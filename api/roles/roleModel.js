@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var roleSchema = mongoose.Schema({
-    role: String
+    role: {type: String, required: true}
 });
 
 module.exports = mongoose.model("Role", roleSchema);
