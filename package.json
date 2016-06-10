@@ -4,7 +4,7 @@
   "description": "enear extreme program",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./api/**/tests.js"
   },
   "repository": {
     "type": "git",
@@ -29,10 +29,13 @@
     "sass": "^0.5.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "grunt-contrib-concat": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-express-server": "^0.5.2"
+    "grunt-express-server": "^0.5.2",
+    "mocha": "^2.5.3"
   }
 }

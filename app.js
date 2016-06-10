@@ -4,9 +4,11 @@ var express = require('express'),
   index = require('./routes/index'),
   mongoose = require('mongoose'),
   morgan = require('morgan'),
+  users = require('./api/users/userRoutes'),
   app = express();
 
 require('./config.js');
+require('./api/users/userInitializer');
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
@@ -21,7 +23,11 @@ app.use(express.static('public'));
 
 //routes
 app.use('/', index);
+app.use('/api/users', users);
 
 app.listen(process.env.PORT_NUMBER, function () {
   console.log("listening to " + process.env.PORT_NUMBER);
 });
+
+
+module.exports = app;
