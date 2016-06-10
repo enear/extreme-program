@@ -6,9 +6,10 @@ var userSchema = new mongoose.Schema({
     password: {type: String, required: true},
     role: {type: String, required: true},
     created: {type:Date, default: Date.now},
-    submissions: {type: Array, default: []},
+    requests: {type: Array, default: []},
     totalPoints: Number,
-    history: {type:Array, default: []}
+    history: {type:Array, default: []},
+    rewards: {type:Array, default: []}
 });
 
 userSchema.methods = {

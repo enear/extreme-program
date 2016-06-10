@@ -9,7 +9,7 @@ var requiredFields = lib.models.getRequiredFields(Role);
 chai.use(chaiHttp);
 
 describe("Roles", function(){
-    it("Should list all roles on /api/users GET", function(done) {
+    it("Should list all roles on /api/roles GET", function(done) {
         chai.request(server)
             .get('/api/roles')
             .end(function(err, res) {
@@ -23,7 +23,7 @@ describe("Roles", function(){
             });
     });
 
-    it("Should list a single user on /api/users/<id> GET", function(done) {
+    it("Should list a single role on /api/roles/<id> GET", function(done) {
         chai.request(server)
             .get('/api/roles')
             .end(function(err, res) {
