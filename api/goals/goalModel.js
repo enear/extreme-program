@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var rewardSchema = new mongoose.Schema({
+var goalSchema = new mongoose.Schema({
     name: {type: String, required: true},
     points: {type: Number, required: true},
     createdBy: String,
@@ -9,4 +9,4 @@ var rewardSchema = new mongoose.Schema({
     description: {type: String, required: true}
 });
 
-module.exports = mongoose.model("Reward", rewardSchema);
+module.exports = mongoose.model('Goal', goalSchema);

@@ -2,33 +2,33 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
-var Reward = require('./rewardModel');
+var Goal = require('./goalModel');
 var lib = require('../lib/lib');
-var requiredFields = lib.models.getRequiredFields(Reward);
+var requiredFields = lib.models.getRequiredFields(Goal);
 
 chai.use(chaiHttp);
 
-describe("Rewards", function(){
-    it("Should list all rewards on /api/rewards GET", function(done) {
+describe("Goals", function(){
+    it("Should list all goals on /api/rewards GET", function(done) {
         chai.request(server)
-            .get('/api/rewards')
+            .get('/api/goals')
             .end(function(err, res) {
                 res.should.have.status(200);
                 res.should.be.json;
                 res.body.should.be.a('array');
-                res.body.forEach(function(reward) {
-                    lib.tests.testRequiredFields(reward, requiredFields);
+                res.body.forEach(function(goal) {
+                    lib.tests.testRequiredFields(goal, requiredFields);
                 });
                 done();
             });
     });
 
-    it("Should list a single reward on /api/rewards/<id> GET", function(done) {
+    it("Should list a single goal on /api/goals/<id> GET", function(done) {
         chai.request(server)
-            .get('/api/rewards')
+            .get('/api/goals')
             .end(function(err, res) {
                 chai.request(server)
-                .get('/api/rewards/' + res.body[0]._id)
+                .get('/api/goals/' + res.body[0]._id)
                 .end(function(err, res) {
                     res.should.have.status(200);
                     res.should.be.json;
@@ -39,10 +39,10 @@ describe("Rewards", function(){
             });
     });
 
-    it("Should save a new reward on /api/rewards POST", function(done) {
+    it("Should save a new goal on /api/goals POST", function(done) {
         chai.request(server)
-        .post('/api/rewards')
-        .send({name: "Trip to Hawai", points: 5000, description: "Trip in all-included regime to Hawai"})
+        .post('/api/goals')
+        .send({name: "New business contact", points: 15, description: "Arrange a meeting with a new potential client"})
         .end(function(err, res) {
             res.should.have.status(200);
             res.should.be.json;

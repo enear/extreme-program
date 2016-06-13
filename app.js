@@ -7,12 +7,14 @@ var express = require('express'),
   users = require('./api/users/userRoutes'),
   roles = require('./api/roles/roleRouter'),
   rewards = require('./api/rewards/rewardRouter'),
+  goals = require('./api/goals/goalRouter'),
   app = express();
 
 require('./config.js');
 require('./api/users/userInitializer');
 require('./api/roles/roleInitializer');
 require('./api/rewards/rewardInitializer');
+require('./api/goals/goalInitializer');
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
@@ -30,6 +32,7 @@ app.use('/', index);
 app.use('/api/users', users);
 app.use('/api/roles', roles);
 app.use('/api/rewards', rewards);
+app.use('/api/goals', goals);
 
 app.listen(process.env.PORT_NUMBER, function () {
   console.log("listening to " + process.env.PORT_NUMBER);

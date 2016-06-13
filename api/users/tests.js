@@ -37,7 +37,6 @@ describe("Users", function(){
                     done();
                 });
             });
-
     });
 
     it("Should save a new user on /api/users POST", function(done) {
@@ -50,6 +49,28 @@ describe("Users", function(){
             res.should.be.a('object');
             lib.tests.testRequiredFields(res.body, requiredFields);
             done();
+        });
+    });
+
+    it("Should delete a user on api/users/<id> DELETE", function(done) {
+        var totalUsers = 0;
+        chai.request(server)
+        .get('/api/users')
+        .end(function(err, res) {
+            totalUsers = res.body.length;
+            chai.request(server)
+            .delete('/api/users/' + res.body[totalUsers - 1]._id)
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                chai.request(server)
+                .get('/api/users')
+                .end(function(err, res) {
+                    res.body.length.should.to.equal(totalUsers - 1);
+                    done();
+                });
+            });
         });
     });
 });

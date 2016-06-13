@@ -37,7 +37,5 @@ describe("Roles", function(){
                     done();
                 });
             });
-
     });
-
 });

@@ -28,4 +28,10 @@ router.get('/:id', function(req, res) {
     });
 });
 
+router.delete('/:id', function(req, res) {
+    lib.models.deleteItem(User, req.params.id, function(err, result) {
+        res.json(err || result);
+    });
+});
+
 module.exports = router;

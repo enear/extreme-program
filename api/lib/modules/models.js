@@ -12,6 +12,10 @@ var createNewItem = function(Model, item, callback) {
     item.save(callback);
 };
 
+var deleteItem = function(Model, id, callback) {
+    Model.findOneAndRemove({'_id': id}, callback);
+};
+
 var getRequiredFields = function(Model)  {
     var schema = Model.schema.tree;
     var requiredFields = [];
@@ -35,5 +39,6 @@ var getRequiredFields = function(Model)  {
 module.exports = {
     getAllItems: getAllItems,
     getById: getById,
+    deleteItem: deleteItem,
     getRequiredFields: getRequiredFields
 };
