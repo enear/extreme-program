@@ -51,4 +51,29 @@ describe("Rewards", function(){
             done();
         });
     });
+
+    it("Should delete a reward on api/rewards/<id> DELETE", function(done) {
+        var totalRewards = 0;
+        var deletedId;
+        chai.request(server)
+        .get('/api/rewards')
+        .end(function(err, res) {
+            totalRewards = res.body.length;
+            deletedId = res.body[totalRewards - 1]._id;
+            chai.request(server)
+            .delete('/api/rewards/' + deletedId)
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                res.body._id.should.to.equal(deletedId);
+                chai.request(server)
+                .get('/api/rewards')
+                .end(function(err, res) {
+                    res.body.length.should.to.equal(totalRewards - 1);
+                    done();
+                });
+            });
+        });
+    });
 });

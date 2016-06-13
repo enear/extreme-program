@@ -51,4 +51,29 @@ describe("Goals", function(){
             done();
         });
     });
+
+    it("Should delete a goal on api/goals/<id> DELETE", function(done) {
+        var totalGoals = 0;
+        var deletedId;
+        chai.request(server)
+        .get('/api/goals')
+        .end(function(err, res) {
+            totalGoals = res.body.length;
+            deletedId = res.body[totalGoals - 1]._id;
+            chai.request(server)
+            .delete('/api/goals/' + deletedId)
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                res.body._id.should.to.equal(deletedId);
+                chai.request(server)
+                .get('/api/goals')
+                .end(function(err, res) {
+                    res.body.length.should.to.equal(totalGoals - 1);
+                    done();
+                });
+            });
+        });
+    });
 });

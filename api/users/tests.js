@@ -54,16 +54,19 @@ describe("Users", function(){
 
     it("Should delete a user on api/users/<id> DELETE", function(done) {
         var totalUsers = 0;
+        var deletedId;
         chai.request(server)
         .get('/api/users')
         .end(function(err, res) {
             totalUsers = res.body.length;
+            deletedId = res.body[totalUsers - 1]._id;
             chai.request(server)
-            .delete('/api/users/' + res.body[totalUsers - 1]._id)
+            .delete('/api/users/' + deletedId)
             .end(function(err, res) {
                 res.should.have.status(200);
                 res.should.be.json;
                 res.body.should.be.a('object');
+                res.body._id.should.to.equal(deletedId);
                 chai.request(server)
                 .get('/api/users')
                 .end(function(err, res) {

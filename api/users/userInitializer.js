@@ -10,12 +10,8 @@ User.find({}, function(err, result) {
 
         newUser.password = newUser.generateHash("123456");
 
-        newUser.save(function(err) {
-            if(err){ 
-                console.log(err);
-            }
-
-            console.log("User saved");
+        newUser.save(function(err, result) {
+            console.log(err || "User saved");
         });
     }
 });
