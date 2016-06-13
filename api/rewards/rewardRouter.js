@@ -26,6 +26,10 @@ router.get('/:id', function(req, res) {
     });
 });
 
+router.post('/:id', function(req, res) {
+    //TODO: update function
+});
+
 router.delete('/:id', function(req, res) {
     lib.models.deleteItem(Reward, req.params.id, function(err, result) {
         res.json(err || result);

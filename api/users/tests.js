@@ -52,6 +52,26 @@ describe("Users", function(){
         });
     });
 
+    it("Should change a user password on /api/user/<id> POST", function(done) {
+        chai.request(server)
+        .get('/api/users')
+        .end(function(err, res) {
+            res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.be.a('array');
+            chai.request(server)
+            .post('/api/users/' + res.body[0]._id)
+            .send({action: 'changePassword', newPassword: "thisIsAPassword"})
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.should.be.a('object');
+                res.body.password.should.to.equal("thisIsAPassword");
+                done();
+            });
+        });
+    });
+
     it("Should delete a user on api/users/<id> DELETE", function(done) {
         var totalUsers = 0;
         var deletedId;

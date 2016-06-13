@@ -28,6 +28,12 @@ router.get('/:id', function(req, res) {
     });
 });
 
+router.post('/:id', function(req, res){
+    lib.users[req.body.action](User, req.params.id, req.body.newPassword, function(err, result) {
+        res.json(err || result);
+    });
+});
+
 router.delete('/:id', function(req, res) {
     lib.models.deleteItem(User, req.params.id, function(err, result) {
         res.json(err || result);
