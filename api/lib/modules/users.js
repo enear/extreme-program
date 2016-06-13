@@ -1,28 +1,21 @@
 //this is a specific module to handle the user actions & updates
 
-var changePassword = function(User, id, newPassword, callback){
-    //TODO: change user's password;
-    User.findOne({'_id': id}, function(err, result) {
-        if(err) {
-            res.json(err);
-        }
-        else{
-            result.password = newPassword;
-            result.save(callback);
-        }
-    });
+var changePassword = function(user, options, callback){
+    user.password = options.newPassword;
+    user.save(callback);
 };
 
-var submitNewRequest = function(request) {
+var submitNewRequest = function(user, options, callback) {
     //TODO: submit a new goal request from a user
 };
 
-var addReward = function(reward) {
+var addReward = function(user, options, callback) {
     //TODO: add a new Reward to the user
 };
 
-var updatePoints = function(points) {
-    //TODO: update the user's points
+var updatePoints = function(user, options, callback) {
+    user.totalPoints += options.points;
+    user.save(callback);
 };
 
 module.exports = {

@@ -72,6 +72,30 @@ describe("Users", function(){
         });
     });
 
+    it("Should update a user points balance on /api/user/<id> POST", function(done) {
+        var pointsToUpdate = 3;
+        var initialPoints;
+        chai.request(server)
+        .get('/api/users')
+        .end(function(err, res) {
+            res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.be.a('array');
+            res.body[0].should.have.property('totalPoints');
+            initialPoints = res.body[0].totalPoints;
+            chai.request(server)
+            .post('/api/users/' + res.body[0]._id)
+            .send({action: 'updatePoints', points: pointsToUpdate})
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.should.be.a('object');
+                res.body.totalPoints.should.to.equal(initialPoints + pointsToUpdate);
+                done();
+            });
+        });
+    });
+
     it("Should delete a user on api/users/<id> DELETE", function(done) {
         var totalUsers = 0;
         var deletedId;

@@ -7,7 +7,7 @@ var userSchema = new mongoose.Schema({
     role: {type: String, required: true},
     created: {type:Date, default: Date.now},
     requests: {type: Array, default: []},
-    totalPoints: Number,
+    totalPoints: {type: Number, default: 0, required: true},
     history: {type:Array, default: []},
     rewards: {type:Array, default: []}
 });

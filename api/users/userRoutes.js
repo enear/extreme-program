@@ -29,9 +29,12 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/:id', function(req, res){
-    lib.users[req.body.action](User, req.params.id, req.body.newPassword, function(err, result) {
-        res.json(err || result);
+    lib.models.getById(User, req.params.id, function(err, result) {
+        lib.users[req.body.action](result, req.body, function(err, doc) {
+            res.json(err || doc);
+        });
     });
+
 });
 
 router.delete('/:id', function(req, res) {
