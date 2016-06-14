@@ -16,9 +16,11 @@ describe("Rewards", function(){
                 res.should.have.status(200);
                 res.should.be.json;
                 res.body.should.be.a('array');
+
                 res.body.forEach(function(reward) {
                     lib.tests.testRequiredFields(reward, requiredFields);
                 });
+
                 done();
             });
     });
@@ -31,7 +33,9 @@ describe("Rewards", function(){
                 res.should.have.status(200);
                 res.should.be.json;
                 res.should.be.a('object');
+
                 lib.tests.testRequiredFields(res.body, requiredFields);
+
                 done();
             });
     });
@@ -46,7 +50,9 @@ describe("Rewards", function(){
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
+
                     lib.tests.testRequiredFields(res.body, requiredFields);
+
                     done();
                 });
             });
@@ -60,16 +66,23 @@ describe("Rewards", function(){
                 res.should.have.status(200);
                 res.should.be.json;
                 res.body.should.be.a('array');
-                res.body[0].should.have.property('points');
-                totalPoints = res.body[0].points;
+
+                var reward = res.body[0];
+
+                reward.should.have.property('points');
+
+                totalPoints = reward.points;
+
                 chai.request(server)
-                    .post('/api/rewards/' + res.body[0]._id)
+                    .post('/api/rewards/' + reward._id)
                     .send({points: totalPoints + 2})
                     .end(function(err, res) {
                         res.should.have.status(200);
                         res.should.be.json;
+
                         res.body.should.be.a('object');
                         res.body.points.should.to.equal(totalPoints + 2);
+
                         done();
                     });
             });
@@ -78,24 +91,29 @@ describe("Rewards", function(){
     it("Should delete a reward on api/rewards/<id> DELETE", function(done) {
         var totalRewards = 0;
         var deletedId;
+
         chai.request(server)
             .get('/api/rewards')
             .end(function(err, res) {
                 totalRewards = res.body.length;
                 deletedId = res.body[totalRewards - 1]._id;
+
                 chai.request(server)
                 .delete('/api/rewards/' + deletedId)
                 .end(function(err, res) {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
+
                     res.body._id.should.to.equal(deletedId);
+
                     chai.request(server)
-                    .get('/api/rewards')
-                    .end(function(err, res) {
-                        res.body.length.should.to.equal(totalRewards - 1);
-                        done();
-                    });
+                        .get('/api/rewards')
+                        .end(function(err, res) {
+                            res.body.length.should.to.equal(totalRewards - 1);
+
+                            done();
+                        });
                 });
             });
     });

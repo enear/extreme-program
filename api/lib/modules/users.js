@@ -6,7 +6,11 @@ var changePassword = function(user, options, callback){
 };
 
 var submitNewRequest = function(user, options, callback) {
-    //TODO: submit a new goal request from a user
+    user.requests.push(options.newRequest);
+    options.newRequest.operation = "request";
+    user.history.push(options.newRequest);
+
+    user.save(callback);
 };
 
 var addReward = function(user, options, callback) {

@@ -145,17 +145,59 @@ describe("Users", function(){
                 res.should.be.json;
                 res.should.be.a('object');
 
+                var historyItem = res.body.history[res.body.history.length - 1];
+
                 res.body.rewards.length.should.to.equal(totalRewards + 1);
                 res.body.totalPoints.should.to.equal(totalPoints - reward.points);
                 res.body.history.length.should.to.equal(historyLength + 1);
-                res.body.history[res.body.history.length - 1].should.have.property('operation');
-                res.body.history[res.body.history.length - 1].operation.should.to.equal('reward');
+                historyItem.should.have.property('operation');
+                historyItem.operation.should.to.equal('reward');
 
                 done();
             });
         });
     });
 
+    it("Should add a new request to a user on /api/user/<id> POST", function(done) {
+        var request = {
+            name: "business case", points: 2, comment: "I've writen a business case about stuff"
+        };
+        var totalRequests;
+        var totalPoints;
+        var historyLength;
+
+        chai.request(server)
+        .get('/api/users')
+        .end(function(err, res) {
+            res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.be.a('array');
+
+            var user = res.body[0];
+
+            totalRequests = user.requests.length;
+            totalPoints = user.totalPoints;
+            historyLength = user.history.length;
+
+            chai.request(server)
+            .post('/api/users/' + user._id)
+            .send({action: 'submitNewRequest', newRequest: request})
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.should.be.a('object');
+
+                var historyItem = res.body.history[res.body.history.length - 1];
+
+                res.body.requests.length.should.to.equal(totalRequests + 1);
+                res.body.history.length.should.to.equal(historyLength + 1);
+                historyItem.should.have.property('operation');
+                historyItem.operation.should.to.equal('request');
+
+                done();
+            });
+        });
+    });
 
     it("Should delete a user on api/users/<id> DELETE", function(done) {
         var totalUsers = 0;
