@@ -8,6 +8,7 @@ var express = require('express'),
   roles = require('./api/roles/roleRouter'),
   rewards = require('./api/rewards/rewardRouter'),
   goals = require('./api/goals/goalRouter'),
+  admin = require('./routes/admin'),
   app = express();
 
 require('./config.js');
@@ -33,6 +34,7 @@ app.use('/api/users', users);
 app.use('/api/roles', roles);
 app.use('/api/rewards', rewards);
 app.use('/api/goals', goals);
+app.use('/admin', admin);
 
 app.listen(process.env.PORT_NUMBER, function () {
   console.log("listening to " + process.env.PORT_NUMBER);
