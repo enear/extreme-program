@@ -145,13 +145,20 @@ describe("Users", function(){
                 res.should.be.json;
                 res.should.be.a('object');
 
-                var historyItem = res.body.history[res.body.history.length - 1];
+                if(totalPoints >= reward.points) {
+                    var historyItem = res.body.history[res.body.history.length - 1];
 
-                res.body.rewards.length.should.to.equal(totalRewards + 1);
-                res.body.totalPoints.should.to.equal(totalPoints - reward.points);
-                res.body.history.length.should.to.equal(historyLength + 1);
-                historyItem.should.have.property('operation');
-                historyItem.operation.should.to.equal('reward');
+                    res.body.rewards.length.should.to.equal(totalRewards + 1);
+                    res.body.totalPoints.should.to.equal(totalPoints - reward.points);
+                    res.body.history.length.should.to.equal(historyLength + 1);
+                    historyItem.should.have.property('operation');
+                    historyItem.operation.should.to.equal('reward');
+                }
+                else {
+                    res.body.rewards.length.should.to.equal(totalRewards);
+                    res.body.history.length.should.to.equal(historyLength);
+                    res.body.totalPoints.should.to.equal(totalPoints);
+                }
 
                 done();
             });

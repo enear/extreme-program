@@ -14,17 +14,28 @@ var submitNewRequest = function(user, options, callback) {
 };
 
 var addReward = function(user, options, callback) {
-    //TODO: validate if user has enough points to collect the reward
-    user.rewards.push(options.newReward);
-    options.newReward.operation = "reward";
-    user.history.push(options.newReward);
-    user.totalPoints -= options.newReward.points;
+    if(_hasEnoughPoints(user, options.newReward.points)) {
+        user.rewards.push(options.newReward);
+        options.newReward.operation = "reward";
+        user.history.push(options.newReward);
+        user.totalPoints -= options.newReward.points;
+    }
+
     user.save(callback);
 };
 
 var updatePoints = function(user, options, callback) {
     user.totalPoints += options.points;
+
+    if(user.totalPoints < 0) {
+        user.totalPoints = 0;
+    }
+
     user.save(callback);
+};
+
+var _hasEnoughPoints = function(user, points) {
+    return user.totalPoints >= points;
 };
 
 module.exports = {

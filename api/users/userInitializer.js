@@ -6,7 +6,7 @@ User.find({}, function(err, result) {
             username: "goncalo.assuncao",
             email: "goncalo.assuncao@e-near.co",
             role: "standard",
-            totalPoints: 0
+            totalPoints: 20
         });
 
         newUser.password = newUser.generateHash("123456");
