@@ -1,0 +1,24 @@
+{
+  "name": "extreme-program",
+  "description": "enear extreme program",
+  "main": "app.js",
+  "authors": [
+    "goncalo.assuncao <goncalo.assuncao@enear.co>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/enear/extreme-program",
+  "moduleType": [
+    "node"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}

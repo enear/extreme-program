@@ -165,6 +165,7 @@ describe("Users", function(){
         });
     });
 
+
     it("Should add a new request to a user on /api/user/<id> POST", function(done) {
         var request = {
             name: "business case", points: 2, comment: "I've writen a business case about stuff"
@@ -205,6 +206,7 @@ describe("Users", function(){
             });
         });
     });
+
 
     it("Should delete a user on api/users/<id> DELETE", function(done) {
         var totalUsers = 0;
