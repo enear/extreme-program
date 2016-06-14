@@ -10,7 +10,12 @@ var submitNewRequest = function(user, options, callback) {
 };
 
 var addReward = function(user, options, callback) {
-    //TODO: add a new Reward to the user
+    //TODO: validate if user has enough points to collect the reward
+    user.rewards.push(options.newReward);
+    options.newReward.operation = "reward";
+    user.history.push(options.newReward);
+    user.totalPoints -= options.newReward.points;
+    user.save(callback);
 };
 
 var updatePoints = function(user, options, callback) {

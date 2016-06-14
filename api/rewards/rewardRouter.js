@@ -9,11 +9,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    var newReward = new Reward({
-        name: req.body.name,
-        points: req.body.points,
-        description: req.body.description
-    });
+    var newReward = new Reward(req.body);
 
     newReward.save(function(err, result) {
         res.json(err || result);
@@ -27,7 +23,9 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/:id', function(req, res) {
-    //TODO: update function
+    lib.models.updateItem(Reward, req.params.id, req.body, function(err, result) {
+        res.json(err || result);
+    });
 });
 
 router.delete('/:id', function(req, res) {

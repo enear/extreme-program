@@ -23,6 +23,19 @@ describe("Rewards", function(){
             });
     });
 
+    it("Should save a new reward on /api/rewards POST", function(done) {
+        chai.request(server)
+            .post('/api/rewards')
+            .send({name: "Trip to Hawai", points: 5000, description: "Trip in all-included regime to Hawai", createdBy:'user', created: new Date()})
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.should.be.a('object');
+                lib.tests.testRequiredFields(res.body, requiredFields);
+                done();
+            });
+    });
+
     it("Should list a single reward on /api/rewards/<id> GET", function(done) {
         chai.request(server)
             .get('/api/rewards')
@@ -39,41 +52,51 @@ describe("Rewards", function(){
             });
     });
 
-    it("Should save a new reward on /api/rewards POST", function(done) {
+    it('Should update a single reward on /api/rewards/<id> POST', function(done) {
+        var totalPoints;
         chai.request(server)
-        .post('/api/rewards')
-        .send({name: "Trip to Hawai", points: 5000, description: "Trip in all-included regime to Hawai"})
-        .end(function(err, res) {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.should.be.a('object');
-            lib.tests.testRequiredFields(res.body, requiredFields);
-            done();
-        });
+            .get('/api/rewards')
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.body.should.be.a('array');
+                res.body[0].should.have.property('points');
+                totalPoints = res.body[0].points;
+                chai.request(server)
+                    .post('/api/rewards/' + res.body[0]._id)
+                    .send({points: totalPoints + 2})
+                    .end(function(err, res) {
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.body.should.be.a('object');
+                        res.body.points.should.to.equal(totalPoints + 2);
+                        done();
+                    });
+            });
     });
 
     it("Should delete a reward on api/rewards/<id> DELETE", function(done) {
         var totalRewards = 0;
         var deletedId;
         chai.request(server)
-        .get('/api/rewards')
-        .end(function(err, res) {
-            totalRewards = res.body.length;
-            deletedId = res.body[totalRewards - 1]._id;
-            chai.request(server)
-            .delete('/api/rewards/' + deletedId)
+            .get('/api/rewards')
             .end(function(err, res) {
-                res.should.have.status(200);
-                res.should.be.json;
-                res.body.should.be.a('object');
-                res.body._id.should.to.equal(deletedId);
+                totalRewards = res.body.length;
+                deletedId = res.body[totalRewards - 1]._id;
                 chai.request(server)
-                .get('/api/rewards')
+                .delete('/api/rewards/' + deletedId)
                 .end(function(err, res) {
-                    res.body.length.should.to.equal(totalRewards - 1);
-                    done();
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body._id.should.to.equal(deletedId);
+                    chai.request(server)
+                    .get('/api/rewards')
+                    .end(function(err, res) {
+                        res.body.length.should.to.equal(totalRewards - 1);
+                        done();
+                    });
                 });
             });
-        });
     });
 });

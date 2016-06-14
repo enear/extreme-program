@@ -16,12 +16,15 @@ describe("Users", function(){
                 res.should.have.status(200);
                 res.should.be.json;
                 res.body.should.be.a('array');
+
                 res.body.forEach(function(user) {
                     lib.tests.testRequiredFields(user, requiredFields);
                 });
+
                 done();
             });
     });
+
 
     it("Should list a single user on /api/users/<id> GET", function(done) {
         chai.request(server)
@@ -33,77 +36,137 @@ describe("Users", function(){
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
+
                     lib.tests.testRequiredFields(res.body, requiredFields);
+
                     done();
                 });
             });
     });
 
+
     it("Should save a new user on /api/users POST", function(done) {
         chai.request(server)
-        .post('/api/users')
-        .send({username: "username", email: "email@email.com", password: "123456", role: "standard"})
-        .end(function(err, res) {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.should.be.a('object');
-            lib.tests.testRequiredFields(res.body, requiredFields);
-            done();
-        });
-    });
-
-    it("Should change a user password on /api/user/<id> POST", function(done) {
-        chai.request(server)
-        .get('/api/users')
-        .end(function(err, res) {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.body.should.be.a('array');
-            chai.request(server)
-            .post('/api/users/' + res.body[0]._id)
-            .send({action: 'changePassword', newPassword: "thisIsAPassword"})
+            .post('/api/users')
+            .send({username: "username", email: "email@email.com", password: "123456", role: "standard"})
             .end(function(err, res) {
                 res.should.have.status(200);
                 res.should.be.json;
                 res.should.be.a('object');
-                res.body.password.should.to.equal("thisIsAPassword");
+
+                lib.tests.testRequiredFields(res.body, requiredFields);
+
                 done();
             });
-        });
     });
+
+
+    it("Should change a user password on /api/user/<id> POST", function(done) {
+        chai.request(server)
+            .get('/api/users')
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.body.should.be.a('array');
+
+                chai.request(server)
+                    .post('/api/users/' + res.body[0]._id)
+                    .send({action: 'changePassword', newPassword: "thisIsAPassword"})
+                    .end(function(err, res) {
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.should.be.a('object');
+
+                        res.body.password.should.to.equal("thisIsAPassword");
+
+                        done();
+                    });
+            });
+    });
+
 
     it("Should update a user points balance on /api/user/<id> POST", function(done) {
         var pointsToUpdate = 3;
         var initialPoints;
         chai.request(server)
+            .get('/api/users')
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.body.should.be.a('array');
+
+                var user = res.body[0];
+
+                user.should.have.property('totalPoints');
+                initialPoints = user.totalPoints;
+
+                chai.request(server)
+                    .post('/api/users/' + user._id)
+                    .send({action: 'updatePoints', points: pointsToUpdate})
+                    .end(function(err, res) {
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.should.be.a('object');
+
+                        res.body.totalPoints.should.to.equal(initialPoints + pointsToUpdate);
+
+                        done();
+                    });
+            });
+    });
+
+
+    it("Should add a new reward to a user on /api/user/<id> POST", function(done) {
+        var reward = {
+            name: "Toaster", points: 10, description: "This is a toaster", createdBy: "user", created: new Date()
+        };
+        var totalRewards;
+        var totalPoints;
+        var historyLength;
+
+        chai.request(server)
         .get('/api/users')
         .end(function(err, res) {
             res.should.have.status(200);
             res.should.be.json;
             res.body.should.be.a('array');
-            res.body[0].should.have.property('totalPoints');
-            initialPoints = res.body[0].totalPoints;
+
+            var user = res.body[0];
+
+            totalRewards = user.rewards.length;
+            totalPoints = user.totalPoints;
+            historyLength = user.history.length;
+
             chai.request(server)
-            .post('/api/users/' + res.body[0]._id)
-            .send({action: 'updatePoints', points: pointsToUpdate})
+            .post('/api/users/' + user._id)
+            .send({action: 'addReward', newReward: reward})
             .end(function(err, res) {
                 res.should.have.status(200);
                 res.should.be.json;
                 res.should.be.a('object');
-                res.body.totalPoints.should.to.equal(initialPoints + pointsToUpdate);
+
+                res.body.rewards.length.should.to.equal(totalRewards + 1);
+                res.body.totalPoints.should.to.equal(totalPoints - reward.points);
+                res.body.history.length.should.to.equal(historyLength + 1);
+                res.body.history[res.body.history.length - 1].should.have.property('operation');
+                res.body.history[res.body.history.length - 1].operation.should.to.equal('reward');
+
                 done();
             });
         });
     });
 
+
     it("Should delete a user on api/users/<id> DELETE", function(done) {
         var totalUsers = 0;
         var deletedId;
+
         chai.request(server)
         .get('/api/users')
         .end(function(err, res) {
             totalUsers = res.body.length;
             deletedId = res.body[totalUsers - 1]._id;
+
             chai.request(server)
             .delete('/api/users/' + deletedId)
             .end(function(err, res) {
@@ -111,10 +174,12 @@ describe("Users", function(){
                 res.should.be.json;
                 res.body.should.be.a('object');
                 res.body._id.should.to.equal(deletedId);
+
                 chai.request(server)
                 .get('/api/users')
                 .end(function(err, res) {
                     res.body.length.should.to.equal(totalUsers - 1);
+
                     done();
                 });
             });

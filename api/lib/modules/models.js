@@ -16,6 +16,18 @@ var deleteItem = function(Model, id, callback) {
     Model.findOneAndRemove({'_id': id}, callback);
 };
 
+var updateItem = function(Model, id, updates, callback) {
+    Model.findOne({'_id': id}, function(err, result) {
+        for(var key in updates) {
+            if(result[key] !== updates[key]) {
+                result[key] = updates[key];
+            }
+        }
+
+        result.save(callback);
+    });
+};
+
 var getRequiredFields = function(Model)  {
     var schema = Model.schema.tree;
     var requiredFields = [];
@@ -40,5 +52,6 @@ module.exports = {
     getAllItems: getAllItems,
     getById: getById,
     deleteItem: deleteItem,
-    getRequiredFields: getRequiredFields
+    getRequiredFields: getRequiredFields,
+    updateItem: updateItem
 };
