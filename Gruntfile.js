@@ -1,11 +1,3 @@
-/**
- * Created by GoncaloAssuncao on 21/03/2016.
- */
-/**
- * Created by Gonçalo Assunção on 11/03/2016.
- */
-
-
 module.exports = function(grunt){
   grunt.initConfig({
     // concat: {
@@ -17,14 +9,25 @@ module.exports = function(grunt){
     sass: {
       dist: {
         files: {
-          'public/build/main.css': 'public/css/styles.scss'
+          'public/build/css/styles.css': 'app/scss/*.scss'
         }
       }
     },
+    browserify: {
+        dev: {
+            options: {
+                debug: true,
+                transform: ['reactify']
+            },
+            files: {
+                'app/public/js/main.js': 'app/templates/*.jsx'
+            }
+        }
+    },
     watch: {
-      js: {
-        files: 'public/**/*.js',
-        tasks: ['concat', 'express:dev'],
+      browserify: {
+        files: 'app/**/*.jsx',
+        tasks: ['browserify:dev', 'express:dev'],
         options: {
           spawn: false
         }
@@ -37,7 +40,7 @@ module.exports = function(grunt){
         }
     },
       express: {
-        files: ['app.js', 'Gruntfile.js', 'config/*.js', 'routes/*.js', 'api/**/*', 'public/**/*'], 
+        files: ['app.js', 'Gruntfile.js', 'config/*.js', 'routes/*.js', 'api/**/*', 'public/**/*'],
         tasks: ['express:dev'],
         options: {
           spawn: false
@@ -69,5 +72,6 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.registerTask('default', [/*'concat', */'sass',/*'copy',*/ 'express:dev', 'watch']);
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.registerTask('default', [/*'concat', */'sass',/*'copy',*/ 'browserify:dev', 'express:dev', 'watch']);
 };

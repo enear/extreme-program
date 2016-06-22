@@ -19,14 +19,14 @@ require('./api/goals/goalInitializer');
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
-app.set('views', path.join(__dirname, 'public/views'));
+app.set('views', path.join(__dirname, 'app/public/views'));
 // override this setting to choose the view engine to be used
 app.set('view engine', 'hbs');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static('app/public'));
 
 //routes
 app.use('/', index);
