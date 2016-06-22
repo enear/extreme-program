@@ -9,7 +9,10 @@ module.exports = function(grunt){
     sass: {
       dist: {
         files: {
-          'public/build/css/styles.css': 'app/scss/*.scss'
+          'app/public/css/styles.css': 'app/scss/*.scss'
+        },
+        options: {
+          sourcemap: 'none'
         }
       }
     },
@@ -33,14 +36,14 @@ module.exports = function(grunt){
         }
       },
       sass: {
-        files: 'public/css/*.scss',
+        files: 'app/scss/*.scss',
         tasks: ['sass', 'express:dev'],
         options: {
           spawn: false
         }
     },
       express: {
-        files: ['app.js', 'Gruntfile.js', 'config/*.js', 'routes/*.js', 'api/**/*', 'public/**/*'],
+        files: ['app.js', 'Gruntfile.js', 'config/*.js', 'routes/*.js', 'api/**/*', 'app/public/**/*'],
         tasks: ['express:dev'],
         options: {
           spawn: false
