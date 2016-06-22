@@ -23,7 +23,7 @@ module.exports = function(grunt){
                 transform: ['reactify']
             },
             files: {
-                'app/public/js/main.js': 'app/templates/*.jsx'
+                'app/public/js/main.js': 'app/components/mainTemplates/*.jsx'
             }
         }
     },

@@ -1,6 +1,12 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
+var TestComponent = require('../test.jsx');
+
+ReactDOM.render( React.createElement(TestComponent, null), document.getElementById('app'));
+},{"../test.jsx":2,"react":169,"react-dom":31}],2:[function(require,module,exports){
+var React = require('react');
+var ReactDOM = require('react-dom');
 
 var TestComponent = React.createClass({displayName: "TestComponent",
     render: function(){
@@ -13,13 +19,7 @@ var TestComponent = React.createClass({displayName: "TestComponent",
 });
 
 module.exports = TestComponent;
-},{"react":169,"react-dom":31}],2:[function(require,module,exports){
-var React = require('react');
-var ReactDOM = require('react-dom');
-var TestComponent = require('../components/test.jsx');
-
-ReactDOM.render( React.createElement(TestComponent, null), document.getElementById('app'));
-},{"../components/test.jsx":1,"react":169,"react-dom":31}],3:[function(require,module,exports){
+},{"react":169,"react-dom":31}],3:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -19711,4 +19711,4 @@ module.exports = validateDOMNesting;
 
 module.exports = require('./lib/React');
 
-},{"./lib/React":57}]},{},[2]);
+},{"./lib/React":57}]},{},[1]);
