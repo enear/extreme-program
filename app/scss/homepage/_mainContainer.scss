@@ -1,0 +1,22 @@
+#mainContainer {
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    background-color: black;
+    color: green;
+    display: table;
+    margin-bottom: $gutter;
+}
+
+.text-container {
+    display: table-cell;
+    vertical-align: middle;
+
+    h2 {
+        margin: 0 0 $gutter 0;
+    }
+
+    p {
+        margin-bottom: $spacing;
+    }
+}

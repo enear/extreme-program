@@ -2,3 +2,5 @@
 config.js
 /.sass-cache
 /bower_components
+/app/public/css
+/app/public/js

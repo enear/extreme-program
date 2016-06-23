@@ -9,7 +9,7 @@ module.exports = function(grunt){
     sass: {
       dist: {
         files: {
-          'app/public/css/styles.css': 'app/scss/*.scss'
+          'app/public/css/styles.css': 'app/scss/styles.scss'
         },
         options: {
           sourcemap: 'none'
@@ -36,7 +36,7 @@ module.exports = function(grunt){
         }
       },
       sass: {
-        files: 'app/scss/*.scss',
+        files: 'app/scss/**/*.scss',
         tasks: ['sass', 'express:dev'],
         options: {
           spawn: false
@@ -59,14 +59,16 @@ module.exports = function(grunt){
           script: 'app.js'
         }
       }
-  }//,
-    // copy: {
-    //   main: {
-    //     files: [
-    //       {expand: false, src: ['bower_components/bootstrap/dist/css/bootstrap.min.css'], dest: 'public/build/bootstrap.min.css'}
-    //     ]
-    //   }
-    // }
+  },
+    copy: {
+      main: {
+        files: [
+          {expand: false, src: ['bower_components/bootstrap/dist/css/bootstrap.min.css'], dest: 'app/public/css/libraries/bootstrap.min.css'},
+          {expand: false, src: ['bower_components/jquery/dist/jquery.min.js'], dest: 'app/public/js/libraries/jquery.min.js'},
+          {expand: false, src: ['bower_components/bootstrap/dist/js/bootstrap.min.js'], dest: 'app/public/js/libraries/bootstrap.min.js'}
+        ]
+      }
+    }
   });
 
 
@@ -76,5 +78,5 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.registerTask('default', [/*'concat', */'sass',/*'copy',*/ 'browserify:dev', 'express:dev', 'watch']);
+  grunt.registerTask('default', [/*'concat', */'sass','copy', 'browserify:dev', 'express:dev', 'watch']);
 };

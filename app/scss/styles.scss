@@ -1,4 +1,17 @@
-body {
-    background-color: black;
-    color: green;
-}
+@import "_config.scss";
+@import "_main.scss";
+
+//Homepage
+@import "homepage/_main.scss";
+@import "homepage/_topNavigation.scss";
+@import "homepage/_mainContainer.scss";
+@import "homepage/_footer.scss";
+
+
+//Single Components
+
+//Goals
+@import "components/_goalList.scss";
+@import "components/_goals.scss";
+@import "components/_rewardsList.scss";
+@import "components/_rewards.scss"

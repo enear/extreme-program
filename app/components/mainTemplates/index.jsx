@@ -1,5 +1,17 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var TestComponent = require('../test.jsx');
+var GoalList = require('../goals/goalList.jsx')
+var RewardList = require('../rewards/rewardList.jsx');
 
-ReactDOM.render( <TestComponent />, document.getElementById('app'));
+var Index = React.createClass({
+    render: function() {
+        return (
+            <div>
+                <GoalList />
+                <RewardList />
+            </div>
+        );
+    }
+});
+
+ReactDOM.render( <Index />, document.getElementById('homepage'));

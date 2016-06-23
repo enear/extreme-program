@@ -1,0 +1,13 @@
+#goal-list {
+    margin-bottom: $column;
+
+    .goal-list-title {
+        margin-top: $spacing;
+        margin-bottom: $gutter;
+    }
+
+    .goal-list-paragraph {
+        margin-top: $spacing;
+        margin-bottom: $spacing;
+    }
+}
