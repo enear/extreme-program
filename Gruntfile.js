@@ -29,7 +29,7 @@ module.exports = function(grunt){
     },
     watch: {
       browserify: {
-        files: 'app/**/*.jsx',
+        files: ['app/**/*.jsx','app/**/*.js'],
         tasks: ['browserify:dev', 'express:dev'],
         options: {
           spawn: false

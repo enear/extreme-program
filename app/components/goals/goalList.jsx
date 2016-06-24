@@ -1,8 +1,31 @@
 var React = require('react');
 var Goal = require('./goal.jsx');
+var GoalsStore = require('../../stores/GoalsStore');
+var GoalsActions = require('../../actions/goalsActions');
+
+function getState() {
+    return {
+        goals: GoalsStore.getGoals()
+    }
+}
 
 var GoalList = React.createClass({
+    getInitialState: function(){
+        return {
+            goals: []
+        }
+    },
+    componentDidMount: function() {
+        GoalsActions.getGoals();
+        GoalsStore.addChangeListener(this._onChange);
+    },
+    _onChange: function() {
+        this.setState(
+            getState()
+        );
+    },
     render: function() {
+        console.log(this.state);
         return (
             <div id="goal-list" className="container">
                 <div className="row">
@@ -16,9 +39,11 @@ var GoalList = React.createClass({
                     </div>
                 </div>
                 <div className="row">
-                    <Goal />
-                    <Goal />
-                    <Goal />
+                    {this.state.goals.map(function(goal, index) {
+                        return (
+                            <Goal key={index} goal={goal} />
+                        )
+                    })}
                 </div>
             </div>
         );

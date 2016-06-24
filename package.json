@@ -21,10 +21,12 @@
     "body-parser": "^1.15.0",
     "bower": "^1.7.7",
     "browserify": "^13.0.1",
+    "events": "^1.1.1",
     "express": "^4.13.4",
     "flux": "^2.1.1",
     "grunt": "^0.4.5",
     "hbs": "^4.0.0",
+    "jquery": "^3.0.0",
     "key-mirror": "^1.0.1",
     "mongoose": "^4.4.20",
     "morgan": "^1.7.0",
@@ -32,7 +34,8 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "reactify": "^1.1.1",
-    "sass": "^0.5.0"
+    "sass": "^0.5.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
