@@ -3,6 +3,7 @@ var GoalsConstants = require('../constants/goalsConstants');
 var $ = require('jquery');
 
 
+//TODO: pass url as argument to getGoals function
 var GoalsActions = {
     getGoals: function() {
         $.getJSON('/api/goals', function(data) {

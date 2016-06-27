@@ -1,7 +1,28 @@
 var React = require('react');
 var Reward = require('./reward.jsx');
+var RewardStore = require('../../stores/RewardsStore');
+var RewardActions = require('../../actions/rewardActions');
 
 var RewardList = React.createClass({
+    getInitialState: function() {
+        return {
+            rewards: []
+        }
+    },
+    componentDidMount: function() {
+        RewardActions.getRewards();
+        RewardStore.addChangeListener(this._onChange);
+    },
+    _onChange: function() {
+        this.setState(
+            this._getState()
+        )
+    },
+    _getState: function() {
+        return {
+            rewards: RewardStore.getRewards()
+        };
+    },
     render: function() {
         return (
             <div id="reward-list" className="container">
@@ -16,9 +37,11 @@ var RewardList = React.createClass({
                     </div>
                 </div>
                 <div className="row">
-                    <Reward />
-                    <Reward />
-                    <Reward />
+                    {this.state.rewards.map(function(reward, index) {
+                        return (
+                            <Reward key={index} reward={reward} />
+                        )
+                    })}
                 </div>
             </div>
         );

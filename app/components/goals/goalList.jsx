@@ -3,11 +3,6 @@ var Goal = require('./goal.jsx');
 var GoalsStore = require('../../stores/GoalsStore');
 var GoalsActions = require('../../actions/goalsActions');
 
-function getState() {
-    return {
-        goals: GoalsStore.getGoals()
-    }
-}
 
 var GoalList = React.createClass({
     getInitialState: function(){
@@ -21,11 +16,15 @@ var GoalList = React.createClass({
     },
     _onChange: function() {
         this.setState(
-            getState()
+            this._getState()
         );
     },
+    _getState: function() {
+        return {
+            goals: GoalsStore.getGoals()
+        }
+    },
     render: function() {
-        console.log(this.state);
         return (
             <div id="goal-list" className="container">
                 <div className="row">
