@@ -3,7 +3,7 @@ var Goal = require('./goalModel');
 var lib = require('../lib/lib');
 
 router.get('/', function(req, res) {
-    lib.models.getAllItems(Goal, function(err, result) {
+    Goal.find({}, function(err, result) {
         res.json(err || result);
     });
 });
@@ -17,19 +17,27 @@ router.post('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-    lib.models.getById(Goal, req.params.id, function(err, result) {
+    Goal.findOne({'_id': req.params.id}, function(err, result) {
         res.json(err || result);
     });
 });
 
 router.post('/:id', function(req, res) {
-    lib.models.updateItem(Goal, req.params.id, req.body, function(err, result) {
-        res.json(err || result);
+    Goal.findOne({'_id': req.params.id}, function(err, result) {
+        for(var key in req.body) {
+            if(result[key] !== req.body[key]) {
+                result[key] = req.body[key];
+            }
+        }
+
+        result.save(function(err, result) {
+            res.json(err || result);
+        });
     });
 });
 
 router.delete('/:id', function(req, res) {
-    lib.models.deleteItem(Goal, req.params.id, function(err, result) {
+    Goal.findOneAndRemove({'_id': req.params.id}, function(err, result) {
         res.json(err || result);
     });
 });

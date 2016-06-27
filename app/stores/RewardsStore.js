@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var RewardsConstants = require('../constants/rewardsConstants');
 var _ = require('underscore');
 
+
 var _rewards = [];
 
 var RewardStore = _.extend({}, EventEmitter.prototype, {

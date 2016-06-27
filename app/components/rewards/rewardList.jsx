@@ -10,7 +10,7 @@ var RewardList = React.createClass({
         }
     },
     componentDidMount: function() {
-        RewardActions.getRewards();
+        RewardActions.getRewards('/api/rewards');
         RewardStore.addChangeListener(this._onChange);
     },
     _onChange: function() {

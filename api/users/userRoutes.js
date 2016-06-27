@@ -3,8 +3,8 @@ var User = require('./userModel');
 var lib = require('../lib/lib');
 
 router.get('/', function(req, res) {
-    lib.models.getAllItems(User, function(err, result) {
-            res.json(err || result);
+    User.find({}, function(err, result) {
+        res.json(err || result);
     });
 });
 
@@ -23,22 +23,22 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res) {
-    lib.models.getById(User, req.params.id, function(err, result) {
+    User.findOne({'_id': req.params.id}, function(err, result) {
         res.json(err || result);
     });
 });
 
 router.post('/:id', function(req, res){
-    lib.models.getById(User, req.params.id, function(err, result) {
-        lib.users[req.body.action](result, req.body, function(err, doc) {
-            res.json(err || doc);
+    User.findOne({'_id': req.params.id}, function(err, result) {
+        lib.users[req.body.action](result, req.body, function(err, result) {
+            res.json(err || result);
         });
     });
 
 });
 
 router.delete('/:id', function(req, res) {
-    lib.models.deleteItem(User, req.params.id, function(err, result) {
+    User.findOneAndRemove({'_id': req.params.id}, function(err, result) {
         res.json(err || result);
     });
 });

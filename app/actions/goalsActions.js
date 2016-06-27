@@ -3,10 +3,9 @@ var GoalsConstants = require('../constants/goalsConstants');
 var $ = require('jquery');
 
 
-//TODO: pass url as argument to getGoals function
 var GoalsActions = {
-    getGoals: function() {
-        $.getJSON('/api/goals', function(data) {
+    getGoals: function(url) {
+        $.getJSON(url, function(data) {
             console.log(data);
             AppDispatcher.handleAction({
                 actionType: GoalsConstants.GET_GOALS,
