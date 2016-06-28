@@ -4,11 +4,27 @@ var GoalsConstants = require('../constants/goalsConstants');
 var _ = require('underscore');
 
 
-var _goals = [];
+var _goals = [],
+    _goal = {};
 
 var GoalsStore = _.extend({}, EventEmitter.prototype, {
     getGoals: function() {
         return _goals;
+    },
+    getGoal: function() {
+        return _goal;
+    },
+    getGoalById: function(id) {
+        var obj = {};
+
+        _goals.forEach(function(goal) {
+
+            if(goal._id === id) {
+                obj = goal;
+            }
+        });
+
+        return obj;
     },
     addChangeListener: function(callback) {
         this.on('change', callback);
@@ -24,6 +40,10 @@ AppDispatcher.register(function(payload) {
     switch(action.actionType) {
         case GoalsConstants.GET_GOALS:
             _goals = action.data;
+            GoalsStore.emit('change');
+            break;
+        case GoalsConstants.GET_GOAL:
+            _goal = action.data;
             GoalsStore.emit('change');
             break;
 

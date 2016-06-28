@@ -10,4 +10,27 @@
         margin-top: $spacing;
         margin-bottom: $spacing;
     }
+
+    .reward {
+        padding-top: $spacing;
+        margin-bottom: $spacing;
+
+        img {
+            margin-bottom: $spacing;
+            max-width: 100%;
+        }
+
+        h3 {
+            margin-top: 0;
+            margin-bottom: $gutter;
+        }
+
+        p {
+            margin-bottom: $gutter;
+        }
+
+        .cost-container {
+            margin-bottom: $gutter;
+        }
+    }
 }

@@ -4,11 +4,24 @@ var RewardsConstants = require('../constants/rewardsConstants');
 var _ = require('underscore');
 
 
-var _rewards = [];
+var _rewards = [],
+    _reward = {};
 
 var RewardStore = _.extend({}, EventEmitter.prototype, {
     getRewards: function() {
         return _rewards;
+    },
+    getRewardById: function(id) {
+        _rewards.forEach(function(reward) {
+            if(reward._id === id) {
+                _reward = reward;
+            }
+        });
+
+        return _reward;
+    },
+    getReward: function() {
+        return _reward;
     },
     addChangeListener: function(callback){
         this.on('change', callback);
@@ -26,9 +39,12 @@ AppDispatcher.register(function(payload) {
             _rewards = action.data;
             RewardStore.emit('change');
             break;
+        case RewardsConstants.GET_REWARD:
+            _reward = action.data;
+            RewardStore.emit('change');
+            break;
         default:
             return true;
-
     }
 });
 

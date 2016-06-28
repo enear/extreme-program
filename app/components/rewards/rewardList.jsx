@@ -1,5 +1,5 @@
 var React = require('react');
-var Reward = require('./reward.jsx');
+var Reward = require('./rewardListItem.jsx');
 var RewardStore = require('../../stores/RewardsStore');
 var RewardActions = require('../../actions/rewardActions');
 

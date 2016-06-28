@@ -1,5 +1,5 @@
 var React = require('react');
-var Goal = require('./goal.jsx');
+var Goal = require('./goalListItem.jsx');
 var GoalsStore = require('../../stores/GoalsStore');
 var GoalsActions = require('../../actions/goalsActions');
 
@@ -10,9 +10,12 @@ var GoalList = React.createClass({
             goals: []
         }
     },
-    componentDidMount: function() {
+    componentWillMount: function() {
         GoalsActions.getGoals('/api/goals');
         GoalsStore.addChangeListener(this._onChange);
+    },
+    componentWillUnmount: function() {
+        GoalsStore.removeChangeListener(this._onChange);
     },
     _onChange: function() {
         this.setState(

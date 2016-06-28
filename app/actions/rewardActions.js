@@ -11,6 +11,14 @@ var RewardActions = {
                 data: data
             });
         });
+    },
+    getReward: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: RewardsConstants.GET_REWARD,
+                data: data
+            });
+        });
     }
 };
 

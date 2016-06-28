@@ -1,3 +1,14 @@
 html, body {
     height: 100%;
 }
+
+#wrap {
+    min-height: 100%;
+    margin-bottom: -80px;
+
+    &:after {
+        content: "";
+        display: block;
+        height: 80px;
+    }
+}

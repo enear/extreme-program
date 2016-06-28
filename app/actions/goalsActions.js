@@ -12,6 +12,14 @@ var GoalsActions = {
                 data: data
             });
         });
+    },
+    getGoal: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: GoalsConstants.GET_GOAL,
+                data: data
+            });
+        });
     }
 };
 
