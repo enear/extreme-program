@@ -38,6 +38,12 @@ var _hasEnoughPoints = function(user, points) {
     return user.totalPoints >= points;
 };
 
+
+var signInWithSlack = function() {
+
+};
+
+
 module.exports = {
     changePassword: changePassword,
     submitNewRequest: submitNewRequest,

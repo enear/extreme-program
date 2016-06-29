@@ -1,9 +1,9 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
-var GoalList = require('../goals/goalList.jsx')
+var GoalList = require('../goals/goalList.jsx');
 var RewardList = require('../rewards/rewardList.jsx');
+var NavBar = require('../navBar/navBar.jsx');
 
-var Homepage = React.createClass({
+var Home = React.createClass({
     render: function() {
         return (
             <div>
@@ -21,4 +21,4 @@ var Homepage = React.createClass({
     }
 });
 
-module.exports = Homepage;
+module.exports = Home;
