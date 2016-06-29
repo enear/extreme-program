@@ -17,7 +17,7 @@ var App = React.createClass({
         return (
             <div>
                 <Router history={hashHistory}>
-                    <Route path="/" component={Index}>
+                    <Route path="/" component={Index} >
                         <IndexRoute component={Home} />
                         <Route path="/goals/:id" component={Goal} />
                         <Route path="/rewards/:id" component={Reward} onEnter={test} />
@@ -35,6 +35,15 @@ function test(nextState, replace) {
         pathname:'/goals/5770e304ccd41a402b88c1c8',
         state: {nextPathname: nextState.location.pathname}
     });
+}
+
+function hasUserName(nextState, replace) {
+    if(window.location.href.indexOf('?user=') !== -1){
+        replace({
+            pathname:'/login',
+            state: {nextPathname: nextState.location.pathname}
+        });
+    }
 }
 
 ReactDOM.render(<App />, document.getElementById('homepage'));

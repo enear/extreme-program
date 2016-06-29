@@ -4,11 +4,14 @@ var express = require('express'),
   index = require('./routes/index'),
   mongoose = require('mongoose'),
   morgan = require('morgan'),
+
   users = require('./api/users/userRoutes'),
   roles = require('./api/roles/roleRouter'),
   rewards = require('./api/rewards/rewardRouter'),
   goals = require('./api/goals/goalRouter'),
+
   admin = require('./routes/admin'),
+  login = require('./routes/login'),
   app = express();
 
 require('./config.js');
@@ -30,6 +33,7 @@ app.use(express.static('app/public'));
 
 //routes
 app.use('/', index);
+app.use('/auth', login);
 app.use('/api/users', users);
 app.use('/api/roles', roles);
 app.use('/api/rewards', rewards);

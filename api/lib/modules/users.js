@@ -39,7 +39,7 @@ var _hasEnoughPoints = function(user, points) {
 };
 
 
-var signInWithSlack = function() {
+var signInWithSlack = function(payload) {
 
 };
 

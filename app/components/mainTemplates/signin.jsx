@@ -7,6 +7,7 @@ var SignIn = React.createClass({
                 <div className="row">
                     <div className="col-xs-12">
                         <h1>This is the singin page!</h1>
+                        <a href="/auth/slack">Sign in with Slack</a>
                     </div>
                 </div>
             </div>
