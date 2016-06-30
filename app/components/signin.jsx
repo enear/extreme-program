@@ -9,7 +9,8 @@ var $ = require('jquery');
 var SignIn = React.createClass({
     getInitialState: function() {
         return {
-            user: {}
+            password: "",
+            confirmPassword: ""
         };
     },
     componentWillMount: function() {
@@ -41,18 +42,33 @@ var SignIn = React.createClass({
                     return sParameterName[1] === undefined ? true : sParameterName[1];
                 }
             }
+    },
+    _validForm: function() {
+
+    },
+    _matchingPasswords: function() {
+
+    },
+    sendData: function() {
 
     },
     render: function(){
         return (
-            <div className="container">
+            <div id="signinComponent" className="container">
                 <div className="row">
                     <div className="col-xs-12">
                         <h1>This is the singin page!</h1>
                         <p>Please select your password</p>
-                        <form action="/signin" method="POST">
-                            <input type="text" name="password" value="" />
-                            <input type="submit" value="send" />
+                        <form  className="form-horizontal"action="/signin" method="POST" onSubmit={this.sendData}>
+                            <div className="form-group">
+                                <label for="password" className="col-xs-12">Password</label>
+                                <input className="col-xs-12 form-control" type="text" id="password" name="password"  />
+                                <label for="confirmPassword" className="col-xs-12">Confirm your password</label>
+                                <input className="col-xs-12 form-control" type="text" id="confirmPassword" name="confirmPassword" value="" />
+                            </div>
+                            <div className="form-group">
+                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
