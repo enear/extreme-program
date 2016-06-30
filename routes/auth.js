@@ -1,36 +1,39 @@
 var router = require('express').Router();
 var request = require('request');
 
+
 router.get('/slack', function(req, res) {
-    //TODO: make this data procsess.env variables
 
     var params = serialize({
-        client_id: "4173363215.47618547495",
-        scope: "identity.basic identity.email ",
-        redirect_uri: "http://localhost:3000/auth/slack/return",
-        team: "T0453AP6B"
+        client_id: process.env.CLIENT_ID,
+        scope: process.env.SCOPE,
+        redirect_uri: process.env.REDIRECT_URI,
+        team: process.env.TEAM_ID
     });
-
-
-    console.log(params);
 
     res.redirect('https://slack.com/oauth/authorize?' + params);
 });
 
 router.get('/slack/return', function(req, res) {
+    console.log("return");
     var params = serialize({
-        client_id: "4173363215.47618547495",
-        redirect_uri: "http://localhost:3000/auth/slack/return",
+        client_id: process.env.CLIENT_ID,
+        redirect_uri: process.env.REDIRECT_URI,
         code: req.query.code,
-        client_secret: '3673e6d751c486f23cff36654f13cb1f'
+        client_secret: process.env.CLIENT_SECRET
     });
 
     request('https://slack.com/api/oauth.access?' + params, function(error, response, body) {
         var obj = JSON.parse(body);
-        console.log(obj);
-        res.redirect('/#/login?user=' + obj.user.email);
+        if(obj.team.id !== process.env.TEAM_ID) {
+            res.redirect('/#/signin');
+        }
+        else{
+            console.log(obj);
+            req.flash('user', obj.user.email);
+            res.redirect('/signin');
+        }
     });
-
 });
 
 function serialize(params) {

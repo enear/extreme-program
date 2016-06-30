@@ -4,6 +4,8 @@ var express = require('express'),
   index = require('./routes/index'),
   mongoose = require('mongoose'),
   morgan = require('morgan'),
+  flash = require('connect-flash'),
+  session = require('express-session'),
 
   users = require('./api/users/userRoutes'),
   roles = require('./api/roles/roleRouter'),
@@ -11,7 +13,8 @@ var express = require('express'),
   goals = require('./api/goals/goalRouter'),
 
   admin = require('./routes/admin'),
-  login = require('./routes/login'),
+  auth = require('./routes/auth'),
+  signin = require('./routes/signin'),
   app = express();
 
 require('./config.js');
@@ -31,9 +34,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('app/public'));
 
+//sessions
+app.use(session({ secret: 'th1s1s4V3ryL0ng4nd$3cur3$3cR37'}));
+app.use(flash());
+
 //routes
 app.use('/', index);
-app.use('/auth', login);
+app.use('/signin', signin);
+app.use('/auth', auth);
 app.use('/api/users', users);
 app.use('/api/roles', roles);
 app.use('/api/rewards', rewards);

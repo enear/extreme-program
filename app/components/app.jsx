@@ -4,13 +4,11 @@ var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var IndexRoute = require('react-router').IndexRoute;
 var hashHistory = require('react-router').hashHistory;
-var Index = require('./index.jsx');
-var Home = require('./home.jsx');
-var Goal = require('../goals/goalDetail.jsx');
-var Reward = require('../rewards/rewardDetail.jsx');
-
-var Login = require('./login.jsx');
-var SignIn = require('./signin.jsx');
+var Index = require('./mainTemplates/index.jsx');
+var Home = require('./mainTemplates/home.jsx');
+var Goal = require('./goals/goalDetail.jsx');
+var Reward = require('./rewards/rewardDetail.jsx');
+var Login = require('./mainTemplates/login.jsx');
 
 var App = React.createClass({
     render: function() {
@@ -23,7 +21,6 @@ var App = React.createClass({
                         <Route path="/rewards/:id" component={Reward} onEnter={test} />
                     </Route>
                     <Route path="/login" component={Login} />
-                    <Route path="/signin" component={SignIn} />
                 </Router>
             </div>
         );
@@ -46,4 +43,4 @@ function hasUserName(nextState, replace) {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('homepage'));
+ReactDOM.render(<App />, document.getElementById('app'));

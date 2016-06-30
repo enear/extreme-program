@@ -8,7 +8,7 @@ var Login = React.createClass({
                 <div className="row">
                     <div className="col-xs-12">
                         <h1>This is the login page!</h1>
-                        Not registered? <Link to="/signin">Sign in</Link>
+                        Not registered? <a href="/auth/slack">Sign in with Slack</a>
                     </div>
                 </div>
             </div>

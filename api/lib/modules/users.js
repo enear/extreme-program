@@ -1,5 +1,4 @@
 //this is a specific module to handle the user actions & updates
-
 var changePassword = function(user, options, callback){
     user.password = options.newPassword;
     user.save(callback);
@@ -39,7 +38,7 @@ var _hasEnoughPoints = function(user, points) {
 };
 
 
-var signInWithSlack = function(payload) {
+var loginStrategy = function(payload) {
 
 };
 

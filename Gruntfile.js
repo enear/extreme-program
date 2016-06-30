@@ -23,13 +23,14 @@ module.exports = function(grunt){
                 transform: ['reactify']
             },
             files: {
-                'app/public/js/main.js': 'app/components/mainTemplates/*.jsx'
+                'app/public/js/app.js': 'app/components/app.jsx',
+                'app/public/js/signin.js': 'app/components/signin.jsx'
             }
         }
     },
     watch: {
       browserify: {
-        files: ['app/**/*.jsx','app/**/*.js'],
+        files: ['app/**/*.jsx','app/**/*.js', 'Gruntfile.js'],
         tasks: ['browserify:dev', 'express:dev'],
         options: {
           spawn: false
@@ -47,7 +48,7 @@ module.exports = function(grunt){
         tasks: ['express:dev'],
         options: {
           spawn: false
-      }
+        }
       }
     },
     express: {
