@@ -2,12 +2,14 @@ var router = require('express').Router();
 
 router.get('/', function(req, res) {
     var user = req.flash('user');
-    req.flash('user', user);
 
-    if(user === '') {
+    console.log(user);
+
+    if(user.length === 0) {
         res.redirect('/');
     }
     else {
+        req.flash('user', user);
         res.render('signin', {user: user});
     }
 });

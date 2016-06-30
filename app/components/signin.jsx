@@ -55,9 +55,12 @@ var SignIn = React.createClass({
             this.setState(state);
         }.bind(this);
     },
-    sendData: function(e) {
+    handleSubmit: function(e) {
         e.preventDefault();
-        console.log(this._validForm());
+        console.log(e);
+        if(this._validForm()){
+            e.target.submit();
+        }
     },
     render: function(){
         return (
@@ -66,12 +69,12 @@ var SignIn = React.createClass({
                     <div className="col-xs-12">
                         <h1>This is the singin page!</h1>
                         <p>Please select your password</p>
-                        <form  className="form-horizontal" onSubmit={this.sendData}>
+                        <form  className="form-horizontal" action="/signin" method="POST" onSubmit={this.handleSubmit} >
                             <div className="form-group">
                                 <label for="password" className="col-xs-12">Password</label>
-                                <input className="col-xs-12 form-control"  type="text" id="password" name="password" onBlur={this._handleBlur('password')} />
+                                <input className="col-xs-12 form-control"  type="password" id="password" name="password" onBlur={this._handleBlur('password')} />
                                 <label for="confirmPassword" className="col-xs-12">Confirm your password</label>
-                                <input className="col-xs-12 form-control" type="text" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur('confirmPassword')} />
+                                <input className="col-xs-12 form-control" type="password" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur('confirmPassword')} />
                             </div>
                             <div className="form-group">
                                 <button type="submit" className="btn btn-primary">Submit</button>

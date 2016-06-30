@@ -25,7 +25,7 @@ module.exports = function(passport, User) {
                 }
 
                 if(user){
-                    
+
                 }
             });
         });
