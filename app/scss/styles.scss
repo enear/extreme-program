@@ -10,8 +10,11 @@
 
 //Single Components
 
-//Goals
+//Goals & rewards
 @import "components/_goalList.scss";
 @import "components/_goalDetail.scss";
 @import "components/_rewardsList.scss";
-@import "components/_rewardDetail.scss"
+@import "components/_rewardDetail.scss";
+
+//Signin Page
+@import "signinPage/_signinPage.scss";

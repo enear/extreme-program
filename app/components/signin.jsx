@@ -1,11 +1,10 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var SigninStore = require('../stores/SigninStore');
-var SigninActions = require('../actions/SigninActions');
+var SigninActions = require('../actions/signinActions');
 var $ = require('jquery');
 
 
-//TODO: validate password and check if it matches the confirm password field
 var SignIn = React.createClass({
     getInitialState: function() {
         return {
@@ -44,13 +43,21 @@ var SignIn = React.createClass({
             }
     },
     _validForm: function() {
-
+        return this.state.password.length >= 4 && this.state.confirmPassword.length >= 4 && this._matchingPasswords();
     },
     _matchingPasswords: function() {
-
+        return this.state.password === this.state.confirmPassword;
     },
-    sendData: function() {
-
+    _handleBlur: function(key) {
+        return function(e) {
+            var state = {};
+            state[key] = e.target.value;
+            this.setState(state);
+        }.bind(this);
+    },
+    sendData: function(e) {
+        e.preventDefault();
+        console.log(this._validForm());
     },
     render: function(){
         return (
@@ -59,12 +66,12 @@ var SignIn = React.createClass({
                     <div className="col-xs-12">
                         <h1>This is the singin page!</h1>
                         <p>Please select your password</p>
-                        <form  className="form-horizontal"action="/signin" method="POST" onSubmit={this.sendData}>
+                        <form  className="form-horizontal" onSubmit={this.sendData}>
                             <div className="form-group">
                                 <label for="password" className="col-xs-12">Password</label>
-                                <input className="col-xs-12 form-control" type="text" id="password" name="password"  />
+                                <input className="col-xs-12 form-control"  type="text" id="password" name="password" onBlur={this._handleBlur('password')} />
                                 <label for="confirmPassword" className="col-xs-12">Confirm your password</label>
-                                <input className="col-xs-12 form-control" type="text" id="confirmPassword" name="confirmPassword" value="" />
+                                <input className="col-xs-12 form-control" type="text" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur('confirmPassword')} />
                             </div>
                             <div className="form-group">
                                 <button type="submit" className="btn btn-primary">Submit</button>
