@@ -1,11 +1,13 @@
 var express = require('express'),
   bodyParser = require('body-parser'),
+  cookieParser = require('cookie-parser'),
   path = require('path'),
   index = require('./routes/index'),
   mongoose = require('mongoose'),
   morgan = require('morgan'),
   flash = require('connect-flash'),
   session = require('express-session'),
+  passport = require('passport'),
 
   users = require('./api/users/userRoutes'),
   roles = require('./api/roles/roleRouter'),
@@ -14,7 +16,9 @@ var express = require('express'),
 
   admin = require('./routes/admin'),
   auth = require('./routes/auth'),
-  signin = require('./routes/signin'),
+
+  UserModel = require('./api/users/userModel');
+
   app = express();
 
 require('./config.js');
@@ -22,6 +26,8 @@ require('./api/users/userInitializer');
 require('./api/roles/roleInitializer');
 require('./api/rewards/rewardInitializer');
 require('./api/goals/goalInitializer');
+
+require('./api/lib/lib').auth(passport, UserModel);
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
@@ -32,21 +38,29 @@ app.set('view engine', 'hbs');
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.static('app/public'));
 
 //sessions
-app.use(session({ secret: 'th1s1s4V3ryL0ng4nd$3cur3$3cR37'}));
+app.use(session({
+    secret: 'th1s1s4V3ryL0ng4nd$3cur3$3cR37',
+    resave: false,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
 //routes
 app.use('/', index);
-app.use('/signin', signin);
 app.use('/auth', auth);
 app.use('/api/users', users);
 app.use('/api/roles', roles);
 app.use('/api/rewards', rewards);
 app.use('/api/goals', goals);
 app.use('/admin', admin);
+
+require('./routes/signin')(app, passport);
 
 app.listen(process.env.PORT_NUMBER, function () {
   console.log("listening to " + process.env.PORT_NUMBER);

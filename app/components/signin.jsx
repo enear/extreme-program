@@ -57,7 +57,6 @@ var SignIn = React.createClass({
     },
     handleSubmit: function(e) {
         e.preventDefault();
-        console.log(e);
         if(this._validForm()){
             e.target.submit();
         }

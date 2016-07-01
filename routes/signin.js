@@ -1,24 +1,24 @@
-var router = require('express').Router();
+module.exports = function(app, passport) {
+    app.get('/signin', function(req, res) {
+        var user = req.flash('user');
 
-router.get('/', function(req, res) {
-    var user = req.flash('user');
+        if(user.length === 0) {
+            res.redirect('/#/login');
+        }
+        else {
+            req.flash('user', user);
+            res.render('signin', {user: user});
+        }
+    });
 
-    console.log(user);
+    app.post('/signin', function(req, res, next) {
+        req.body.email = req.flash('user').toString();
 
-    if(user.length === 0) {
-        res.redirect('/');
-    }
-    else {
-        req.flash('user', user);
-        res.render('signin', {user: user});
-    }
-});
-
-router.post('/', function(req, res) {
-    console.log(req.flash('user'));
-    console.log(req.body);
-
-    //TODO: post request /api/users {username: email, email: email, password: password, role} and create a new user
-});
-
-module.exports = router;
+        next();
+    },
+    passport.authenticate('local-signup', {
+        successRedirect: '/',
+        failureRedirect: '/#/login',
+        failureFlash: true
+    }));
+};

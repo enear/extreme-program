@@ -15,7 +15,6 @@ router.get('/slack', function(req, res) {
 });
 
 router.get('/slack/return', function(req, res) {
-    console.log("return");
     var params = serialize({
         client_id: process.env.CLIENT_ID,
         redirect_uri: process.env.REDIRECT_URI,
@@ -25,12 +24,10 @@ router.get('/slack/return', function(req, res) {
 
     request('https://slack.com/api/oauth.access?' + params, function(error, response, body) {
         var obj = JSON.parse(body);
-        console.log(obj);
         if(obj.team.id !== process.env.TEAM_ID) {
             res.redirect('/#/login');
         }
         else{
-            console.log(obj);
             req.flash('user', obj.user.email);
             res.redirect('/signin');
         }
