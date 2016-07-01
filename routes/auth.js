@@ -25,7 +25,7 @@ router.get('/slack/return', function(req, res) {
     request('https://slack.com/api/oauth.access?' + params, function(error, response, body) {
         var obj = JSON.parse(body);
         if(obj.team.id !== process.env.TEAM_ID) {
-            res.redirect('/#/login');
+            res.redirect('/login');
         }
         else{
             req.flash('user', obj.user.email);

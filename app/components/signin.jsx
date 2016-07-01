@@ -28,20 +28,6 @@ var SignIn = React.createClass({
             user: SigninStore.getUser()
         }
     },
-    _getUrlParam: function(sParam) {
-        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-                sURLVariables = sPageURL.split('&'),
-                sParameterName,
-                i;
-
-            for (i = 0; i < sURLVariables.length; i++) {
-                sParameterName = sURLVariables[i].split('=');
-
-                if (sParameterName[0] === sParam) {
-                    return sParameterName[1] === undefined ? true : sParameterName[1];
-                }
-            }
-    },
     _validForm: function() {
         return this.state.password.length >= 4 && this.state.confirmPassword.length >= 4 && this._matchingPasswords();
     },
@@ -57,6 +43,7 @@ var SignIn = React.createClass({
     },
     handleSubmit: function(e) {
         e.preventDefault();
+
         if(this._validForm()){
             e.target.submit();
         }
@@ -86,4 +73,4 @@ var SignIn = React.createClass({
     }
 });
 
-ReactDOM.render(<SignIn />, document.getElementById("signin"));
+ReactDOM.render(<SignIn />, document.getElementById('signin'));

@@ -18,7 +18,7 @@ var NavBar = React.createClass({
 
                 <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                    <li className="active"><Link to="/login">Log in</Link></li>
+                    <li className="active"><a href="/logout">Log Out</a></li>
                   </ul>
                 </div>
               </div>

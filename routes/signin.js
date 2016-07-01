@@ -3,7 +3,7 @@ module.exports = function(app, passport) {
         var user = req.flash('user');
 
         if(user.length === 0) {
-            res.redirect('/#/login');
+            res.redirect('/#login');
         }
         else {
             req.flash('user', user);
@@ -13,12 +13,12 @@ module.exports = function(app, passport) {
 
     app.post('/signin', function(req, res, next) {
         req.body.email = req.flash('user').toString();
-
+        
         next();
     },
-    passport.authenticate('local-signup', {
+    passport.authenticate('signin', {
         successRedirect: '/',
-        failureRedirect: '/#/login',
+        failureRedirect: '/login',
         failureFlash: true
     }));
 };

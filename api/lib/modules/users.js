@@ -38,11 +38,6 @@ var _hasEnoughPoints = function(user, points) {
 };
 
 
-var loginStrategy = function(payload) {
-
-};
-
-
 module.exports = {
     changePassword: changePassword,
     submitNewRequest: submitNewRequest,

@@ -31,7 +31,6 @@ var RewardDetail = React.createClass({
         }
     },
     render: function() {
-        console.log(this.state);
         return (
             <div className="container reward-detail">
                 <div className="row">

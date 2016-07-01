@@ -8,7 +8,6 @@ var Index = require('./mainTemplates/index.jsx');
 var Home = require('./mainTemplates/home.jsx');
 var Goal = require('./goals/goalDetail.jsx');
 var Reward = require('./rewards/rewardDetail.jsx');
-var Login = require('./mainTemplates/login.jsx');
 
 var App = React.createClass({
     render: function() {
@@ -20,7 +19,6 @@ var App = React.createClass({
                         <Route path="/goals/:id" component={Goal} />
                         <Route path="/rewards/:id" component={Reward} onEnter={test} />
                     </Route>
-                    <Route path="/login" component={Login} />
                 </Router>
             </div>
         );
