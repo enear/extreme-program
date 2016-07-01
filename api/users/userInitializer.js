@@ -3,13 +3,12 @@ var User = require('./userModel');
 User.find({}, function(err, result) {
     if(result.length === 0){
         var newUser = new User({
-            username: "goncalo.assuncao",
-            email: "goncalo.assuncao@e-near.co",
+            username: "tester@test.com",
+            email: "tester@test.com",
             role: "standard",
+            password: "tester",
             totalPoints: 20
         });
-
-        newUser.password = newUser.generateHash("123456");
 
         newUser.save(function(err, result) {
             console.log(err || "User saved");

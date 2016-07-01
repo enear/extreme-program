@@ -60,7 +60,7 @@ app.use('/api/rewards', rewards);
 app.use('/api/goals', goals);
 app.use('/admin', admin);
 
-require('./routes/signin')(app, passport);
+require('./routes/signin')(app, passport, UserModel);
 require('./routes/login')(app, passport);
 
 app.listen(process.env.PORT_NUMBER, function () {

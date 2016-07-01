@@ -42,6 +42,18 @@ var GoalDetail = React.createClass({
                         <div>
                             {this.state.goal.points}
                         </div>
+                        <form  className="form-horizontal col-xs-12" action="/" method="POST"  >
+                            <div className="form-group">
+                                <input type="hidden" name="user"/>
+                                <input type="hidden" name="goal" />
+                                <input type="hidden" name="points" />
+                                <label for="Comment" className="col-xs-12">Comment</label>
+                                <textarea className="form-control col-xs-12" id="comment"></textarea>
+                            </div>
+                            <div className="form-group">
+                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
                         <div>
                             <Link to="/" className="btn btn-default">Back</Link>
                         </div>
