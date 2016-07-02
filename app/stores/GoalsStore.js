@@ -5,7 +5,8 @@ var _ = require('underscore');
 
 
 var _goals = [],
-    _goal = {};
+    _goal = {},
+    _user = {};
 
 var GoalsStore = _.extend({}, EventEmitter.prototype, {
     getGoals: function() {
@@ -26,6 +27,9 @@ var GoalsStore = _.extend({}, EventEmitter.prototype, {
 
         return obj;
     },
+    getUser: function(){
+        return _user;
+    },
     addChangeListener: function(callback) {
         this.on('change', callback);
     },
@@ -45,6 +49,10 @@ AppDispatcher.register(function(payload) {
         case GoalsConstants.GET_GOAL:
             _goal = action.data;
             GoalsStore.emit('change');
+            break;
+        case GoalsConstants.GET_USER:
+            console.log("didnt refused tha cawll! ")
+            _user = action.user;
             break;
 
         default:

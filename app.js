@@ -59,9 +59,8 @@ app.use('/api/roles', roles);
 app.use('/api/rewards', rewards);
 app.use('/api/goals', goals);
 app.use('/admin', admin);
-
-require('./routes/signin')(app, passport, UserModel);
-require('./routes/login')(app, passport);
+app.use('/login', require('./routes/login')(passport));
+app.use('/signin', require('./routes/signin')(passport, UserModel));
 
 app.listen(process.env.PORT_NUMBER, function () {
   console.log("listening to " + process.env.PORT_NUMBER);

@@ -2,12 +2,21 @@ var router = require('express').Router();
 
 router.get("/", function(req, res) {
     if(req.isAuthenticated()) {
-        res.render('index');
+        if(req.query.getuser === "true") {
+            res.json(req.user);
+        }
+        else{
+            res.render('index');
+        }
     }
     else {
         res.redirect('/login');
     }
 });
 
+router.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
 
 module.exports = router;

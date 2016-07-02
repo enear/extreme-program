@@ -1,5 +1,7 @@
-module.exports = function(app, passport, User) {
-    app.get('/signin', function(req, res) {
+var router = require('express').Router();
+
+module.exports = function(passport, User) {
+    router.get('/', function(req, res) {
         var user = req.flash('user');
 
         if(user.length === 0) {
@@ -22,7 +24,7 @@ module.exports = function(app, passport, User) {
         }
     });
 
-    app.post('/signin', function(req, res, next) {
+    router.post('/', function(req, res, next) {
 
         req.body.email = req.flash('user').toString();
 
@@ -33,4 +35,6 @@ module.exports = function(app, passport, User) {
         failureRedirect: '/login',
         failureFlash: true
     }));
+
+    return router;
 };

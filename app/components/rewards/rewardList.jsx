@@ -9,7 +9,7 @@ var RewardList = React.createClass({
             rewards: []
         }
     },
-    componentDidMount: function() {
+    componentWillMount: function() {
         RewardActions.getRewards('/api/rewards');
         RewardStore.addChangeListener(this._onChange);
     },
