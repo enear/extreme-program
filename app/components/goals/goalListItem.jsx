@@ -12,7 +12,7 @@ var GoalListItem = React.createClass( {
                 <img  src="/assets/goal.jpg" alt="name" title="name" />
                 <h3><Link to={link}>{this.props.goal.name}</Link></h3>
                 <p>
-                    {this.props.goal.description}
+                    {this.props.goal.summary}
                 </p>
                 <div className="cost-container">{this.props.goal.points} Points</div>
                 <div className="text-center">
