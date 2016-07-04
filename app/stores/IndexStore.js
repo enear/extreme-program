@@ -1,11 +1,11 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var EventEmitter = require('events').EventEmitter;
-var AppConstants = require('../constants/appConstants');
+var IndexConstants = require('../constants/indexConstants');
 var _ = require('underscore');
 
 var _user = {};
 
-var AppStore = _.extend({}, EventEmitter.prototype, {
+var IndexStore = _.extend({}, EventEmitter.prototype, {
     getUser: function() {
         return _user;
     },
@@ -17,20 +17,17 @@ var AppStore = _.extend({}, EventEmitter.prototype, {
     }
 });
 
-//TODO: react-router is throwing a warning due to the re-render after setting the new user state.
-//TODO: make the index component make this call
-
 AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
-        case AppConstants.GET_USER:
+        case IndexConstants.GET_USER:
             _user = action.user;
-            AppStore.emit('change');
+            IndexStore.emit('change');
             break;
         default:
             return true;
     }
 });
 
-module.exports = AppStore;
+module.exports = IndexStore;

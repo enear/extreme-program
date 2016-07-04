@@ -51,8 +51,8 @@ AppDispatcher.register(function(payload) {
             GoalsStore.emit('change');
             break;
         case GoalsConstants.GET_USER:
-            console.log("didnt refused tha cawll! ")
             _user = action.user;
+            GoalsStore.emit('change');
             break;
 
         default:

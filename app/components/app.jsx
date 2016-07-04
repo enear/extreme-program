@@ -8,34 +8,9 @@ var Index = require('./mainTemplates/index.jsx');
 var Home = require('./mainTemplates/home.jsx');
 var Goal = require('./goals/goalDetail.jsx');
 var Reward = require('./rewards/rewardDetail.jsx');
-var AppStore = require('../stores/AppStore');
-var AppActions = require('../actions/appActions');
 
 var App = React.createClass({
-    getInitialState: function(){
-        return {
-            user: {}
-        }
-    },
-    componentWillMount: function() {
-        AppActions.getUser('/?getuser=true');
-        AppStore.addChangeListener(this._onChange);
-    },
-    componentWillUnmount: function() {
-        AppStore.removeChangeListener(this._onChange);
-    },
-    _onChange: function() {
-        this.setState(
-            this._getState()
-        );
-    },
-    _getState: function() {
-        return {
-            user: AppStore.getUser()
-        };
-    },
     render: function() {
-        console.log(this.state);
         return (
             <div>
                 <Router history={hashHistory}>

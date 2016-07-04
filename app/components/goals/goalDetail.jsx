@@ -7,8 +7,9 @@ var Link = require('react-router').Link;
 var GoalDetail = React.createClass({
     getInitialState: function() {
         return {
-            goal: GoalsStore.getGoalById(this.props.params.id)
-        }
+            goal: GoalsStore.getGoalById(this.props.params.id),
+            user: GoalsStore.getUser()
+        };
     },
     componentWillMount: function() {
         if(Object.keys(this.state.goal).length === 0) {
@@ -26,7 +27,8 @@ var GoalDetail = React.createClass({
     },
     _getState: function() {
         return {
-            goal: GoalsStore.getGoal()
+            goal: GoalsStore.getGoal(),
+            user: GoalsStore.getUser()
         }
     },
     render: function() {

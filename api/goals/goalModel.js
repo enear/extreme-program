@@ -6,6 +6,7 @@ var goalSchema = new mongoose.Schema({
     createdBy: String,
     created: {type: Date, default: Date.now},
     image: String,
+    summary: {type: String, required: true},
     description: {type: String, required: true}
 });
 

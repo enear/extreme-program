@@ -47,7 +47,7 @@ describe("Goals", function(){
     it("Should save a new goal on /api/goals POST", function(done) {
         chai.request(server)
         .post('/api/goals')
-        .send({name: "New business contact", points: 15, description: "Arrange a meeting with a new potential client"})
+        .send({name: "New business contact", points: 15, summary: "Arrange a meeting with a new potential client", description:"Arrange a meeting with a brand new customer that can provide some financial cashflow to the company",})
         .end(function(err, res) {
             res.should.have.status(200);
             res.should.be.json;

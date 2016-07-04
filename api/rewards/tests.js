@@ -28,7 +28,7 @@ describe("Rewards", function(){
     it("Should save a new reward on /api/rewards POST", function(done) {
         chai.request(server)
             .post('/api/rewards')
-            .send({name: "Trip to Hawai", points: 5000, description: "Trip in all-included regime to Hawai", createdBy:'user', created: new Date()})
+            .send({name: "Trip to Hawai", points: 5000, summary: "Trip in all-included regime to Hawai", description:"Trip in an all-included regime to a beatiful beach in Hawai for two person", createdBy:'user', created: new Date()})
             .end(function(err, res) {
                 res.should.have.status(200);
                 res.should.be.json;
