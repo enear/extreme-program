@@ -8,6 +8,7 @@ var Index = require('./mainTemplates/index.jsx');
 var Home = require('./mainTemplates/home.jsx');
 var Goal = require('./goals/goalDetail.jsx');
 var Reward = require('./rewards/rewardDetail.jsx');
+var Profile = require('./profile/profile.jsx');
 
 var App = React.createClass({
     render: function() {
@@ -18,6 +19,7 @@ var App = React.createClass({
                         <IndexRoute component={Home} />
                         <Route path="/goals/:id" component={Goal} />
                         <Route path="/rewards/:id" component={Reward}  />
+                        <Route path="/profile" component={Profile} />
                     </Route>
                 </Router>
             </div>

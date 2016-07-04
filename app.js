@@ -2,11 +2,11 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   cookieParser = require('cookie-parser'),
   path = require('path'),
-  index = require('./routes/index'),
+  session = require('express-session'),
   mongoose = require('mongoose'),
+  MongoStore = require('connect-mongo/es5')(session),
   morgan = require('morgan'),
   flash = require('connect-flash'),
-  session = require('express-session'),
   passport = require('passport'),
 
   users = require('./api/users/userRoutes'),
@@ -14,6 +14,7 @@ var express = require('express'),
   rewards = require('./api/rewards/rewardRouter'),
   goals = require('./api/goals/goalRouter'),
 
+  index = require('./routes/index'),
   admin = require('./routes/admin'),
   auth = require('./routes/auth'),
 
@@ -45,7 +46,8 @@ app.use(express.static('app/public'));
 app.use(session({
     secret: 'th1s1s4V3ryL0ng4nd$3cur3$3cR37',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
 }));
 app.use(passport.initialize());
 app.use(passport.session());
