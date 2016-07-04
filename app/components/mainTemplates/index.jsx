@@ -11,7 +11,10 @@ var Index = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
-        IndexActions.getUser('/?getuser=true');
+        if(Object.keys(this.state.user).length === 0) {
+            IndexActions.getUser('/?getuser=true');
+        }
+
         IndexStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
@@ -28,7 +31,6 @@ var Index = React.createClass({
         }
     },
     render: function() {
-        console.log(this.state);
         return (
             <div>
                 <NavBar />

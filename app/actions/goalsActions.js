@@ -19,6 +19,14 @@ var GoalsActions = {
                 data: data
             });
         });
+    },
+    sendRequest: function(request) {
+        $.post("/api/users/" + request.user._id, request, function(data) {
+            AppDispatcher.handleAction({
+                actionType: GoalsConstants.SEND_REQUEST,
+                data: data
+            });
+        });
     }
 };
 

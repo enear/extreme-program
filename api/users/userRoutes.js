@@ -9,18 +9,19 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res, next) {
-    var dummyUser = new User({
+    var newUser = new User({
         username: req.body.username,
         email: req.body.email,
         role: req.body.role
     });
 
-    dummyUser.password = dummyUser.generateHash(req.body.password);
+    newUser.password = newUser.generateHash(req.body.password);
 
-    dummyUser.save(function(err, result) {
+    newUser.save(function(err, result) {
         res.json(err || result);
     });
 });
+
 
 router.get('/:id', function(req, res) {
     User.findOne({'_id': req.params.id}, function(err, result) {

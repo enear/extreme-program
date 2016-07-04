@@ -1,10 +1,15 @@
 var React = require('react');
 var GoalsStore = require('../../stores/GoalsStore');
 var GoalsActions = require('../../actions/goalsActions');
+var Router = require('react-router');
+
 var Link = require('react-router').Link;
 
 
 var GoalDetail = React.createClass({
+    contextTypes: {
+      router: React.PropTypes.object.isRequired
+    },
     getInitialState: function() {
         return {
             goal: GoalsStore.getGoalById(this.props.params.id),
@@ -20,6 +25,26 @@ var GoalDetail = React.createClass({
     componentWillUnmount: function() {
         GoalsStore.removeChangeListener(this._onChange);
     },
+    handleSubmit: function(e) {
+        e.preventDefault();
+
+        var request = {
+            user: this.state.user,
+            action: 'submitNewRequest',
+            newRequest: {
+                name: this.state.goal.name,
+                points: this.state.goal.points,
+                summary: this.state.goal.summary,
+                comment: this.state.comment,
+                date: new Date(),
+                state: "open"
+            }
+        };
+
+        GoalsActions.sendRequest(request);
+
+        this.context.router.push('/');
+    },
     _onChange: function() {
         this.setState(
             this._getState()
@@ -30,6 +55,13 @@ var GoalDetail = React.createClass({
             goal: GoalsStore.getGoal(),
             user: GoalsStore.getUser()
         }
+    },
+    _handleBlur: function() {
+        return function(e) {
+            var state = {};
+            state[e.target.name] = e.target.value;
+            this.setState(state);
+        }.bind(this);
     },
     render: function() {
         return (
@@ -44,13 +76,10 @@ var GoalDetail = React.createClass({
                         <div>
                             {this.state.goal.points}
                         </div>
-                        <form  className="form-horizontal col-xs-12" action="/" method="POST"  >
+                        <form  className="form-horizontal col-xs-12" onSubmit={this.handleSubmit}  >
                             <div className="form-group">
-                                <input type="hidden" name="user"/>
-                                <input type="hidden" name="goal" />
-                                <input type="hidden" name="points" />
                                 <label for="Comment" className="col-xs-12">Comment</label>
-                                <textarea className="form-control col-xs-12" id="comment"></textarea>
+                                <textarea className="form-control col-xs-12" id="comment" name="comment" onBlur={this._handleBlur()}></textarea>
                             </div>
                             <div className="form-group">
                                 <button type="submit" className="btn btn-primary">Submit</button>

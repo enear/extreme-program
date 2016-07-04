@@ -54,7 +54,10 @@ AppDispatcher.register(function(payload) {
             _user = action.user;
             GoalsStore.emit('change');
             break;
-
+        case GoalsConstants.SEND_REQUEST:
+            _user = action.data;
+            GoalsStore.emit('change');
+            break;
         default:
             return true;
     }

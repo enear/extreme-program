@@ -168,7 +168,7 @@ describe("Users", function(){
 
     it("Should add a new request to a user on /api/user/<id> POST", function(done) {
         var request = {
-            name: "business case", points: 2, comment: "I've writen a business case about stuff"
+            name: "business case", points: 2, summary: "Write a business", comment: "I've writen a business case about stuff"
         };
         var totalRequests;
         var totalPoints;

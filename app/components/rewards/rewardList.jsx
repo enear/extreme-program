@@ -5,12 +5,13 @@ var RewardActions = require('../../actions/rewardActions');
 
 var RewardList = React.createClass({
     getInitialState: function() {
-        return {
-            rewards: []
-        }
+        return this._getState();
     },
     componentWillMount: function() {
-        RewardActions.getRewards('/api/rewards');
+        if(Object.keys(this.state.rewards).length === 0) {
+            RewardActions.getRewards('/api/rewards');
+        }
+
         RewardStore.addChangeListener(this._onChange);
     },
     _onChange: function() {

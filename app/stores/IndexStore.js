@@ -25,6 +25,10 @@ AppDispatcher.register(function(payload) {
             _user = action.user;
             IndexStore.emit('change');
             break;
+        case IndexConstants.SEND_REQUEST:
+            _user = action.data;
+            IndexStore.emit('change');
+            break;
         default:
             return true;
     }

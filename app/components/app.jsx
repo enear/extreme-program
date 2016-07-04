@@ -17,7 +17,7 @@ var App = React.createClass({
                     <Route path="/" component={Index} >
                         <IndexRoute component={Home} />
                         <Route path="/goals/:id" component={Goal} />
-                        <Route path="/rewards/:id" component={Reward} onEnter={test} />
+                        <Route path="/rewards/:id" component={Reward}  />
                     </Route>
                 </Router>
             </div>

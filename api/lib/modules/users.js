@@ -23,6 +23,7 @@ var addReward = function(user, options, callback) {
     user.save(callback);
 };
 
+
 var updatePoints = function(user, options, callback) {
     user.totalPoints += options.points;
 
