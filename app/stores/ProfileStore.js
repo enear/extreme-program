@@ -23,6 +23,7 @@ AppDispatcher.register(function(payload) {
 
     switch(action.actionType) {
         case ProfileConstants.GET_USER:
+        case ProfileConstants.CHANGE_PASSWORD:
             _user = action.user;
             ProfileStore.emit('change');
             break;

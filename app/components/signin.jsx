@@ -57,9 +57,9 @@ var SignIn = React.createClass({
                         <p>Please select your password</p>
                         <form  className="form-horizontal" action="/signin" method="POST" onSubmit={this.handleSubmit} >
                             <div className="form-group">
-                                <label for="password" className="col-xs-12">Password</label>
+                                <label htmlFor="password" className="col-xs-12">Password</label>
                                 <input className="col-xs-12 form-control"  type="password" id="password" name="password" onBlur={this._handleBlur('password')} />
-                                <label for="confirmPassword" className="col-xs-12">Confirm your password</label>
+                                <label htmlFor="confirmPassword" className="col-xs-12">Confirm your password</label>
                                 <input className="col-xs-12 form-control" type="password" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur('confirmPassword')} />
                             </div>
                             <div className="form-group">

@@ -33,9 +33,9 @@ var Login = React.createClass({
                         <h1>This is the login page!</h1>
                         <form  className="form-horizontal col-xs-12" action="/login" method="POST" onSubmit={this._handleSubmit} >
                             <div className="form-group">
-                                <label for="email" className="col-xs-12">Email</label>
+                                <label htmlFor="email" className="col-xs-12">Email</label>
                                 <input className="col-xs-12 form-control"  type="email" id="email" name="email" onBlur={this._handleBlur('email')}/>
-                                <label for="password" className="col-xs-12">Password</label>
+                                <label htmlFor="password" className="col-xs-12">Password</label>
                                 <input className="col-xs-12 form-control"  type="password" id="password" name="password" onBlur={this._handleBlur('password')} />
                             </div>
                             <div className="form-group">

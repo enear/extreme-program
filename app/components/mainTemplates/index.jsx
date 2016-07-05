@@ -4,7 +4,6 @@ var RewardList = require('../rewards/rewardList.jsx');
 var NavBar = require('../navBar/navBar.jsx');
 var IndexStore = require('../../stores/IndexStore');
 var IndexActions = require('../../actions/indexActions');
-var indexConstants = require('../../constants/indexConstants');
 
 var Index = React.createClass({
     getInitialState: function() {

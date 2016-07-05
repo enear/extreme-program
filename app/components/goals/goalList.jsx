@@ -6,9 +6,7 @@ var GoalsActions = require('../../actions/goalsActions');
 
 var GoalList = React.createClass({
     getInitialState: function(){
-        return {
-            goals: []
-        }
+        return this._getState();
     },
     componentWillMount: function() {
         GoalsActions.getGoals('/api/goals');

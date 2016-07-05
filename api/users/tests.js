@@ -69,9 +69,10 @@ describe("Users", function(){
                 res.should.be.json;
                 res.body.should.be.a('array');
 
+                var user = res.body[res.body.length-1];
                 chai.request(server)
-                    .post('/api/users/' + res.body[0]._id)
-                    .send({action: 'changePassword', newPassword: "thisIsAPassword"})
+                    .post('/api/users/' + user._id)
+                    .send({action: 'changePassword',password: "123456", newPassword: "thisIsAPassword"})
                     .end(function(err, res) {
                         res.should.have.status(200);
                         res.should.be.json;
@@ -118,7 +119,7 @@ describe("Users", function(){
 
     it("Should add a new reward to a user on /api/user/<id> POST", function(done) {
         var reward = {
-            name: "Toaster", points: 10, description: "This is a toaster", createdBy: "user", created: new Date()
+            name: "Toaster", points: 10, summary: "This is a toaster", createdBy: "user", created: new Date()
         };
         var totalRewards;
         var totalPoints;
