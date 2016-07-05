@@ -62,10 +62,10 @@ module.exports = function(passport, User) {
                 return done(err);
 
             if (!user)
-                return done(null, false);
+                return done(null, false, {message: "User/Password incorrect!"});
 
             if (!user.validPassword(password))
-                return done(null, false);
+                return done(null, false, {message: "User/Password incorrect!"});
 
             return done(null, user);
         });

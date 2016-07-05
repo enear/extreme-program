@@ -1,5 +1,5 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
-var GoalsConstants = require('../constants/goalsConstants');
+var constants = require('../constants/constants');
 var $ = require('jquery');
 
 
@@ -7,7 +7,7 @@ var GoalsActions = {
     getGoals: function(url) {
         $.getJSON(url, function(data) {
             AppDispatcher.handleAction({
-                actionType: GoalsConstants.GET_GOALS,
+                actionType: constants.GET_GOALS,
                 data: data
             });
         });
@@ -15,7 +15,7 @@ var GoalsActions = {
     getGoal: function(url) {
         $.getJSON(url, function(data) {
             AppDispatcher.handleAction({
-                actionType: GoalsConstants.GET_GOAL,
+                actionType: constants.GET_GOAL,
                 data: data
             });
         });
@@ -23,7 +23,7 @@ var GoalsActions = {
     sendRequest: function(request) {
         $.post("/api/users/" + request.user._id, request, function(data) {
             AppDispatcher.handleAction({
-                actionType: GoalsConstants.SEND_REQUEST,
+                actionType: constants.SEND_REQUEST,
                 data: data
             });
         });

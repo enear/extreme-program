@@ -1,6 +1,6 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var EventEmitter = require('events').EventEmitter;
-var GoalsConstants = require('../constants/goalsConstants');
+var constants = require('../constants/constants');
 var _ = require('underscore');
 
 
@@ -42,19 +42,19 @@ AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
-        case GoalsConstants.GET_GOALS:
+        case constants.GET_GOALS:
             _goals = action.data;
             GoalsStore.emit('change');
             break;
-        case GoalsConstants.GET_GOAL:
+        case constants.GET_GOAL:
             _goal = action.data;
             GoalsStore.emit('change');
             break;
-        case GoalsConstants.GET_USER:
+        case constants.GET_USER:
             _user = action.user;
             GoalsStore.emit('change');
             break;
-        case GoalsConstants.SEND_REQUEST:
+        case constants.SEND_REQUEST:
             _user = action.data;
             GoalsStore.emit('change');
             break;

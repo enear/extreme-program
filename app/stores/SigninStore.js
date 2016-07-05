@@ -1,6 +1,6 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var EventEmitter = require('events').EventEmitter;
-var SigninConstants = require('../constants/signinConstants');
+var constants = require('../constants/constants');
 var _ = require('underscore');
 
 var _user = {};
@@ -21,7 +21,7 @@ AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
-        case SigninConstants.GET_USER:
+        case constants.GET_USER:
             _user = action.user;
             SigninStore.emit('change');
             break;

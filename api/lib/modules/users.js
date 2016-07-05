@@ -3,7 +3,6 @@ var changePassword = function(user, options, callback){
     console.log(options);
     if(user.validPassword(options.password)) {
         user.password = user.generateHash(options.newPassword);
-        console.log("valid");
     }
 
     user.save(callback);

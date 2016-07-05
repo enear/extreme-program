@@ -1,6 +1,6 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var EventEmitter = require('events').EventEmitter;
-var ProfileConstants = require('../constants/profileConstants');
+var constants = require('../constants/constants');
 var _ = require('underscore');
 
 var _user = {};
@@ -13,7 +13,7 @@ var ProfileStore = _.extend({}, EventEmitter.prototype, {
         this.on('change', callback);
     },
     removeChangeListener: function(callback) {
-        this.removeListener(callback);
+        this.removeListener('change', callback);
     }
 
 });
@@ -22,10 +22,13 @@ AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
-        case ProfileConstants.GET_USER:
-        case ProfileConstants.CHANGE_PASSWORD:
+        case constants.GET_USER:
+        case constants.CHANGE_PASSWORD:
             _user = action.user;
             ProfileStore.emit('change');
+            break;
+        case constants.SEND_REQUEST:
+            _user = action.data;
             break;
         default:
             return true;

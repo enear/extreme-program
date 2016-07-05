@@ -1,6 +1,6 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var EventEmitter = require('events').EventEmitter;
-var IndexConstants = require('../constants/indexConstants');
+var constants = require('../constants/constants');
 var _ = require('underscore');
 
 var _user = {};
@@ -21,13 +21,12 @@ AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
-        case IndexConstants.GET_USER:
+        case constants.GET_USER:
             _user = action.user;
             IndexStore.emit('change');
             break;
-        case IndexConstants.SEND_REQUEST:
+        case constants.SEND_REQUEST:
             _user = action.data;
-            IndexStore.emit('change');
             break;
         default:
             return true;

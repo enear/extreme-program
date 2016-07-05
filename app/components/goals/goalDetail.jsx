@@ -78,7 +78,7 @@ var GoalDetail = React.createClass({
                         </div>
                         <form  className="form-horizontal col-xs-12" onSubmit={this.handleSubmit}  >
                             <div className="form-group">
-                                <label for="Comment" className="col-xs-12">Comment</label>
+                                <label htmlFor="Comment" className="col-xs-12">Comment</label>
                                 <textarea className="form-control col-xs-12" id="comment" name="comment" onBlur={this._handleBlur()}></textarea>
                             </div>
                             <div className="form-group">

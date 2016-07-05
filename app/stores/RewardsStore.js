@@ -1,6 +1,6 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var EventEmitter = require('events').EventEmitter;
-var RewardsConstants = require('../constants/rewardsConstants');
+var constants = require('../constants/constants');
 var _ = require('underscore');
 
 
@@ -35,11 +35,11 @@ AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch (action.actionType) {
-        case RewardsConstants.GET_REWARDS:
+        case constants.GET_REWARDS:
             _rewards = action.data;
             RewardStore.emit('change');
             break;
-        case RewardsConstants.GET_REWARD:
+        case constants.GET_REWARD:
             _reward = action.data;
             RewardStore.emit('change');
             break;

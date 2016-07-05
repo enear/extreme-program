@@ -1,12 +1,12 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
-var indexConstants = require('../constants/indexConstants');
+var constants = require('../constants/constants');
 var $ = require('jquery');
 
 var IndexActions = {
     getUser: function(url) {
         $.getJSON(url, function(data) {
             AppDispatcher.handleAction({
-                actionType: indexConstants.GET_USER,
+                actionType: constants.GET_USER,
                 user: data
             });
         });
