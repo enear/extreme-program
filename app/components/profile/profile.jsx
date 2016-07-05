@@ -54,6 +54,7 @@ var Profile = React.createClass({
         }
     },
     render: function() {
+        console.log(this.state.user);
         return (
             <div className="user-profile container">
                 <div className="row" >
@@ -91,18 +92,30 @@ var Profile = React.createClass({
 
                     }
                     <h3 className="col-xs-12">My Rewards</h3>
-                        {this.state.user.rewards && this.state.user.rewards.length > 0
-                        ?   (this.state.user.rewards.map(function(reward, index) {
-                                return (
-                                    <div key={index} className="col-xs-12">
-                                        <h4 >{reward.name}</h4>
-                                        <p>{reward.date}</p>
-                                        <p>{reward.summary}</p>
-                                    </div>
-                                )
-                            }))
-                        :    <p className="col-xs-12">There are no rewards at the moment</p>
-                        }
+                    {this.state.user.rewards && this.state.user.rewards.length > 0
+                    ?   (this.state.user.rewards.map(function(reward, index) {
+                            return (
+                                <div key={index} className="col-xs-12">
+                                    <h4 >{reward.name}</h4>
+                                    <p>{reward.date}</p>
+                                    <p>{reward.summary}</p>
+                                </div>
+                            )
+                        }))
+                    :    <p className="col-xs-12">There are no rewards at the moment</p>
+                    }
+                    <h3 className="col-xs-12">My history</h3>
+                    {this.state.user.history && this.state.user.history.length > 0
+                    ?   (this.state.user.history.map(function(item, index) {
+                        return(
+                            <div key={index} className="col-xs-12">
+                                <h4>{item.name} - {item.operation}</h4>
+                                <p>{dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
+                            </div>
+                        )
+                    }))
+                    : null
+                    }
                 </div>
             </div>
         );

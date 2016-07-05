@@ -15,7 +15,6 @@ var ProfileStore = _.extend({}, EventEmitter.prototype, {
     removeChangeListener: function(callback) {
         this.removeListener('change', callback);
     }
-
 });
 
 AppDispatcher.register(function(payload) {
