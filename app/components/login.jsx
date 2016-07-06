@@ -18,10 +18,10 @@ var Login = React.createClass({
             e.target.submit();
         }
     },
-    _handleBlur: function(key) {
+    _handleChange: function() {
         return function(e) {
             var state = {};
-            state[key] = e.target.value;
+            state[e.target.name] = e.target.value;
             this.setState(state);
         }.bind(this);
     },
@@ -34,9 +34,9 @@ var Login = React.createClass({
                         <form  className="form-horizontal col-xs-12" action="/login" method="POST" onSubmit={this._handleSubmit} >
                             <div className="form-group">
                                 <label htmlFor="email" className="col-xs-12">Email</label>
-                                <input className="col-xs-12 form-control"  type="email" id="email" name="email" onBlur={this._handleBlur('email')}/>
+                                <input className="col-xs-12 form-control"  type="email" id="email" name="email" onChange={this._handleChange()}/>
                                 <label htmlFor="password" className="col-xs-12">Password</label>
-                                <input className="col-xs-12 form-control"  type="password" id="password" name="password" onBlur={this._handleBlur('password')} />
+                                <input className="col-xs-12 form-control"  type="password" id="password" name="password" onChange={this._handleChange()} />
                             </div>
                             <div className="form-group">
                                 <input type="submit" className="btn btn-primary" value="Submit" />

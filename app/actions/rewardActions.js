@@ -18,6 +18,14 @@ var RewardActions = {
                 data: data
             });
         });
+    },
+    sendReward: function(request) {
+        $.post('/api/users/' + request.user._id, request, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.SEND_REWARD,
+                data: data
+            });
+        });
     }
 };
 

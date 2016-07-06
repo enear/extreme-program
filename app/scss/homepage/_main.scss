@@ -12,3 +12,8 @@ html, body {
         height: 80px;
     }
 }
+
+#app {
+    min-height: 100%;
+    margin-bottom: -80px;
+}

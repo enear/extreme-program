@@ -12,9 +12,7 @@ var profileActions = {
         });
     },
     changePassword: function(request) {
-        console.log(request);
         $.post('/api/users/' + request.user._id, request, function(data) {
-            console.log(data);
             AppDispatcher.handleAction({
                 actionType: constants.CHANGE_PASSWORD,
                 user: data

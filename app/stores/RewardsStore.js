@@ -5,7 +5,8 @@ var _ = require('underscore');
 
 
 var _rewards = [],
-    _reward = {};
+    _reward = {},
+    _user = {};
 
 var RewardStore = _.extend({}, EventEmitter.prototype, {
     getRewards: function() {
@@ -22,6 +23,9 @@ var RewardStore = _.extend({}, EventEmitter.prototype, {
     },
     getReward: function() {
         return _reward;
+    },
+    getUser: function() {
+        return _user;
     },
     addChangeListener: function(callback){
         this.on('change', callback);
@@ -41,6 +45,14 @@ AppDispatcher.register(function(payload) {
             break;
         case constants.GET_REWARD:
             _reward = action.data;
+            RewardStore.emit('change');
+            break;
+        case constants.GET_USER:
+            _user = action.user;
+            RewardStore.emit('change');
+            break;
+        case constants.SEND_REWARD:
+            _user = action.data;
             RewardStore.emit('change');
             break;
         default:

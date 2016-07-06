@@ -1,7 +1,17 @@
 .reward-detail {
     padding-top: $column;
+    min-height: 100%;
+    position: relative;
 
     img {
         max-width: 100%;
+    }
+
+    #confirmation {
+        color: $black;
+        
+        &.show {
+            display:block;
+        }
     }
 }

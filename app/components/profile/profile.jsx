@@ -54,7 +54,6 @@ var Profile = React.createClass({
         }
     },
     render: function() {
-        console.log(this.state.user);
         return (
             <div className="user-profile container">
                 <div className="row" >

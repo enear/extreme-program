@@ -27,6 +27,7 @@ AppDispatcher.register(function(payload) {
             ProfileStore.emit('change');
             break;
         case constants.SEND_REQUEST:
+        case constants.SEND_REWARD:
             _user = action.data;
             break;
         default:

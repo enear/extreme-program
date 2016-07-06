@@ -14,6 +14,9 @@ var RewardList = React.createClass({
 
         RewardStore.addChangeListener(this._onChange);
     },
+    componentWillUnmount: function() {
+            RewardStore.removeChangeListener(this._onChange);
+    },
     _onChange: function() {
         this.setState(
             this._getState()

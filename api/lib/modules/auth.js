@@ -32,7 +32,7 @@ module.exports = function(passport, User) {
                         username: email,
                         email: email,
                         points: 0,
-                        role: "standard"
+                        role: "Standard"
                     });
 
                     newUser.password = newUser.generateHash(password);
