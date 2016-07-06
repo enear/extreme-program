@@ -9,6 +9,11 @@ var Home = require('./mainTemplates/home.jsx');
 var Goal = require('./goals/goalDetail.jsx');
 var Reward = require('./rewards/rewardDetail.jsx');
 var Profile = require('./profile/profile.jsx');
+var Admin = require('./mainTemplates/admin.jsx');
+var AdminMain = require('./admin/main.jsx');
+var UsersManagement = require('./admin/users.jsx');
+var RewardsManagement = require('./admin/rewards.jsx');
+var GoalsManagement = require('./admin/goals.jsx');
 
 var App = React.createClass({
     render: function() {
@@ -20,6 +25,12 @@ var App = React.createClass({
                         <Route path="/goals/:id" component={Goal} />
                         <Route path="/rewards/:id" component={Reward}  />
                         <Route path="/profile" component={Profile} />
+                        <Route path="/admin" component={Admin} >
+                            <IndexRoute component={AdminMain} />
+                            <Route path="/admin/users" component={UsersManagement} />
+                            <Route path="/admin/rewards" component={RewardsManagement} />
+                            <Route path="/admin/goals" component={GoalsManagement} />
+                        </Route>
                     </Route>
                 </Router>
             </div>

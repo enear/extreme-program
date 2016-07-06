@@ -32,7 +32,7 @@ var Index = React.createClass({
     render: function() {
         return (
             <div>
-                <NavBar />
+                <NavBar user={this.state.user} />
                 {this.props.children}
             </div>
         );

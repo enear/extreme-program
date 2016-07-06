@@ -6,6 +6,7 @@ module.exports = keyMirror({
     GET_REWARDS: null,
     GET_REWARD: null,
     GET_USER: null,
+    GET_USERS: null,
     SEND_REQUEST: null,
     SEND_REWARD: null,
     CHANGE_PASSWORD: null

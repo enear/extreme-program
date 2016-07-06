@@ -1,11 +1,13 @@
 var router = require('express').Router();
 
 router.get("/", function(req, res) {
+
     if(req.isAuthenticated()) {
         if(req.query.getuser === "true") {
             res.json(req.user);
         }
         else{
+            console.log("reached here!");
             res.render('index');
         }
     }

@@ -18,7 +18,11 @@ var NavBar = React.createClass({
 
                 <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                      <li className="active"><Link to="/profile">My Profile</Link></li>
+                    <li className="active"><Link to="/profile">My Profile</Link></li>
+                    {this.props.user.role === 'Admin'
+                    ?   <li><Link to="/admin">Admin</Link></li>
+                    :   null
+                    }
                     <li ><a href="/logout">Log Out</a></li>
                   </ul>
                 </div>
