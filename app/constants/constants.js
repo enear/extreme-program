@@ -9,5 +9,7 @@ module.exports = keyMirror({
     GET_USERS: null,
     SEND_REQUEST: null,
     SEND_REWARD: null,
-    CHANGE_PASSWORD: null
+    CHANGE_PASSWORD: null,
+    GET_ROLES: null,
+    CHANGE_ROLE: null
 });

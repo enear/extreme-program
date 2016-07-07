@@ -1,7 +1,13 @@
 var router = require('express').Router();
 
 router.get("/", function(req, res) {
-    res.render('admin');
+    if(req.isAuthenticated()) {
+        res.render('admin');
+    }
+    else {
+        req.session.returnTo = '/admin';
+        res.redirect('/login');
+    }
 });
 
 module.exports = router;

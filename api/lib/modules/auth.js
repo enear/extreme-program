@@ -1,5 +1,7 @@
 var LocalStrategy = require('passport-local').Strategy;
 
+
+
 module.exports = function(passport, User) {
     passport.serializeUser(function(user, done) {
         done(null, user.id);
@@ -56,7 +58,7 @@ module.exports = function(passport, User) {
     passReqToCallback : true
     },
     function(req, email, password, done) {
-
+        //TODO: improve this ASAP
         User.findOne({ 'email' :  email }, function(err, user) {
             if (err)
                 return done(err);
@@ -66,6 +68,10 @@ module.exports = function(passport, User) {
 
             if (!user.validPassword(password))
                 return done(null, false, {message: "User/Password incorrect!"});
+
+            if(req.session.returnTo === '/admin' && user.role === 'Standard') {
+                return done(null, false, {message: "User/Password incorrect!"});
+            }
 
             return done(null, user);
         });

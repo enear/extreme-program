@@ -1,6 +1,6 @@
 var React = require('react');
-var AdminStore = require('../../stores/AdminStore');
-var AdminActions = require('../../actions/adminActions');
+var AdminStore = require('../../../stores/AdminStore');
+var AdminActions = require('../../../actions/adminActions');
 
 
 UsersManagement = React.createClass({
@@ -8,6 +8,7 @@ UsersManagement = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
+
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
@@ -21,10 +22,12 @@ UsersManagement = React.createClass({
     _getState: function() {
         return {
             user: AdminStore.getUser(),
-            users: AdminStore.getUsers()
+            users: AdminStore.getUsers(),
+            roles: AdminStore.getRoles()
         }
     },
     render: function() {
+        var that = this;
         console.log(this.state);
         return (
             <div className="container">
@@ -36,7 +39,8 @@ UsersManagement = React.createClass({
                                     return (
                                         <li key={index}>
                                             <p>{user.email}</p>
-                                            <p>{user.totalPoints}</p>
+                                            <p>Points: {user.totalPoints}</p>
+                                            <p>{user.role}</p>
                                         </li>
                                     )
                                 })}

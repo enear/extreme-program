@@ -2,6 +2,11 @@
     padding-top: $column;
     padding-left: 300px;
     min-height: 100%;
+
+    select,
+    select > option {
+        color: $black;
+    }
 }
 
 #adminNav {

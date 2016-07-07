@@ -16,6 +16,10 @@ var Admin = React.createClass({
             AdminActions.getUsers('/api/users');
         }
 
+        if(this.state.roles.length === 0) {
+            AdminActions.getRoles('/api/roles');
+        }
+
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
@@ -24,7 +28,8 @@ var Admin = React.createClass({
     _getState: function() {
         return {
             user: AdminStore.getUser(),
-            users: AdminStore.getUsers()
+            users: AdminStore.getUsers(),
+            roles: AdminStore.getRoles()
         }
     },
     _onChange: function() {
@@ -38,9 +43,10 @@ var Admin = React.createClass({
             <div className="admin">
                 <div id="adminNav">
                     <ul className="navigation" >
-                        <li><Link to="admin/users">Users</Link></li>
-                        <li><Link to="admin/rewards">Rewards</Link></li>
-                        <li><Link to="admin/goals">Goals</Link></li>
+                        <li><Link to="/users">Users</Link></li>
+                        <li><Link to="/rewards">Rewards</Link></li>
+                        <li><Link to="/goals">Goals</Link></li>
+                        <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
                 {this.props.children}

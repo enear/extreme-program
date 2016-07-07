@@ -7,18 +7,18 @@ router.get("/", function(req, res) {
             res.json(req.user);
         }
         else{
-            console.log("reached here!");
             res.render('index');
         }
     }
     else {
+        req.session.returnTo = '/';
         res.redirect('/login');
     }
 });
 
 router.get("/logout", function(req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect('/login');
 });
 
 module.exports = router;

@@ -4,6 +4,7 @@ var constants = require('../constants/constants');
 var _ = require('underscore');
 
 var _users = [],
+    _roles = [],
     _user = {};
 
 var AdminStore = _.extend({}, EventEmitter.prototype, {
@@ -12,6 +13,9 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
     },
     getUser: function() {
         return _user;
+    },
+    getRoles: function() {
+        return _roles;
     },
     addChangeListener: function(callback) {
         this.on('change', callback);
@@ -32,6 +36,13 @@ AppDispatcher.register(function(payload) {
         case constants.GET_USERS:
             _users = action.users;
             AdminStore.emit('change');
+            break;
+        case constants.GET_ROLES:
+            _roles = action.roles;
+            AdminStore.emit('change');
+            break;
+        case constants.CHANGE_ROLE:
+
             break;
         default:
             return true;

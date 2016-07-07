@@ -18,6 +18,22 @@ var AdminActions = {
                 users: data
             });
         });
+    },
+    getRoles: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.GET_ROLES,
+                roles: data
+            });
+        });
+    },
+    changeUserRole: function(request) {
+        $.post(request.url, request, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.CHANGE_ROLE,
+                user: data
+            });
+        });
     }
 };
 

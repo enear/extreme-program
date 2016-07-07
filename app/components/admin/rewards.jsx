@@ -21,7 +21,8 @@ RewardsManagement = React.createClass({
     _getState: function() {
         return {
             user: AdminStore.getUser(),
-            users: AdminStore.getUsers()
+            users: AdminStore.getUsers(),
+            roles: AdminStore.getRoles()
         }
     },
     render: function() {

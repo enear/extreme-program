@@ -25,7 +25,8 @@ module.exports = function(grunt){
             files: {
                 'app/public/js/app.js': 'app/components/app.jsx',
                 'app/public/js/signin.js': 'app/components/signin.jsx',
-                'app/public/js/login.js': 'app/components/login.jsx'
+                'app/public/js/login.js': 'app/components/login.jsx',
+                'app/public/js/admin.js': 'app/components/admin.jsx'
             }
         }
     },

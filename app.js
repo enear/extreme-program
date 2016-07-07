@@ -13,6 +13,7 @@ var express = require('express'),
   roles = require('./api/roles/roleRouter'),
   rewards = require('./api/rewards/rewardRouter'),
   goals = require('./api/goals/goalRouter'),
+  requestStates = require('./api/requestsStates/requestStateRouter'),
 
   index = require('./routes/index'),
   admin = require('./routes/admin'),
@@ -27,6 +28,7 @@ require('./api/users/userInitializer');
 require('./api/roles/roleInitializer');
 require('./api/rewards/rewardInitializer');
 require('./api/goals/goalInitializer');
+require('./api/requestsStates/requestsStatesInitializer');
 
 require('./api/lib/lib').auth(passport, UserModel);
 
@@ -44,7 +46,7 @@ app.use(express.static('app/public'));
 
 //sessions
 app.use(session({
-    secret: 'th1s1s4V3ryL0ng4nd$3cur3$3cR37',
+    secret: process.env.APP_SECRET,
     resave: false,
     saveUninitialized: true,
     store: new MongoStore({mongooseConnection: mongoose.connection})
@@ -60,6 +62,7 @@ app.use('/api/users', users);
 app.use('/api/roles', roles);
 app.use('/api/rewards', rewards);
 app.use('/api/goals', goals);
+app.use('/api/requeststates', requestStates);
 app.use('/admin', admin);
 app.use('/login', require('./routes/login')(passport));
 app.use('/signin', require('./routes/signin')(passport, UserModel));

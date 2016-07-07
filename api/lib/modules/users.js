@@ -38,6 +38,16 @@ var updatePoints = function(user, options, callback) {
     user.save(callback);
 };
 
+var changeRole = function(user, options, callback) {
+    user.role = options.role;
+
+    user.save(callback);
+};
+
+var changeRequestState = function(user, options, callback) {
+
+};
+
 var _hasEnoughPoints = function(user, points) {
     return user.totalPoints >= points;
 };
@@ -47,5 +57,6 @@ module.exports = {
     changePassword: changePassword,
     submitNewRequest: submitNewRequest,
     addReward: addReward,
-    updatePoints: updatePoints
+    updatePoints: updatePoints,
+    changeRole: changeRole
 };
