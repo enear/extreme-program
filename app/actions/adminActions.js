@@ -3,10 +3,18 @@ var constants = require('../constants/constants');
 var $ = require('jquery');
 
 var AdminActions = {
+    getAdmin: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.ADMIN_GET_ADMIN,
+                admin: data
+            });
+        });
+    },
     getUser: function(url) {
         $.getJSON(url, function(data) {
             AppDispatcher.handleAction({
-                actionType: constants.GET_USER,
+                actionType: constants.ADMIN_GET_USER,
                 user: data
             });
         });
@@ -14,7 +22,7 @@ var AdminActions = {
     getUsers: function(url) {
         $.getJSON(url, function(data) {
             AppDispatcher.handleAction({
-                actionType: constants.GET_USERS,
+                actionType: constants.ADMIN_GET_USERS,
                 users: data
             });
         });
@@ -22,16 +30,19 @@ var AdminActions = {
     getRoles: function(url) {
         $.getJSON(url, function(data) {
             AppDispatcher.handleAction({
-                actionType: constants.GET_ROLES,
+                actionType: constants.ADMIN_GET_ROLES,
                 roles: data
             });
         });
     },
-    changeUserRole: function(request) {
-        $.post(request.url, request, function(data) {
-            AppDispatcher.handleAction({
-                actionType: constants.CHANGE_ROLE,
-                user: data
+    updateUser: function(request) {
+        $.post(request.url, request, function(user) {
+            $.get('/api/users', function(users) {
+                AppDispatcher.handleAction({
+                    actionType: constants.ADMIN_UPDATE_USER,
+                    user: user,
+                    users: users
+                });
             });
         });
     }

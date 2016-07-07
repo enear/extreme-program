@@ -87,7 +87,7 @@ describe("Users", function(){
 
 
     it("Should update a user points balance on /api/user/<id> POST", function(done) {
-        var pointsToUpdate = 3;
+        var pointsToUpdate = '3';
         var initialPoints;
         chai.request(server)
             .get('/api/users')
@@ -96,26 +96,50 @@ describe("Users", function(){
                 res.should.be.json;
                 res.body.should.be.a('array');
 
-                var user = res.body[0];
+                var user = res.body[res.body.length-1];
 
                 user.should.have.property('totalPoints');
                 initialPoints = user.totalPoints;
 
                 chai.request(server)
                     .post('/api/users/' + user._id)
-                    .send({action: 'updatePoints', points: pointsToUpdate})
+                    .send({action: 'updatePoints', points: parseInt(pointsToUpdate)})
                     .end(function(err, res) {
                         res.should.have.status(200);
                         res.should.be.json;
                         res.should.be.a('object');
 
-                        res.body.totalPoints.should.to.equal(initialPoints + pointsToUpdate);
+                        res.body.totalPoints.should.to.equal(initialPoints + parseInt(pointsToUpdate));
 
                         done();
                     });
             });
     });
 
+    it('Should change a user role on /api/users/<id> POST', function(done) {
+        chai.request(server)
+        .get('/api/users')
+        .end(function(err, res) {
+            res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.be.a('array');
+
+            var user = res.body[res.body.length-1];
+
+            chai.request(server)
+            .post('/api/users/' + user._id)
+            .send({action: 'changeRole', role: "Attributor"})
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.should.be.a('object');
+
+                res.body.role.should.to.equal('Attributor');
+
+                done();
+            });
+        });
+    });
 
     it("Should add a new reward to a user on /api/user/<id> POST", function(done) {
         var reward = {
@@ -132,7 +156,7 @@ describe("Users", function(){
             res.should.be.json;
             res.body.should.be.a('array');
 
-            var user = res.body[0];
+            var user = res.body[res.body.length-1];
 
             totalRewards = user.rewards.length;
             totalPoints = user.totalPoints;
@@ -182,7 +206,7 @@ describe("Users", function(){
             res.should.be.json;
             res.body.should.be.a('array');
 
-            var user = res.body[0];
+            var user = res.body[res.body.length-1];
 
             totalRequests = user.requests.length;
             totalPoints = user.totalPoints;

@@ -8,8 +8,8 @@ var Admin = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
-        if(Object.keys(this.state.user).length === 0) {
-            AdminActions.getUser('/?getuser=true');
+        if(Object.keys(this.state.admin).length === 0) {
+            AdminActions.getAdmin('/?getuser=true');
         }
 
         if(this.state.users.length === 0) {
@@ -27,7 +27,7 @@ var Admin = React.createClass({
     },
     _getState: function() {
         return {
-            user: AdminStore.getUser(),
+            admin: AdminStore.getAdmin(),
             users: AdminStore.getUsers(),
             roles: AdminStore.getRoles()
         }

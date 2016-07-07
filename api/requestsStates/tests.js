@@ -9,9 +9,9 @@ var requiredFields = lib.models.getRequiredFields(State);
 chai.use(chaiHttp);
 
 describe("Request States", function(){
-    it("Should list all states on /api/states GET", function(done) {
+    it("Should list all states on /api/requeststates GET", function(done) {
         chai.request(server)
-            .get('/api/states')
+            .get('/api/requeststates')
             .end(function(err, res) {
                 res.should.have.status(200);
                 res.should.be.json;
@@ -23,12 +23,12 @@ describe("Request States", function(){
             });
     });
 
-    it("Should list a single state on /api/states/<id> GET", function(done) {
+    it("Should list a single state /api/requeststates<id> GET", function(done) {
         chai.request(server)
-            .get('/api/states')
+            .get('/api/requeststates')
             .end(function(err, res) {
                 chai.request(server)
-                .get('/api/states/' + res.body[0]._id)
+                .get('/api/requeststates/' + res.body[0]._id)
                 .end(function(err, res) {
                     res.should.have.status(200);
                     res.should.be.json;

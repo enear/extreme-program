@@ -29,10 +29,13 @@ var addReward = function(user, options, callback) {
 
 
 var updatePoints = function(user, options, callback) {
-    user.totalPoints += options.points;
+    if(!isNaN(options.points)) {
+        console.log("here!");
+        user.totalPoints += options.points;
 
-    if(user.totalPoints < 0) {
-        user.totalPoints = 0;
+        if(user.totalPoints < 0) {
+            user.totalPoints = 0;
+        }
     }
 
     user.save(callback);
