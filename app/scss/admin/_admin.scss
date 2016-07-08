@@ -5,7 +5,8 @@
 
     select,
     select > option,
-    input {
+    input,
+    textarea {
         color: $black;
     }
 }

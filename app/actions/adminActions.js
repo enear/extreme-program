@@ -45,6 +45,33 @@ var AdminActions = {
                 });
             });
         });
+    },
+    getRewards: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.ADMIN_GET_REWARDS,
+                rewards: data
+            });
+        });
+    },
+    getReward: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.ADMIN_GET_REWARD,
+                reward: data
+            });
+        });
+    },
+    updateReward: function(reward) {
+        $.post('/api/rewards/' + reward._id, reward, function(updatedReward) {
+            $.getJSON('/api/rewards', function(rewards) {
+                AppDispatcher.handleAction({
+                    actionType: constants.ADMIN_UPDATE_REWARD,
+                    reward: updatedReward,
+                    rewards: rewards
+                });
+            });
+        });
     }
 };
 

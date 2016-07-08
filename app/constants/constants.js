@@ -14,4 +14,7 @@ module.exports = keyMirror({
     ADMIN_GET_USERS: null,
     ADMIN_GET_ROLES: null,
     ADMIN_UPDATE_USER: null,
+    ADMIN_GET_REWARDS: null,
+    ADMIN_GET_REWARD: null,
+    ADMIN_UPDATE_REWARD: null
 });

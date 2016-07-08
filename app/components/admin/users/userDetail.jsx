@@ -1,7 +1,8 @@
 var React = require('react');
+var dateFormat = require('dateformat');
+var Link = require('react-router').Link;
 var AdminStore = require('../../../stores/AdminStore');
 var AdminActions = require('../../../actions/adminActions');
-var Link = require('react-router').Link;
 
 var UserDetail = React.createClass({
     getInitialState: function() {
@@ -95,6 +96,7 @@ var UserDetail = React.createClass({
                         }))
                         : <p>This user has no activity at the moment</p>
                         }
+                        <Link to="/users" className="btn btn-default" >Back</Link>
                     </div>
                 </div>
             </div>

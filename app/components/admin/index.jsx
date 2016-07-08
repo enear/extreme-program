@@ -38,7 +38,6 @@ var Admin = React.createClass({
         );
     },
     render: function(){
-        console.log(this.state);
         return (
             <div className="admin">
                 <div id="adminNav">

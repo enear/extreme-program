@@ -9,7 +9,6 @@ UsersManagement = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
-
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
@@ -29,7 +28,6 @@ UsersManagement = React.createClass({
     },
     render: function() {
         var that = this;
-        console.log(this.state);
         return (
             <div className="container">
                 <div className="row">
