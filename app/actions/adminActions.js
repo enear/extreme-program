@@ -83,6 +83,21 @@ var AdminActions = {
                 });
             });
         });
+    },
+    deleteReward: function(reward) {
+        $.ajax({
+            url: '/api/rewards/' + reward._id,
+            method: 'DELETE',
+            success: function(data) {
+                $.getJSON('/api/rewards', function(rewards){
+                    AppDispatcher.handleAction({
+                        actionType: constants.ADMIN_DELETE_REWARD,
+                        rewards: rewards,
+                        reward: {}
+                    });
+                });
+            }
+        });
     }
 };
 
