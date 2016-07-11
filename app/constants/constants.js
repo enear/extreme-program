@@ -18,5 +18,10 @@ module.exports = keyMirror({
     ADMIN_GET_REWARD: null,
     ADMIN_CREATE_REWARD: null,
     ADMIN_UPDATE_REWARD: null,
-    ADMIN_DELETE_REWARD: null
+    ADMIN_DELETE_REWARD: null,
+    ADMIN_GET_GOALS: null,
+    ADMIN_GET_GOAL: null,
+    ADMIN_CREATE_GOAL: null,
+    ADMIN_UPDATE_GOAL: null,
+    ADMIN_DELETE_GOAL: null
 });

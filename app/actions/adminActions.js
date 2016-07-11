@@ -98,6 +98,59 @@ var AdminActions = {
                 });
             }
         });
+    },
+    getGoals: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.ADMIN_GET_GOALS,
+                goals: data
+            });
+        });
+    },
+    getGoal: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.ADMIN_GET_GOAL,
+                goal: data
+            });
+        });
+    },
+    createGoal: function(goal) {
+        $.post('/api/goals/', goal, function(newGoal) {
+            $.getJSON('/api/goals', function(goals) {
+                AppDispatcher.handleAction( {
+                    actionType: constants.ADMIN_CREATE_GOALS,
+                    goal: newGoal,
+                    goals: goals
+                });
+            });
+        });
+    },
+    updateGoal: function(goal) {
+        $.post('/api/goals/' + goal._id, goal, function(updatedGoal) {
+            $.getJSON('/api/goals', function(goals) {
+                AppDispatcher.handleAction({
+                    actionType: constants.ADMIN_UPDATE_GOAL,
+                    goal: updatedGoal,
+                    goals: goals
+                });
+            });
+        });
+    },
+    deleteGoal: function(goal) {
+        $.ajax({
+            url: '/api/goals/' + goal._id,
+            method: 'DELETE',
+            success: function(data) {
+                $.getJSON('/api/goals', function(goals){
+                    AppDispatcher.handleAction({
+                        actionType: constants.ADMIN_DELETE_GOAL,
+                        goals: goals,
+                        goal: {}
+                    });
+                });
+            }
+        });
     }
 };
 

@@ -6,9 +6,11 @@ var _ = require('underscore');
 var _users = [],
     _roles = [],
     _rewards = [],
+    _goals = [],
     _user = {},
     _admin = {},
-    _reward = {};
+    _reward = {},
+    _goal = {};
 
 var AdminStore = _.extend({}, EventEmitter.prototype, {
     getAdmin: function() {
@@ -23,11 +25,17 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
     getRoles: function() {
         return _roles;
     },
-    getRewards: function(){
+    getRewards: function() {
         return _rewards;
     },
     getReward: function() {
         return _reward;
+    },
+    getGoals: function() {
+        return _goals;
+    },
+    getGoal: function() {
+        return _goal;
     },
     addChangeListener: function(callback) {
         this.on('change', callback);
@@ -75,6 +83,21 @@ AppDispatcher.register(function(payload) {
         case constants.ADMIN_DELETE_REWARD:
             _reward = action.reward;
             _rewards = action.rewards;
+            AdminStore.emit('change');
+            break;
+        case constants.ADMIN_GET_GOALS:
+            _goals = action.goals;
+            AdminStore.emit('change');
+            break;
+        case constants.ADMIN_GET_GOAL:
+            _goal = action.goal;
+            AdminStore.emit('change');
+            break;
+        case constants.ADMIN_UPDATE_GOAL:
+        case constants.ADMIN_DELETE_GOAL:
+        case constants.ADMIN_CREATE_GOAL:
+            _goal = action.goal;
+            _goals = action.goals;
             AdminStore.emit('change');
             break;
         default:
