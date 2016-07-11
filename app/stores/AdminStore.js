@@ -71,6 +71,7 @@ AppDispatcher.register(function(payload) {
             AdminStore.emit('change');
             break;
         case constants.ADMIN_UPDATE_REWARD:
+        case constants.ADMIN_CREATE_REWARD:
             _reward = action.reward;
             _rewards = action.rewards;
             AdminStore.emit('change');

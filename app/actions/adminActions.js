@@ -72,6 +72,17 @@ var AdminActions = {
                 });
             });
         });
+    },
+    createReward: function(reward) {
+        $.post('/api/rewards/', reward, function(newReward) {
+            $.getJSON('/api/rewards', function(rewards) {
+                AppDispatcher.handleAction( {
+                    actionType: constants.ADMIN_CREATE_REWARD,
+                    reward: newReward,
+                    rewards: rewards
+                });
+            });
+        });
     }
 };
 

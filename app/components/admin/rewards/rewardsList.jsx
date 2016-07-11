@@ -42,12 +42,20 @@ var RewardsList = React.createClass({
                                        {reward.summary}
                                    </p>
                                    <div className="cost-container">{reward.points} Points</div>
-                                   <Link to={link} className="btn btn-default">Edit</Link>
+                                   <div>
+                                       <Link to={link} className="btn btn-default">Edit</Link>
+                                   </div>
+
                                </div>
                             )
                         }))
                         :   null
                     }
+                </div>
+                <div className="row">
+                    <div className="col-xs-12">
+                        <Link to="/rewards/new" className="btn btn-default"> Add new</Link>
+                    </div>
                 </div>
             </div>
         )

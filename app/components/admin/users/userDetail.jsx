@@ -52,7 +52,7 @@ var UserDetail = React.createClass({
     _handlePointsUpdate: function(e) {
         return function(e) {
             var user = this.state.user,
-                points = user.totalPoints - e.target.value;
+                points = e.target.value;
 
             user.totalPoints = e.target.value;
 
@@ -75,7 +75,7 @@ var UserDetail = React.createClass({
                 <div className="row">
                     <div className="col-xs-12">
                         <p>{this.state.user.email}</p>
-                        <input type="number" name="totalPoints" onChange={this._handlePointsUpdate()} value={this.state.user.totalPoints} /> <br />
+                        <input type="number" name="totalPoints" onBlur={this._handlePointsUpdate()} value={this.state.user.totalPoints} /> <br />
 
                         <select name="role" onChange={this._handleRoleChange()} value={this.state.user.role} >
                             {   this.state.roles.map(function(role, index) {

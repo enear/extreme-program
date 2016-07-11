@@ -1,6 +1,5 @@
 //this is a specific module to handle the user actions & updates
 var changePassword = function(user, options, callback){
-    console.log(options);
     if(user.validPassword(options.password)) {
         user.password = user.generateHash(options.newPassword);
     }
@@ -30,8 +29,7 @@ var addReward = function(user, options, callback) {
 
 var updatePoints = function(user, options, callback) {
     if(!isNaN(options.points)) {
-        console.log("here!");
-        user.totalPoints += options.points;
+        user.totalPoints = options.points;
 
         if(user.totalPoints < 0) {
             user.totalPoints = 0;

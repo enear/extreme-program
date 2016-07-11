@@ -9,6 +9,7 @@ var UsersManagement = require('./admin/users/userList.jsx');
 var UserDetailManagement = require('./admin/users/userDetail.jsx');
 var RewardsManagement = require('./admin/rewards/rewardsList.jsx');
 var RewardDetailManagement = require('./admin/rewards/rewardDetail.jsx');
+var NewReward = require('./admin/rewards/newReward.jsx');
 
 var Admin = React.createClass({
     render: function() {
@@ -19,6 +20,7 @@ var Admin = React.createClass({
                         <Route path="/users" component={UsersManagement} />
                         <Route path="users/:id" component={UserDetailManagement} />
                         <Route path="/rewards" component={RewardsManagement} />
+                        <Route path="/rewards/new" component={NewReward} />
                         <Route path="/rewards/:id" component={RewardDetailManagement} />
                     </Route>
                 </Router>

@@ -10,6 +10,8 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
     var newReward = new Reward(req.body);
 
+    newReward.createdBy = req.user.email;
+
     newReward.save(function(err, result) {
         res.json(err || result);
     });
