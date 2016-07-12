@@ -7,10 +7,13 @@ var _users = [],
     _roles = [],
     _rewards = [],
     _goals = [],
+    _requests = [],
+    _requestStates = [],
     _user = {},
     _admin = {},
     _reward = {},
-    _goal = {};
+    _goal = {},
+    _request = {};
 
 var AdminStore = _.extend({}, EventEmitter.prototype, {
     getAdmin: function() {
@@ -37,6 +40,38 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
     getGoal: function() {
         return _goal;
     },
+    getNewRequests: function() {
+        return _requests;
+    },
+    getRequestById: function(id) {
+        _request = {};
+
+        for(var i = 0, l = _requests.length; i < l; i+=1) {
+            if(_requests[i].id === id) {
+                _request = _requests[i];
+                break;
+            }
+        }
+
+        return _request;
+    },
+    getRequestStates: function() {
+        return _requestStates;
+    },
+    _updateRequests: function() {
+        _requests = [];
+        console.log(_users);
+        if(_users.length > 0) {
+            _users.forEach(function(user) {
+                user.requests.forEach(function(request) {
+                    if(request.state === 'Pending') {
+                        request.user = user._id;
+                        _requests.push(request);
+                    }
+                });
+            });
+        }
+    },
     addChangeListener: function(callback) {
         this.on('change', callback);
     },
@@ -55,15 +90,19 @@ AppDispatcher.register(function(payload) {
             break;
         case constants.ADMIN_GET_USER:
             _user = action.user;
+            AdminStore._updateRequests();
             AdminStore.emit('change');
             break;
         case constants.ADMIN_UPDATE_USER:
             _user = action.user;
             _users = action.users;
+            console.log(_user);
+            AdminStore._updateRequests();
             AdminStore.emit('change');
             break;
         case constants.ADMIN_GET_USERS:
             _users = action.users;
+            AdminStore._updateRequests();
             AdminStore.emit('change');
             break;
         case constants.ADMIN_GET_ROLES:
@@ -87,10 +126,12 @@ AppDispatcher.register(function(payload) {
             break;
         case constants.ADMIN_GET_GOALS:
             _goals = action.goals;
+            AdminStore._updateRequests();
             AdminStore.emit('change');
             break;
         case constants.ADMIN_GET_GOAL:
             _goal = action.goal;
+            AdminStore._updateRequests();
             AdminStore.emit('change');
             break;
         case constants.ADMIN_UPDATE_GOAL:
@@ -98,6 +139,11 @@ AppDispatcher.register(function(payload) {
         case constants.ADMIN_CREATE_GOAL:
             _goal = action.goal;
             _goals = action.goals;
+            AdminStore._updateRequests();
+            AdminStore.emit('change');
+            break;
+        case constants.ADMIN_GET_REQUESTSTATES:
+            _requestStates = action.requestStates;
             AdminStore.emit('change');
             break;
         default:

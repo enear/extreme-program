@@ -46,6 +46,21 @@ var changeRole = function(user, options, callback) {
 };
 
 var changeRequestState = function(user, options, callback) {
+    //TODO: this is not saving the user as it should save
+    
+    // console.log(user);
+    // for(var i = 0, l = user.requests.length; i < l; i+=1) {
+    //     if(user.requests[i].id === options.request.id){
+    //         user.requests[i] = options.request;
+    //         if(user.requests[i].state === 'Approved') {
+    //             user.totalPoints += options.request.points;
+    //         }
+    //
+    //         break;
+    //     }
+    // }
+    //
+    // user.save(callback);
 
 };
 
@@ -59,5 +74,6 @@ module.exports = {
     submitNewRequest: submitNewRequest,
     addReward: addReward,
     updatePoints: updatePoints,
-    changeRole: changeRole
+    changeRole: changeRole,
+    changeRequestState: changeRequestState
 };

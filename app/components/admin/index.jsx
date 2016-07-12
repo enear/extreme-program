@@ -20,6 +20,8 @@ var Admin = React.createClass({
             AdminActions.getRoles('/api/roles');
         }
 
+
+
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
@@ -45,6 +47,7 @@ var Admin = React.createClass({
                         <li><Link to="/users">Users</Link></li>
                         <li><Link to="/rewards">Rewards</Link></li>
                         <li><Link to="/goals">Goals</Link></li>
+                        <li><Link to="/requests">Requests</Link></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>

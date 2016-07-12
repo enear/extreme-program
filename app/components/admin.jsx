@@ -13,6 +13,8 @@ var NewReward = require('./admin/rewards/newReward.jsx');
 var GoalsManagement = require('./admin/goals/goalsList.jsx');
 var GoalDetailManagement = require('./admin/goals/goalDetail.jsx');
 var NewGoal = require('./admin/goals/newGoal.jsx');
+var Requests = require('./admin/requests/requests.jsx');
+var RequestDetail = require('./admin/requests/requestDetail.jsx');
 
 var Admin = React.createClass({
     render: function() {
@@ -28,6 +30,8 @@ var Admin = React.createClass({
                         <Route path="/goals" component={GoalsManagement} />
                         <Route path="/goals/new" component={NewGoal} />
                         <Route path="/goals/:id" component={GoalDetailManagement} />
+                        <Route path="/requests" component={Requests} />
+                        <Route path="/requests/:id" component={RequestDetail} />
                     </Route>
                 </Router>
             </div>

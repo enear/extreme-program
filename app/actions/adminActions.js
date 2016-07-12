@@ -37,7 +37,9 @@ var AdminActions = {
     },
     updateUser: function(request) {
         $.post(request.url, request, function(user) {
+            console.log(user);
             $.get('/api/users', function(users) {
+                console.log(users);
                 AppDispatcher.handleAction({
                     actionType: constants.ADMIN_UPDATE_USER,
                     user: user,
@@ -150,6 +152,14 @@ var AdminActions = {
                     });
                 });
             }
+        });
+    },
+    getRequestStates: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.ADMIN_GET_REQUESTSTATES,
+                requestStates: data
+            });
         });
     }
 };

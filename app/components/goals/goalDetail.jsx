@@ -27,6 +27,7 @@ var GoalDetail = React.createClass({
     },
     handleSubmit: function(e) {
         e.preventDefault();
+        var date = new Date();
 
         var request = {
             user: this.state.user,
@@ -36,8 +37,9 @@ var GoalDetail = React.createClass({
                 points: this.state.goal.points,
                 summary: this.state.goal.summary,
                 comment: this.state.comment,
-                date: new Date(),
-                state: "open"
+                date: date,
+                id: date.getTime(),
+                state: "Pending"
             }
         };
 
