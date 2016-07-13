@@ -64,7 +64,7 @@ var RequestDetail = React.createClass({
             action: 'changeRequestState'
         });
 
-        //this.context.push('/requests');
+        this.context.router.push('/requests');
     },
     render: function() {
         console.log(this.state);

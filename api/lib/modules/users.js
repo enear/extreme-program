@@ -1,5 +1,7 @@
+var mongo = require('mongodb');
+
 //this is a specific module to handle the user actions & updates
-var changePassword = function(user, options, callback){
+var changePassword = function(Model, user, options, callback){
     if(user.validPassword(options.password)) {
         user.password = user.generateHash(options.newPassword);
     }
@@ -7,7 +9,7 @@ var changePassword = function(user, options, callback){
     user.save(callback);
 };
 
-var submitNewRequest = function(user, options, callback) {
+var submitNewRequest = function(Model, user, options, callback) {
     user.requests.push(options.newRequest);
     options.newRequest.operation = "request";
     user.history.push(options.newRequest);
@@ -15,7 +17,7 @@ var submitNewRequest = function(user, options, callback) {
     user.save(callback);
 };
 
-var addReward = function(user, options, callback) {
+var addReward = function(Model, user, options, callback) {
     if(_hasEnoughPoints(user, options.newReward.points)) {
         user.rewards.push(options.newReward);
         options.newReward.operation = "reward";
@@ -27,7 +29,7 @@ var addReward = function(user, options, callback) {
 };
 
 
-var updatePoints = function(user, options, callback) {
+var updatePoints = function(Model, user, options, callback) {
     if(!isNaN(options.points)) {
         user.totalPoints = options.points;
 
@@ -39,28 +41,25 @@ var updatePoints = function(user, options, callback) {
     user.save(callback);
 };
 
-var changeRole = function(user, options, callback) {
+var changeRole = function(Model, user, options, callback) {
     user.role = options.role;
 
     user.save(callback);
 };
 
-var changeRequestState = function(user, options, callback) {
-    //TODO: this is not saving the user as it should save
-    
-    // console.log(user);
-    // for(var i = 0, l = user.requests.length; i < l; i+=1) {
-    //     if(user.requests[i].id === options.request.id){
-    //         user.requests[i] = options.request;
-    //         if(user.requests[i].state === 'Approved') {
-    //             user.totalPoints += options.request.points;
-    //         }
-    //
-    //         break;
-    //     }
-    // }
-    //
-    // user.save(callback);
+var changeRequestState = function(Model, user, options, callback) {
+    var update = {
+        'requests.$.state': options.request.state
+    };
+
+    if(options.request.state === 'Approved'){
+        update.totalPoints = user.totalPoints + options.request.points;
+    }
+
+    Model.findOneAndUpdate({_id: mongo.ObjectID(user._id), 'requests.id': options.request.id}, {
+        '$set': update
+    }, callback );
+
 
 };
 
