@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var AdminActions = require('../actions/adminActions');
 
 var Login = React.createClass({
     getInitialState: function() {
@@ -15,6 +16,7 @@ var Login = React.createClass({
         e.preventDefault();
 
         if(this._validForm()){
+            AdminActions.getAdmin('/?getuser=true');
             e.target.submit();
         }
     },

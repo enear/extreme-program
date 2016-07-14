@@ -8,6 +8,8 @@ var GoalsList = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
+        this.props.checkPermission(this.props.permissions.Admin);
+
         if(this.state.goals.length === 0) {
             AdminActions.getGoals('/api/goals');
         }

@@ -4,6 +4,9 @@ var AdminActions = require('../../actions/adminActions');
 var Link = require('react-router').Link;
 
 var Admin = React.createClass({
+    contextTypes: {
+      router: React.PropTypes.object.isRequired
+    },
     getInitialState: function() {
         return this._getState();
     },
@@ -20,12 +23,13 @@ var Admin = React.createClass({
             AdminActions.getRoles('/api/roles');
         }
 
-
-
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
         AdminStore.removeChangeListener(this._onChange);
+    },
+    userPermissions: function() {
+
     },
     _getState: function() {
         return {
@@ -40,6 +44,17 @@ var Admin = React.createClass({
             this._getState()
         );
     },
+    _userPermissions: {
+        Admin: ['Admin'],
+        Attributor: ['Admin', 'Attributor']
+    },
+    checkPermission: function() {
+        return function(permission) {
+            if( permission.indexOf(this.state.admin.role) < 0)  {
+                this.context.router.push('/');
+            }
+        }.bind(this);
+    },
     render: function(){
         return (
             <div className="admin">
@@ -52,7 +67,7 @@ var Admin = React.createClass({
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
-                {this.props.children}
+                {this.props.children && React.cloneElement(this.props.children, { permissions: this._userPermissions, checkPermission: this.checkPermission()}) }
             </div>
 
         );

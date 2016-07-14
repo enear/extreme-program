@@ -8,6 +8,8 @@ var RewardsList = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
+        this.props.checkPermission(this.props.permissions.Admin);
+
         if(this.state.rewards.length === 0) {
             AdminActions.getRewards('/api/rewards');
         }

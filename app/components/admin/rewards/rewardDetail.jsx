@@ -11,6 +11,8 @@ var RewardDetail = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
+        this.props.checkPermission(this.props.permissions.Admin);
+
         if(Object.keys(this.state.reward).length === 0  || this.state.reward._id !== this.props.params.id) {
             AdminActions.getReward('/api/rewards/' + this.props.params.id);
         }

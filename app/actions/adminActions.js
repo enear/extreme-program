@@ -5,6 +5,9 @@ var $ = require('jquery');
 var AdminActions = {
     getAdmin: function(url) {
         $.getJSON(url, function(data) {
+            if(data.role === 'Standard') {
+                data = {};
+            }
             AppDispatcher.handleAction({
                 actionType: constants.ADMIN_GET_ADMIN,
                 admin: data
@@ -37,9 +40,7 @@ var AdminActions = {
     },
     updateUser: function(request) {
         $.post(request.url, request, function(user) {
-            console.log(user);
             $.get('/api/users', function(users) {
-                console.log(users);
                 AppDispatcher.handleAction({
                     actionType: constants.ADMIN_UPDATE_USER,
                     user: user,

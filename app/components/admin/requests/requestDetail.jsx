@@ -67,7 +67,6 @@ var RequestDetail = React.createClass({
         this.context.router.push('/requests');
     },
     render: function() {
-        console.log(this.state);
         return (
             <div className="container">
                 <div className="row">

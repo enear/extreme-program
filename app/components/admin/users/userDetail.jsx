@@ -10,6 +10,8 @@ var UserDetail = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
+        this.props.checkPermission(this.props.permissions.Attributor);
+        
         if(Object.keys(this.state.user).length === 0  || this.state.user._id !== this.props.params.id) {
             AdminActions.getUser('/api/users/' + this.props.params.id);
         }

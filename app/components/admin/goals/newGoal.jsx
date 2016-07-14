@@ -11,6 +11,8 @@ var NewGoal = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
+        this.props.checkPermission(this.props.permissions.Admin);
+
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {

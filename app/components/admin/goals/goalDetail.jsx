@@ -11,6 +11,8 @@ var GoalDetail = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
+        this.props.checkPermission(this.props.permissions.Admin);
+
         if(Object.keys(this.state.goal).length === 0  || this.state.goal._id !== this.props.params.id) {
             AdminActions.getGoal('/api/goals/' + this.props.params.id);
         }
