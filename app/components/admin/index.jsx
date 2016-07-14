@@ -31,7 +31,8 @@ var Admin = React.createClass({
         return {
             admin: AdminStore.getAdmin(),
             users: AdminStore.getUsers(),
-            roles: AdminStore.getRoles()
+            roles: AdminStore.getRoles(),
+            requests: AdminStore.getNewRequests()
         }
     },
     _onChange: function() {
@@ -47,7 +48,7 @@ var Admin = React.createClass({
                         <li><Link to="/users">Users</Link></li>
                         <li><Link to="/rewards">Rewards</Link></li>
                         <li><Link to="/goals">Goals</Link></li>
-                        <li><Link to="/requests">Requests</Link></li>
+                        <li><Link to="/requests">Requests {this.state.requests.length > 0 ? <span>this.state.requests.length</span> : ""}</Link></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
