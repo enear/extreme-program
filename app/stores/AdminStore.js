@@ -60,7 +60,6 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
     },
     _updateRequests: function() {
         _requests = [];
-        console.log(_users);
         if(_users.length > 0) {
             _users.forEach(function(user) {
                 user.requests.forEach(function(request) {
@@ -96,7 +95,6 @@ AppDispatcher.register(function(payload) {
         case constants.ADMIN_UPDATE_USER:
             _user = action.user;
             _users = action.users;
-            console.log(_user);
             AdminStore._updateRequests();
             AdminStore.emit('change');
             break;

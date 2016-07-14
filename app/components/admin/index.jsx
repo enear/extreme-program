@@ -48,6 +48,9 @@ var Admin = React.createClass({
         Admin: ['Admin'],
         Attributor: ['Admin', 'Attributor']
     },
+    _hasPermission: function(roles) {
+        return roles.indexOf(this.state.admin.role) >= 0
+    },
     checkPermission: function() {
         return function(permission) {
             if( permission.indexOf(this.state.admin.role) < 0)  {
@@ -60,9 +63,19 @@ var Admin = React.createClass({
             <div className="admin">
                 <div id="adminNav">
                     <ul className="navigation" >
-                        <li><Link to="/users">Users</Link></li>
-                        <li><Link to="/rewards">Rewards</Link></li>
-                        <li><Link to="/goals">Goals</Link></li>
+                        {this._hasPermission(this._userPermissions.Attributor)
+                        ?   <li><Link to="/users">Users</Link></li>
+                        :   null
+                        }
+                        {this._hasPermission(this._userPermissions.Admin)
+                        ?   <li><Link to="/rewards">Rewards</Link></li>
+                        :   null
+                        }
+                        {this._hasPermission(this._userPermissions.Admin)
+                        ?   <li><Link to="/goals">Goals</Link></li>
+                        :   null
+                        }
+
                         <li><Link to="/requests">Requests {this.state.requests.length > 0 ? <span>this.state.requests.length</span> : ""}</Link></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
