@@ -1,0 +1,41 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: $whiteSmoke;
+    color: $darkGray;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.login {
+    min-height: 100%;
+    height: 100%;
+    display: table;
+
+
+    .content {
+        min-height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+.signin {
+    .info-graphic {
+        padding: $spacing 0;
+    }
+}
+
+.intro-logo {
+    margin-bottom: $gutter;
+}
+
+@media( min-width: $screen-xs) {
+    .signin {
+        .info-graphic {
+            padding: $column 0;
+        }
+    }
+
+}

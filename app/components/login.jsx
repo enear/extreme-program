@@ -29,26 +29,21 @@ var Login = React.createClass({
     },
     render: function(){
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-xs-12">
-                        <h1>This is the login page!</h1>
-                        <form  className="form-horizontal col-xs-12" action="/login" method="POST" onSubmit={this._handleSubmit} >
-                            <div className="form-group">
-                                <label htmlFor="email" className="col-xs-12">Email</label>
-                                <input className="col-xs-12 form-control"  type="email" id="email" name="email" onChange={this._handleChange()}/>
-                                <label htmlFor="password" className="col-xs-12">Password</label>
-                                <input className="col-xs-12 form-control"  type="password" id="password" name="password" onChange={this._handleChange()} />
-                            </div>
-                            <div className="form-group">
-                                <input type="submit" className="btn btn-primary" value="Submit" />
-                            </div>
-                        </form>
-
-                        <p>Not registered? <a href="/auth/slack">Sign in with Slack</a></p>
-
+            <div>
+                <form className="form-horizontal col-xs-12" action="/login" method="POST" onSubmit={this._handleSubmit} >
+                    <div className="form-group">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input className="col-xs-12 col-sm-6 form-field"  type="email" id="email" name="email" onChange={this._handleChange()}/>
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <input className="col-xs-12 col-sm-6 form-field"  type="password" id="password" name="password" onChange={this._handleChange()} />
                     </div>
-                </div>
+                    <div className="form-group">
+                        <input type="submit" className="button submit" value="Submit" />
+                    </div>
+                </form>
+
+                <p className="info-text">Not registered? <a href="/auth/slack"><img src="assets/slack-button.png" alt="Sign in with Slack" title="Sign in with Slack"/></a></p>
+                <p className="info-text">Why Slack? We use it to validate your information before choosing your password</p>
             </div>
         );
     }

@@ -1,6 +1,6 @@
 .button {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 10px 15px;
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 400;
@@ -18,8 +18,67 @@
     background-image: none;
     border: 1px solid transparent;
     border-radius: 4px;
+    width:100%;
+
+    &.submit {
+        background-color: $orange;
+        color: $white;
+    }
+}
+
+
+.form-field {
+    display: block;
+    height: 44px;
+    padding: 6px 12px;
+    font-size: 18px;
+    line-height: 20;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: $spacing;
+    outline: none;
+
+    &:focus {
+        border: 2px solid $orange;
+    }
+}
+
+.form-label {
+    width:100%;
+    float: left;
+}
+
+.error-message,
+.info-text {
+    margin-bottom: $spacing;
+}
+
+.bold {
+    font-weight: bold;
+    font-size: 16px;
 }
 
 #confirmation {
     color: $black;
+}
+
+@media(min-width: $screen-xs) {
+    .button {
+        width: auto;
+    }
+
+    .form-field {
+        height: 40px;
+        font-size: 16px;
+        line-height: 18;
+        margin-bottom: $spacing;
+    }
+
+    .error-message,
+    .info-text {
+        margin-bottom: $gutter;
+    }
+
 }

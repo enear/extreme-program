@@ -50,25 +50,17 @@ var SignIn = React.createClass({
     },
     render: function(){
         return (
-            <div id="signinComponent" className="container">
-                <div className="row">
-                    <div className="col-xs-12">
-                        <h1>This is the singin page!</h1>
-                        <p>Please select your password</p>
-                        <form  className="form-horizontal" action="/signin" method="POST" onSubmit={this.handleSubmit} >
-                            <div className="form-group">
-                                <label htmlFor="password" className="col-xs-12">Password</label>
-                                <input className="col-xs-12 form-control"  type="password" id="password" name="password" onBlur={this._handleBlur('password')} />
-                                <label htmlFor="confirmPassword" className="col-xs-12">Confirm your password</label>
-                                <input className="col-xs-12 form-control" type="password" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur('confirmPassword')} />
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+            <form  className="form-horizontal col-xs-12" action="/signin" method="POST" onSubmit={this.handleSubmit} >
+                <div className="form-group">
+                    <label htmlFor="password" className="form-label">Password</label>
+                    <input className="col-xs-12 col-sm-6 form-field"  type="password" id="password" name="password" onBlur={this._handleBlur('password')} />
+                    <label htmlFor="confirmPassword" className="form-label">Confirm your password</label>
+                    <input className="col-xs-12 col-sm-6 form-field" type="password" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur('confirmPassword')} />
                 </div>
-            </div>
+                <div className="form-group">
+                    <button type="submit" className="button submit">Submit</button>
+                </div>
+            </form>
         );
     }
 });

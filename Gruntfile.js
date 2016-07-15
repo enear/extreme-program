@@ -9,7 +9,9 @@ module.exports = function(grunt){
     sass: {
       dist: {
         files: {
-          'app/public/css/styles.css': 'app/scss/styles.scss'
+          'app/public/css/styles.css': 'app/scss/styles.scss',
+          'app/public/css/login.css': 'app/scss/login.scss',
+          'app/public/css/admin.css': 'app/scss/admin.scss'
         },
         options: {
           sourcemap: 'none'
@@ -67,8 +69,12 @@ module.exports = function(grunt){
       main: {
         files: [
           {expand: false, src: ['bower_components/bootstrap/dist/css/bootstrap.min.css'], dest: 'app/public/css/libraries/bootstrap.min.css'},
+          {expand: false, src: ['bower_components/font-awesome/css/font-awesome.min.css'], dest: 'app/public/css/libraries/font-awesome.min.css'},
+          {expand: true, cwd: 'bower_components/font-awesome/fonts/', src: '*',  dest: 'app/public/css/fonts'},
+          {expand: false, src: ['bower_components/font-awesome/scss/_variables.scss'], dest: 'app/scss/_fa-variables.scss'},
           {expand: false, src: ['bower_components/jquery/dist/jquery.min.js'], dest: 'app/public/js/libraries/jquery.min.js'},
-          {expand: false, src: ['bower_components/bootstrap/dist/js/bootstrap.min.js'], dest: 'app/public/js/libraries/bootstrap.min.js'}
+          {expand: false, src: ['bower_components/bootstrap/dist/js/bootstrap.min.js'], dest: 'app/public/js/libraries/bootstrap.min.js'},
+
         ]
       }
     }
