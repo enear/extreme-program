@@ -17,7 +17,6 @@ module.exports = function(passport, User) {
                     res.redirect('/login');
                 }
                 else{
-                    req.flash('user', user);
                     res.render('signin', {user: user});
                 }
             });
