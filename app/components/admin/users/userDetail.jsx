@@ -11,7 +11,7 @@ var UserDetail = React.createClass({
     },
     componentWillMount: function() {
         this.props.checkPermission(this.props.permissions.Attributor);
-        
+
         if(Object.keys(this.state.user).length === 0  || this.state.user._id !== this.props.params.id) {
             AdminActions.getUser('/api/users/' + this.props.params.id);
         }
@@ -56,7 +56,7 @@ var UserDetail = React.createClass({
             var user = this.state.user,
                 points = e.target.value;
 
-            user.totalPoints = e.target.value;
+            user.totalPoints = points;
 
             this.setState({
                 user: user
@@ -71,13 +71,12 @@ var UserDetail = React.createClass({
         }.bind(this);
     },
     render: function() {
-        //TODO: This is throwing an warning about un/controlled inputs
         return (
-            <div className="container">
+            <div className="container-fluid admin-content">
                 <div className="row">
                     <div className="col-xs-12">
                         <p>{this.state.user.email}</p>
-                        <input type="number" name="totalPoints" onBlur={this._handlePointsUpdate()} value={this.state.user.totalPoints} /> <br />
+                        <input type="number" name="totalPoints" onChange={this._handlePointsUpdate()} value={this.state.user.totalPoints} /> <br />
 
                         <select name="role" onChange={this._handleRoleChange()} value={this.state.user.role} >
                             {   this.state.roles.map(function(role, index) {

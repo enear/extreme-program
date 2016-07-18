@@ -1,29 +1,116 @@
-#adminNav {
+#admin-side-nav {
     position: fixed;
     top: 0;
     left: 0;
     min-height: 100%;
-    min-width: 300px;
-    background-color: $white;
-    color: $black;
+    width: 100%;
+    background-color: $darkGray;
+    color: $lightGray;
     z-index: 200;
-    padding-top: 200px;
+    display: none;
+
+    .user-info {
+        padding: $gutter;
+        background-color: $orange;
+        color: $white;
+        font-size: 16px;
+        max-width: 250px;
+        width: 250px;
+        float: left;
+        max-height: 82px;
+
+        .user > i.fa {
+            padding: 10px 12px;
+            border-radius: 50%;
+            background-color: $darkGray;
+        }
+    }
 
     .navigation {
         list-style-type: none;
         padding: 0;
-        margin: 0;
+        margin: $highSpace 0;
 
         li {
             width: 100%;
             a {
                 display: block;
-                padding: 10px;
-                border: 1px solid $black;
+                padding: $spacing;
+                text-decoration: none;
+                color: $lightGray;
+                font-size: 16px;
+                border-left: 5px solid $darkGray;
 
                 &:hover {
                     text-decoration: none;
+                    background-color: $hoverGray;
+                    border-left: 5px solid $hoverGray;
                 }
+
+                &.active {
+                    border-left: 5px solid $orange;
+                    background-color: $activeGray;
+                    color: $white;
+
+                }
+
+
+                .request-notification {
+                    display: inline-block;
+                    padding: 0 10px;
+                    background-color: $green;
+                    color: $white;
+                    border-radius: 2px;
+                    font-weight: bold;
+                }
+            }
+
+        }
+
+        .logout {
+            display: block;
+        }
+    }
+}
+
+#admin-top-nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: $darkGray;
+    z-index: 100;
+    max-height: 82px;
+
+
+    .logout {
+        padding: $gutter;
+        background-color: $orange;
+        color: $white;
+        font-size: 22px;
+        font-weight: bold;
+
+        &:hover {
+            background-color: $hoverOrange;
+        }
+    }
+}
+
+.spacing {
+    display: inline-block;
+    line-height: 22px;
+    margin-left: $spacing;
+}
+
+@media(min-width: $screen-xs) {
+    #admin-side-nav {
+        width: 250px;
+        max-width: 250px;
+        display: block;
+
+        .navigation {
+            .logout {
+                display: none;
             }
         }
     }

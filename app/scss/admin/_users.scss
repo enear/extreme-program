@@ -1,0 +1,36 @@
+.user-list-title {
+    margin: 0 0 $spacing 0;
+    @include font-size(16px) ;
+
+}
+
+#admin-user-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .user-list-item {
+        a {
+            display: block;
+            padding: $spacing;
+            font-size: 16px;
+            line-height: 18px;
+            color: $darkGray;
+            border-left: 5px solid $white;
+
+            &:hover {
+                text-decoration: none;
+                border-left: 5px solid $hoverOrange;
+                background-color: $whiteSmoke;
+
+            }
+
+            &.active {
+                border-left: 5px solid $orange;
+                background-color: $hoverOrange;
+                color: $white;
+                text-decoration: none;
+            }
+        }
+    }
+}

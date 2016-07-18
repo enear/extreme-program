@@ -26,8 +26,9 @@ var Admin = React.createClass({
             <div>
                 <Router history={hashHistory}>
                     <Route path="/" component={Index}>
-                        <Route path="/users" component={UsersManagement} />
-                        <Route path="users/:id" component={UserDetailManagement} />
+                        <Route path="/users" component={UsersManagement} >
+                            <Route path="/users/:id" component={UserDetailManagement} />
+                        </Route>
                         <Route path="/rewards" component={RewardsManagement} />
                         <Route path="/rewards/new" component={NewReward} />
                         <Route path="/rewards/:id" component={RewardDetailManagement} />

@@ -1,17 +1,25 @@
 @import "_fa-variables.scss";
 @import "_fonts.scss";
+@import "_mixins.scss";
 
 //colors:
 $white: #fff;
-$whiteSmoke: #f2f2f2;
+$whiteSmoke: #e9f0f5;
 $black: #000;
 $darkGray: #273135;
+$activeGray: #0c1315;
+$hoverGray: #304047;
 $lightGray: #89949B;
+
 $orange: #EE6626;
+$hoverOrange: #ff884f;
+
+$green: #009a31;
 
 $spacing: 15px;
 $gutter: $spacing * 2;
 $column: $gutter * 2;
+$highSpace: $column * 2;
 
 //Screen width
 $screen-xs: 480px;

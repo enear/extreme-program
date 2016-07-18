@@ -1,3 +1,11 @@
+html, body {
+    height: 100%;
+
+    * {
+        font-family: 'Open Sans', sans-serif;
+    }
+}
+
 .button {
     display: inline-block;
     padding: 10px 15px;
