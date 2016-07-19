@@ -2,53 +2,49 @@
     position: fixed;
     top: 0;
     left: 0;
-    min-height: 100%;
     width: 100%;
     background-color: $darkGray;
     color: $lightGray;
     z-index: 200;
-    display: none;
 
     .user-info {
-        padding: $gutter;
+        padding: 0;
         background-color: $orange;
         color: $white;
-        font-size: 16px;
-        max-width: 250px;
-        width: 250px;
+        @include font-size(16px);
+        width: 100%;
         float: left;
-        max-height: 82px;
+        text-align: left;
 
-        .user > i.fa {
-            padding: 10px 12px;
-            border-radius: 50%;
-            background-color: $darkGray;
-        }
     }
 
     .navigation {
         list-style-type: none;
         padding: 0;
-        margin: $highSpace 0;
+        display: flex;
+        flex-direction: row;
+        float:left;
+        width: 100%;
 
         li {
-            width: 100%;
+            flex: 1;
+            margin-bottom: 0px;
+            text-align: center;
             a {
                 display: block;
-                padding: $spacing;
                 text-decoration: none;
                 color: $lightGray;
-                font-size: 16px;
-                border-left: 5px solid $darkGray;
-
+                @include font-size(16px);
+                border-bottom: 5px solid $darkGray;
+                padding: 15px 0;
                 &:hover {
                     text-decoration: none;
                     background-color: $hoverGray;
-                    border-left: 5px solid $hoverGray;
+                    border-bottom: 5px solid $hoverGray;
                 }
 
                 &.active {
-                    border-left: 5px solid $orange;
+                    border-bottom: 5px solid $orange;
                     background-color: $activeGray;
                     color: $white;
 
@@ -64,7 +60,6 @@
                     font-weight: bold;
                 }
             }
-
         }
 
         .logout {
@@ -74,26 +69,7 @@
 }
 
 #admin-top-nav {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: $darkGray;
-    z-index: 100;
-    max-height: 82px;
-
-
-    .logout {
-        padding: $gutter;
-        background-color: $orange;
-        color: $white;
-        font-size: 22px;
-        font-weight: bold;
-
-        &:hover {
-            background-color: $hoverOrange;
-        }
-    }
+    display:none;
 }
 
 .spacing {
@@ -104,13 +80,109 @@
 
 @media(min-width: $screen-xs) {
     #admin-side-nav {
-        width: 250px;
-        max-width: 250px;
         display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100%;
+        max-width: 250px;
+        width: 250px;
+        background-color: $darkGray;
+        color: $lightGray;
+        z-index: 200;
+
+        .user-info {
+            padding: $spacing;
+            background-color: $orange;
+            color: $white;
+            font-size: 16px;
+            max-width: 250px;
+            width: 250px;
+            float: left;
+            max-height: 82px;
+            text-align: center;
+
+            .user > i.fa {
+                padding: 10px 12px;
+                border-radius: 50%;
+                background-color: $darkGray;
+            }
+        }
 
         .navigation {
+            list-style-type: none;
+            padding: 0;
+            margin: $highSpace 0;
+            display: block;
+
+            li {
+                width: 100%;
+                margin-bottom: 0;
+                flex: none;
+                text-align: left;
+
+                a {
+                    display: block;
+                    padding: $spacing;
+                    text-decoration: none;
+                    color: $lightGray;
+                    font-size: 16px;
+                    border-left: 5px solid $darkGray;
+                    border-bottom: none;
+
+                    &:hover {
+                        text-decoration: none;
+                        background-color: $hoverGray;
+                        border-left: 5px solid $hoverGray;
+                        border-bottom: none;
+                    }
+
+                    &.active {
+                        border-left: 5px solid $orange;
+                        background-color: $activeGray;
+                        color: $white;
+                        border-bottom: none;
+                    }
+
+
+                    .request-notification {
+                        display: inline-block;
+                        padding: 0 10px;
+                        background-color: $green;
+                        color: $white;
+                        border-radius: 2px;
+                        font-weight: bold;
+                    }
+                }
+
+            }
+
             .logout {
                 display: none;
+            }
+        }
+    }
+
+    #admin-top-nav {
+        display:block;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: $darkGray;
+        z-index: 100;
+        max-height: 82px;
+
+
+        .logout {
+            padding: $gutter;
+            background-color: $orange;
+            color: $white;
+            font-size: 22px;
+            font-weight: bold;
+
+            &:hover {
+                background-color: $hoverOrange;
             }
         }
     }

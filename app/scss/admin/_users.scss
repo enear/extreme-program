@@ -10,11 +10,12 @@
     padding: 0;
 
     .user-list-item {
+        margin-bottom: 0;
+
         a {
+            @include font-size(16px) ;
             display: block;
             padding: $spacing;
-            font-size: 16px;
-            line-height: 18px;
             color: $darkGray;
             border-left: 5px solid $white;
 
@@ -22,7 +23,6 @@
                 text-decoration: none;
                 border-left: 5px solid $hoverOrange;
                 background-color: $whiteSmoke;
-
             }
 
             &.active {
@@ -33,4 +33,16 @@
             }
         }
     }
+}
+
+#user-detail {
+    .user-history-title,
+    .user-detail-history-item {
+        margin-bottom: $spacing;
+    }
+
+    .user-history-item-title {
+        margin-bottom: 5px;
+    }
+
 }

@@ -11,7 +11,7 @@ var changePassword = function(Model, user, options, callback){
 
 var submitNewRequest = function(Model, user, options, callback) {
     user.requests.push(options.newRequest);
-    options.newRequest.operation = "request";
+    options.newRequest.operation = "Request";
     user.history.push(options.newRequest);
 
     user.save(callback);
@@ -20,7 +20,7 @@ var submitNewRequest = function(Model, user, options, callback) {
 var addReward = function(Model, user, options, callback) {
     if(_hasEnoughPoints(user, options.newReward.points)) {
         user.rewards.push(options.newReward);
-        options.newReward.operation = "reward";
+        options.newReward.operation = "Reward";
         user.history.push(options.newReward);
         user.totalPoints -= options.newReward.points;
     }
@@ -57,7 +57,8 @@ var changeRequestState = function(Model, user, options, callback) {
     }
 
     Model.findOneAndUpdate({_id: mongo.ObjectID(user._id), 'requests.id': options.request.id}, {
-        '$set': update
+        '$set': update,
+        '$push': {'history': options.request}
     }, callback );
 
 

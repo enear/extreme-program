@@ -74,30 +74,34 @@ var UserDetail = React.createClass({
         return (
             <div className="container-fluid admin-content">
                 <div className="row">
-                    <div className="col-xs-12">
-                        <p>{this.state.user.email}</p>
-                        <input type="number" name="totalPoints" onChange={this._handlePointsUpdate()} value={this.state.user.totalPoints} /> <br />
+                    <div className="col-xs-12" id="user-detail">
+                        <h4><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.user.email}</h4>
+                        <label className="form-label" htlmFor="userDetailTotalPoints">Points:</label>
+                        <input type="number" name="totalPoints" id="userDetailTotalPoints" className="form-field" onChange={this._handlePointsUpdate()} value={this.state.user.totalPoints} />
 
-                        <select name="role" onChange={this._handleRoleChange()} value={this.state.user.role} >
+                    <label className="form-label" htmlFor="userDetailRole" >Role:</label>
+                        <select name="role" id="userDetailRole" className="form-field" onChange={this._handleRoleChange()} value={this.state.user.role} >
                             {   this.state.roles.map(function(role, index) {
                                 return (
                                     <option key={index} value={role.role}>{role.role}</option>
                                 )
                             })}
                         </select>
-                        <h4>User history</h4>
+                        <h4 className="user-history-title"><i className="fa fa-th-list" aria-hidden="true"></i><span className="spacing"></span>User history</h4>
                         {this.state.user.history && this.state.user.history.length > 0
-                        ?   (this.state.user.history.map(function(item, index) {
-                            return(
-                                <div key={index} className="col-xs-12">
-                                    <h4>{item.name} - {item.operation}</h4>
-                                    <p>{dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
-                                </div>
-                            )
-                        }))
+                        ?   <ul className="user-detail-history">
+                                {this.state.user.history.map(function(item, index) {
+                                    return(
+                                        <li className="user-detail-history-item" key={index}>
+                                            <h4 className="user-history-item-title">{item.operation} - {dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</h4>
+                                            <p>{item.name} {item.operation === 'request' ? '- state: ' + item.state : ""} </p>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+
                         : <p>This user has no activity at the moment</p>
                         }
-                        <Link to="/users" className="btn btn-default" >Back</Link>
                     </div>
                 </div>
             </div>

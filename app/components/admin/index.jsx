@@ -65,25 +65,25 @@ var Admin = React.createClass({
                     <a href="/logout" className="pull-right logout"><i className="fa fa-sign-out" aria-hidden="true"></i></a>
                 </div>
                 <div id="admin-side-nav">
-                    <div className="user-info text-center">
+                    <div className="user-info">
                         <span className="user"><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.admin.email}</span>
                     </div>
                     <ul className="navigation" >
                         {this._hasPermission(this._userPermissions.Attributor)
-                        ?   <li><Link activeClassName="active" to="/users"><i className="fa fa-users" aria-hidden="true"></i><span className="spacing"></span>Users</Link></li>
+                        ?   <li><Link activeClassName="active" to="/users"><i className="fa fa-users" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Users</span></Link></li>
                         :   null
                         }
                         {this._hasPermission(this._userPermissions.Admin)
-                        ?   <li><Link activeClassName="active" to="/rewards"><i className="fa fa-trophy" aria-hidden="true"></i><span className="spacing"></span>Rewards</Link></li>
+                        ?   <li><Link activeClassName="active" to="/rewards"><i className="fa fa-trophy" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Rewards</span></Link></li>
                         :   null
                         }
                         {this._hasPermission(this._userPermissions.Admin)
-                        ?   <li><Link activeClassName="active" to="/goals"><i className="fa fa-star" aria-hidden="true"></i><span className="spacing"></span>Goals</Link></li>
+                        ?   <li><Link activeClassName="active" to="/goals"><i className="fa fa-star" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Goals</span></Link></li>
                         :   null
                         }
 
-                        <li><Link activeClassName="active" to="/requests"><i className="fa fa-exchange" aria-hidden="true"></i><span className="spacing"></span>Requests {this.state.requests.length > 0 ? <span className="pull-right request-notification">{this.state.requests.length}</span> : ""}</Link></li>
-                        <li className="logout"><a href="/logout"><i className="fa fa-sign-out" aria-hidden="true"></i><span className="spacing"></span> Sign Out</a></li>
+                        <li><Link activeClassName="active" to="/requests"><i className="fa fa-exchange" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Requests</span> {this.state.requests.length > 0 ? <span className="pull-right request-notification">{this.state.requests.length}</span> : ""}</Link></li>
+                        <li className="logout"><a href="/logout"><i className="fa fa-sign-out" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span> Sign Out</span></a></li>
                     </ul>
                 </div>
                 <div id="admin-content-container">

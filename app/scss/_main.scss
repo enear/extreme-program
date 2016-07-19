@@ -4,6 +4,20 @@ html, body {
     * {
         font-family: 'Open Sans', sans-serif;
     }
+
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        li {
+            margin-bottom: $spacing;
+        }
+    }
+
+    h4 {
+        margin-bottom: $gutter;
+    }
 }
 
 .button {
@@ -45,8 +59,9 @@ html, body {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-bottom: $spacing;
+    margin-bottom: $gutter;
     outline: none;
+    width: 100%;
 
     &:focus {
         border: 2px solid $orange;
@@ -81,7 +96,8 @@ html, body {
         height: 40px;
         font-size: 16px;
         line-height: 18;
-        margin-bottom: $spacing;
+        width: 300px;
+        max-width: 300px;
     }
 
     .error-message,
