@@ -1,6 +1,6 @@
 var React = require('react');
 var AdminStore = require('../../../stores/AdminStore');
-var AdminActions = require('../../../actions/AdminActions');
+var AdminActions = require('../../../actions/adminActions');
 var Link = require('react-router').Link;
 
 var RewardsList = React.createClass({

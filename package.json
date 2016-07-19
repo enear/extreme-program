@@ -33,6 +33,7 @@
     "hbs": "^4.0.0",
     "jquery": "^3.0.0",
     "key-mirror": "^1.0.1",
+    "mongodb": "^2.2.4",
     "mongoose": "^4.4.20",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",

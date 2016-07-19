@@ -54,13 +54,24 @@ var UserDetail = React.createClass({
     _handlePointsUpdate: function(e) {
         return function(e) {
             var user = this.state.user,
-                points = e.target.value;
+                points = e.target.value ;
 
             user.totalPoints = points;
 
             this.setState({
                 user: user
             });
+
+            console.log(this.state.user);
+
+        }.bind(this);
+    },
+    _handleOnBlur: function(e) {
+        return function(e) {
+            var user = this.state.user,
+                points = e.target.value || 0;
+
+            user.totalPoints = points;
 
             AdminActions.updateUser({
                 points: points,
@@ -72,39 +83,35 @@ var UserDetail = React.createClass({
     },
     render: function() {
         return (
-            <div className="container-fluid admin-content">
-                <div className="row">
-                    <div className="col-xs-12" id="user-detail">
-                        <h4><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.user.email}</h4>
-                        <label className="form-label" htlmFor="userDetailTotalPoints">Points:</label>
-                        <input type="number" name="totalPoints" id="userDetailTotalPoints" className="form-field" onChange={this._handlePointsUpdate()} value={this.state.user.totalPoints} />
+                <div className="col-xs-12" id="user-detail">
+                    <h4><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.user.email}</h4>
+                    <label className="form-label" htlmFor="userDetailTotalPoints">Points:</label>
+                    <input type="number" name="totalPoints" id="userDetailTotalPoints" className="form-field" onBlur={this._handleOnBlur()} onChange={this._handlePointsUpdate()} value={this.state.user.totalPoints} />
 
-                    <label className="form-label" htmlFor="userDetailRole" >Role:</label>
-                        <select name="role" id="userDetailRole" className="form-field" onChange={this._handleRoleChange()} value={this.state.user.role} >
-                            {   this.state.roles.map(function(role, index) {
-                                return (
-                                    <option key={index} value={role.role}>{role.role}</option>
+                <label className="form-label" htmlFor="userDetailRole" >Role:</label>
+                    <select name="role" id="userDetailRole" className="form-field" onChange={this._handleRoleChange()} value={this.state.user.role} >
+                        {   this.state.roles.map(function(role, index) {
+                            return (
+                                <option key={index} value={role.role}>{role.role}</option>
+                            )
+                        })}
+                    </select>
+                    <h4 className="user-history-title"><i className="fa fa-th-list" aria-hidden="true"></i><span className="spacing"></span>User history</h4>
+                    {this.state.user.history && this.state.user.history.length > 0
+                    ?   <ul className="user-detail-history">
+                            {this.state.user.history.map(function(item, index) {
+                                return(
+                                    <li className="user-detail-history-item" key={index}>
+                                        <h4 className="user-history-item-title">{item.operation} - {dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</h4>
+                                        <p>{item.name} {item.operation === 'request' ? '- state: ' + item.state : ""} </p>
+                                    </li>
                                 )
                             })}
-                        </select>
-                        <h4 className="user-history-title"><i className="fa fa-th-list" aria-hidden="true"></i><span className="spacing"></span>User history</h4>
-                        {this.state.user.history && this.state.user.history.length > 0
-                        ?   <ul className="user-detail-history">
-                                {this.state.user.history.map(function(item, index) {
-                                    return(
-                                        <li className="user-detail-history-item" key={index}>
-                                            <h4 className="user-history-item-title">{item.operation} - {dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</h4>
-                                            <p>{item.name} {item.operation === 'request' ? '- state: ' + item.state : ""} </p>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
+                        </ul>
 
-                        : <p>This user has no activity at the moment</p>
-                        }
-                    </div>
+                    : <p>This user has no activity at the moment</p>
+                    }
                 </div>
-            </div>
         )
     }
 });

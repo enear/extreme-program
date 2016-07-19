@@ -33,7 +33,7 @@ var updatePoints = function(Model, user, options, callback) {
     if(!isNaN(options.points)) {
         user.totalPoints = options.points;
 
-        if(user.totalPoints < 0) {
+        if(user.totalPoints < 0 || user.totalPoints === '') {
             user.totalPoints = 0;
         }
     }
