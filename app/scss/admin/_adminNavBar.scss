@@ -1,22 +1,13 @@
 #admin-side-nav {
     position: fixed;
-    top: 0;
+    top: 18px;
     left: 0;
     width: 100%;
     background-color: $darkGray;
     color: $lightGray;
     z-index: 200;
 
-    .user-info {
-        padding: 0;
-        background-color: $orange;
-        color: $white;
-        @include font-size(16px);
-        width: 100%;
-        float: left;
-        text-align: left;
 
-    }
 
     .navigation {
         list-style-type: none;
@@ -30,6 +21,12 @@
             flex: 1;
             margin-bottom: 0px;
             text-align: center;
+
+            &:not(:last-of-type) {
+                border-right: 1px solid $lightGray;
+
+            }
+
             a {
                 display: block;
                 text-decoration: none;
@@ -37,6 +34,8 @@
                 @include font-size(16px);
                 border-bottom: 5px solid $darkGray;
                 padding: 15px 0;
+                position: relative;
+                
                 &:hover {
                     text-decoration: none;
                     background-color: $hoverGray;
@@ -58,6 +57,9 @@
                     color: $white;
                     border-radius: 2px;
                     font-weight: bold;
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
                 }
             }
         }
@@ -69,7 +71,20 @@
 }
 
 #admin-top-nav {
-    display:none;
+    .user-info {
+        padding: 0;
+        background-color: $orange;
+        color: $white;
+        @include font-size(16px);
+        width: 100%;
+        float: left;
+        text-align: left;
+
+    }
+
+    .logout {
+        display:none
+    }
 }
 
 .spacing {
@@ -89,25 +104,9 @@
         width: 250px;
         background-color: $darkGray;
         color: $lightGray;
-        z-index: 200;
+        z-index: 100;
 
-        .user-info {
-            padding: $spacing;
-            background-color: $orange;
-            color: $white;
-            font-size: 16px;
-            max-width: 250px;
-            width: 250px;
-            float: left;
-            max-height: 82px;
-            text-align: center;
 
-            .user > i.fa {
-                padding: 10px 12px;
-                border-radius: 50%;
-                background-color: $darkGray;
-            }
-        }
 
         .navigation {
             list-style-type: none;
@@ -121,6 +120,11 @@
                 flex: none;
                 text-align: left;
 
+                &:not(:last-of-type) {
+                    border-right: none;
+
+                }
+
                 a {
                     display: block;
                     padding: $spacing;
@@ -129,6 +133,7 @@
                     font-size: 16px;
                     border-left: 5px solid $darkGray;
                     border-bottom: none;
+                    position: initial;
 
                     &:hover {
                         text-decoration: none;
@@ -152,6 +157,7 @@
                         color: $white;
                         border-radius: 2px;
                         font-weight: bold;
+                        position: initial;
                     }
                 }
 
@@ -170,9 +176,27 @@
         top: 0;
         left: 0;
         background-color: $darkGray;
-        z-index: 100;
+        z-index: 200;
         max-height: 82px;
 
+        .user-info {
+            padding: $spacing;
+            background-color: $orange;
+            color: $white;
+            font-size: 16px;
+            max-width: 250px;
+            width: 250px;
+            float: left;
+            max-height: 82px;
+            height: 82px;
+            text-align: center;
+
+            .user > i.fa {
+                padding: 10px 12px;
+                border-radius: 50%;
+                background-color: $darkGray;
+            }
+        }
 
         .logout {
             padding: $gutter;
@@ -180,6 +204,7 @@
             color: $white;
             font-size: 22px;
             font-weight: bold;
+            display: block;
 
             &:hover {
                 background-color: $hoverOrange;

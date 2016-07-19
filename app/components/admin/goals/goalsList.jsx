@@ -31,14 +31,14 @@ var GoalsList = React.createClass({
     },
     render: function() {
         return (
-            <div className="container">
+            <div className="container-fluid admin-content">
                 <div className="row">
                     { this.state.goals && this.state.goals.length > 0
                         ?  (this.state.goals.map(function(goal, index) {
                             var link = '/goals/' + goal._id;
 
                             return (
-                                <div key={index} className="goal col-xs-12 col-sm-4">
+                                <div key={index} className="goal col-xs-12 col-sm-3">
                                    <h3>{goal.name}</h3>
                                    <p>
                                        {goal.summary}

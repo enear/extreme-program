@@ -31,14 +31,14 @@ var RewardsList = React.createClass({
     },
     render: function() {
         return (
-            <div className="container">
+            <div className="container-fluid admin-content">
                 <div className="row">
                     { this.state.rewards && this.state.rewards.length > 0
                         ?  (this.state.rewards.map(function(reward, index) {
                             var link = '/rewards/' + reward._id;
 
                             return (
-                                <div key={index} className="reward col-xs-12 col-sm-4">
+                                <div key={index} className="reward col-xs-12 col-sm-3">
                                    <h3>{reward.name}</h3>
                                    <p>
                                        {reward.summary}

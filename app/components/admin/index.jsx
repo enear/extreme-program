@@ -62,12 +62,12 @@ var Admin = React.createClass({
         return (
             <div className="admin">
                 <div id="admin-top-nav">
-                    <a href="/logout" className="pull-right logout"><i className="fa fa-sign-out" aria-hidden="true"></i></a>
-                </div>
-                <div id="admin-side-nav">
                     <div className="user-info">
                         <span className="user"><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.admin.email}</span>
                     </div>
+                    <a href="/logout" className="pull-right logout"><i className="fa fa-sign-out" aria-hidden="true"></i></a>
+                </div>
+                <div id="admin-side-nav">
                     <ul className="navigation" >
                         {this._hasPermission(this._userPermissions.Attributor)
                         ?   <li><Link activeClassName="active" to="/users"><i className="fa fa-users" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Users</span></Link></li>
