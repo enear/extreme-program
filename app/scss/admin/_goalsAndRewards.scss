@@ -3,6 +3,10 @@
 .content-item {
     margin-bottom: $spacing;
 
+    &:nth-child(4n + 1) {
+        clear: both;
+    }
+
     .content-item-title {
         display: inline-block;
         width: 75%;

@@ -42,6 +42,7 @@ var RewardsList = React.createClass({
                     { this.state.rewards && this.state.rewards.length > 0
                     ?   (this.state.rewards.map(function(reward, index) {
                         var link = '/rewards/' + reward._id;
+
                         return (
                             <div key={index} className="reward col-xs-12 col-sm-3 content-item">
                                <h4 className="content-item-title"><i className="fa fa-trophy" aria-hidden="true"></i><span className="spacing"></span>{reward.name}</h4>
@@ -65,10 +66,7 @@ var RewardsList = React.createClass({
                                <p>
                                    {reward.points} Points
                                </p>
-
                            </div>
-
-
                         )
                     }))
                     :   null
