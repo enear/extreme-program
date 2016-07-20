@@ -162,6 +162,18 @@ var AdminActions = {
                 requestStates: data
             });
         });
+    },
+    setRequest: function(payload) {
+        AppDispatcher.handleAction({
+            actionType: constants.ADMIN_GET_REQUEST,
+            request: payload
+        });
+    },
+    getRequestById: function(id) {
+        AppDispatcher.handleAction({
+            actionType: constants.ADMIN_GET_REQUEST_BY_ID,
+            id: id
+        });
     }
 };
 

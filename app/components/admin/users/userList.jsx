@@ -39,7 +39,7 @@ UsersManagement = React.createClass({
             <div className="container-fluid admin-content">
                 <div className="row">
                     <div className="col-xs-12 col-sm-4" >
-                        <h3 className="user-list-title">Users</h3>
+                        <h3 className="underline">Users</h3>
                         { this.state.users && this.state.users.length > 0
                         ?    <ul id="admin-user-list">
                                 {this.state.users.map(function(user, index) {
@@ -55,7 +55,7 @@ UsersManagement = React.createClass({
                         }
                     </div>
                     <div className="col-xs-12 col-sm-8">
-                        {this.props.children && React.cloneElement(this.props.children, { permissions: this.props.permissions, checkPermission: this.props.checkPermission, user: this.state.user}) }
+                        {this.props.children && React.cloneElement(this.props.children, { permissions: this.props.permissions, checkPermission: this.props.checkPermission}) }
                     </div>
                 </div>
             </div>

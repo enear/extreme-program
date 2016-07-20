@@ -5,7 +5,7 @@
     width: 100%;
     background-color: $darkGray;
     color: $lightGray;
-    z-index: 200;
+    z-index: 100;
 
 
 
@@ -73,7 +73,12 @@
 #admin-top-nav {
     position: fixed;
     width: 100%;
-    
+    z-index: 200;
+    top: 0;
+    left: 0;
+    background-color: $darkGray;
+    z-index: 200;
+
     .user-info {
         padding: 0;
         background-color: $orange;
@@ -107,7 +112,6 @@
         width: 250px;
         background-color: $darkGray;
         color: $lightGray;
-        z-index: 100;
 
 
 
@@ -173,13 +177,7 @@
     }
 
     #admin-top-nav {
-        display:block;
-        position: fixed;
-        width: 100%;
         top: 0;
-        left: 0;
-        background-color: $darkGray;
-        z-index: 200;
         max-height: 82px;
 
         .user-info {

@@ -24,5 +24,6 @@ module.exports = keyMirror({
     ADMIN_CREATE_GOAL: null,
     ADMIN_UPDATE_GOAL: null,
     ADMIN_DELETE_GOAL: null,
-    ADMIN_GET_REQUESTSTATES: null
+    ADMIN_GET_REQUESTSTATES: null,
+    ADMIN_GET_REQUEST: null
 });

@@ -19,11 +19,19 @@ body {
         display: table-cell;
         vertical-align: middle;
     }
+
+    .form-field {
+        margin-bottom: $spacing;
+    }
 }
 
 .signin {
     .info-graphic {
         padding: $spacing 0;
+    }
+
+    .form-field {
+        margin-bottom: $spacing;
     }
 }
 

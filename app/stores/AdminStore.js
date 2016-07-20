@@ -55,6 +55,9 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
 
         return _request;
     },
+    getRequest :function() {
+        return _request;
+    },
     getRequestStates: function() {
         return _requestStates;
     },
@@ -65,6 +68,7 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
                 user.requests.forEach(function(request) {
                     if(request.state === 'Pending') {
                         request.user = user._id;
+                        request.userName = user.email;
                         _requests.push(request);
                     }
                 });
@@ -143,6 +147,13 @@ AppDispatcher.register(function(payload) {
         case constants.ADMIN_GET_REQUESTSTATES:
             _requestStates = action.requestStates;
             AdminStore.emit('change');
+            break;
+        case constants.ADMIN_GET_REQUEST:
+            _request = action.request;
+            AdminStore.emit('change');
+            break;
+        case constants.ADMIN_GET_REQUEST_BY_ID:
+
             break;
         default:
             return true;

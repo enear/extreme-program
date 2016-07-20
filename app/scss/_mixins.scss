@@ -2,3 +2,15 @@
     font-size: $size;
     line-height: $size + 2;
 }
+
+ @mixin invert-on-hover($main, $secondary) {
+     color: $main;
+     background-color: $secondary;
+     border: 1px solid $secondary;
+
+     &:hover {
+         color: $secondary;
+         background-color: $main;
+         text-decoration: none;
+     }
+ }

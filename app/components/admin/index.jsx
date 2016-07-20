@@ -28,9 +28,6 @@ var Admin = React.createClass({
     componentWillUnmount: function() {
         AdminStore.removeChangeListener(this._onChange);
     },
-    userPermissions: function() {
-
-    },
     _getState: function() {
         return {
             admin: AdminStore.getAdmin(),
@@ -46,7 +43,8 @@ var Admin = React.createClass({
     },
     _userPermissions: {
         Admin: ['Admin'],
-        Attributor: ['Admin', 'Attributor']
+        Attributor: ['Admin', 'Attributor'],
+        Approver: ['Admin', 'Attributor', 'Approver']
     },
     _hasPermission: function(roles) {
         return roles.indexOf(this.state.admin.role) >= 0

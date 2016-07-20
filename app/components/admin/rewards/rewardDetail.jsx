@@ -46,6 +46,7 @@ var RewardDetail = React.createClass({
     _handleSubmit: function(e) {
         e.preventDefault();
         AdminActions.updateReward(this.state.reward);
+        this.context.router.push('/rewards');
     },
     _hideConfirmationDialog: function() {
         this._handleConfirmation(false);
@@ -66,27 +67,24 @@ var RewardDetail = React.createClass({
     },
     render: function() {
         return (
-            <div className="container">
+            <div className="container-fluid admin-content">
                 <div className="row">
-                    <form onSubmit={this._handleSubmit}>
-                        <div className="col-xs-12">
-                            <input type="test" value={this.state.reward.name} onChange={this._handleChange()} name="name" />
-                        </div>
-                        <div className="col-xs-12">
-                            <textarea value={this.state.reward.summary} name="summary" onChange={this._handleChange()}></textarea>
-                        </div>
-                        <div className="col-xs-12">
-                            <textarea value={this.state.reward.description} name="description" onChange={this._handleChange()}></textarea>
-                        </div>
-                        <div className="col-xs-12">
-                            <input type="number" value={this.state.reward.points} onChange={this._handleChange()} name="points" />
-                        </div>
+                    <form onSubmit={this._handleSubmit} className="col-xs-12 col-sm-6 content-item-form">
+                        <label htmlFor="name" className="form-label"><i className="fa fa-trophy" aria-hidden="true"></i><span className="spacing"></span>Name</label>
+                        <input id="name" type="text" className="form-field" value={this.state.reward.name} onChange={this._handleChange()} name="name" />
+                        <label htmlFor="summary" className="form-label">Summary</label>
+                        <textarea id="summary" className="form-field text-area" value={this.state.reward.summary} name="summary" onChange={this._handleChange()}></textarea>
+                        <label htmlFor="description" className="form-label">Description</label>
+                        <textarea id="description" className="form-field text-area" value={this.state.reward.description} name="description" onChange={this._handleChange()}></textarea>
+                        <label htmlFor="points" className="form-label">Points</label>
+                        <input id="points" className="form-field" type="number" value={this.state.reward.points} onChange={this._handleChange()} name="points" />
                         <div>
-                            <Link to="/rewards" className="btn btn-default">Back</Link>
-                            <button type="button" className="btn btn-danger" onClick={this._showConfirmationDialog}>Delete</button>
+                            <button type="button" className="button delete" onClick={this._showConfirmationDialog}>Delete</button>
+                            <input type="submit" className="button submit pull-right" value="Save" />
+
                         </div>
-                        <div>
-                            <input type="submit" className="btn btn-primary" value="Save" />
+                        <div className="bottom-button-container">
+                            <Link to="/rewards" className="button">Back</Link>
                         </div>
 
                     </form>

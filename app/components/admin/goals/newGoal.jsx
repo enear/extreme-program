@@ -46,25 +46,19 @@ var NewGoal = React.createClass({
     },
     render: function() {
         return (
-            <div className="container">
+            <div className="container-fluid admin-content">
                 <div className="row">
-                    <form onSubmit={this._handleSubmit}>
-                        <div className="col-xs-12">
-                            <input type="test" value={this.state.goal.name} onChange={this._handleChange()} name="name" />
-                        </div>
-                        <div className="col-xs-12">
-                            <textarea value={this.state.goal.summary} name="summary" onChange={this._handleChange()}></textarea>
-                        </div>
-                        <div className="col-xs-12">
-                            <textarea value={this.state.goal.description} name="description" onChange={this._handleChange()}></textarea>
-                        </div>
-                        <div className="col-xs-12">
-                            <input type="number" value={this.state.goal.points} onChange={this._handleChange()} name="points" />
-                        </div>
-                        <div>
-                            <Link to="/goals" className="btn btn-default">Back</Link>
-                            <input type="submit" className="btn btn-primary" value="Save" />
-                        </div>
+                    <form onSubmit={this._handleSubmit} className="col-xs-12 col-sm-6 content-item-form">
+                        <label htmlFor="name" className="form-label"><i className="fa fa-star"></i><span className="spacing"></span>Name</label>
+                        <input className="form-field" type="text" value={this.state.goal.name} onChange={this._handleChange()} name="name" />
+                        <label htmlFor="summary" className="form-label">Summary</label>
+                        <textarea className="form-field text-area" id="summary" value={this.state.goal.summary} name="summary" onChange={this._handleChange()}></textarea>
+                        <label htmlFor="description" className="form-label">Description</label>
+                        <textarea className="form-field text-area" id="description" value={this.state.goal.description} name="description" onChange={this._handleChange()}></textarea>
+                        <label htmlFor="points" className="form-label">Points</label>
+                        <input className="form-field" id="points" type="number" value={this.state.goal.points} onChange={this._handleChange()} name="points" />
+                        <Link to="/goals" className="button">Back</Link>
+                        <input type="submit" className="button submit pull-right" value="Save" />
                     </form>
                 </div>
             </div>

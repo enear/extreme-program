@@ -13,9 +13,12 @@ var RequestDetail = React.createClass({
 
     },
     componentWillMount: function() {
+        this.props.checkPermission(this.props.permissions.Attributor);
+
         if(this.state.requestStates.length === 0 ) {
             AdminActions.getRequestStates('/api/requeststates');
         }
+
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
@@ -28,7 +31,8 @@ var RequestDetail = React.createClass({
     },
     _getState: function() {
         return {
-            request: AdminStore.getRequestById(this.props.params.id),
+            users: AdminStore.getUsers(),
+            request: AdminStore.getRequest(),
             requestStates: AdminStore.getRequestStates(),
             confirmation: false
         };
@@ -68,44 +72,43 @@ var RequestDetail = React.createClass({
     },
     render: function() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-xs-12">
-                        <p>{this.state.request.name}</p>
-                        <p>{this.state.request.summary}</p>
-                        {this.state.requestStates && this.state.requestStates.length > 0
-                        ?   <select onChange={this._handleStateChange()} name="state" value={this.state.request.state}>
-                                {this.state.requestStates.map(function(state, index) {
-                                    return (
-                                        <option key={index}>{state.state}</option>
-                                    )
-                                })}
-                            </select>
-                        :   null
-                        }
-                        <div>
-                            <Link className="btn btn-default" to="/requests">Back</Link>
-                            <button className="btn btn-primary" onClick={this._showConfirmationDialog}>Save</button>
-                        </div>
-                    </div>
-                </div>
-                <div id="confirmation" className={this.state.confirmation ? "modal show" : "modal"}>
-                  <div className="modal-dialog">
+            <div className="col-xs-12" id="request-detail">
+                <h4><i className="fa fa-exchange"></i><span className="spacing"></span>{this.state.request.name}</h4>
+                <label className="form-label">Summary</label>
+                <p>{this.state.request.summary}</p>
+                <label className="form-label">Comment</label>
+                <p>{this.state.request.comment}</p>
+                <label className="form-label">State</label>
+                {this.state.requestStates && this.state.requestStates.length > 0
+                    ?   <select id="state" className="form-field" onChange={this._handleStateChange()} name="state" value={this.state.request.state}>
+                    {this.state.requestStates.map(function(state, index) {
+                        return (
+                            <option key={index}>{state.state}</option>
+                        )
+                    })}
+                </select>
+                :   null
+            }
+            <div>
+                <button className="button submit" onClick={this._showConfirmationDialog}>Save</button>
+            </div>
+            <div id="confirmation" className={this.state.confirmation ? "modal show" : "modal"}>
+                <div className="modal-dialog">
                     <div className="modal-content">
-                      <div className="modal-header">
-                        <button type="button" className="close" data-dismiss="modal" aria-hidden="true" onClick={this._hideConfirmationDialog}>&times;</button>
-                        <h4 className="modal-title">Confirmation</h4>
-                      </div>
-                      <div className="modal-body">
-                          Are you sure you want to set this request state as: <span>{this.state.request.state}</span>
-                      </div>
-                      <div className="modal-footer">
+                        <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-hidden="true" onClick={this._hideConfirmationDialog}>&times;</button>
+                            <h4 className="modal-title">Confirmation</h4>
+                        </div>
+                        <div className="modal-body">
+                            Are you sure you want to set this request state as: <span>{this.state.request.state}</span>
+                    </div>
+                    <div className="modal-footer">
                         <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
                         <button type="button" className="btn btn-primary" onClick={this._updateRequest}>Accept</button>
-                      </div>
                     </div>
-                  </div>
                 </div>
+            </div>
+        </div>
             </div>
         );
     }

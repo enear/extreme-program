@@ -35,8 +35,9 @@ var Admin = React.createClass({
                         <Route path="/goals" component={GoalsManagement} />
                         <Route path="/goals/new" component={NewGoal}  />
                         <Route path="/goals/:id" component={GoalDetailManagement} />
-                        <Route path="/requests" component={Requests}  />
-                        <Route path="/requests/:id" component={RequestDetail} />
+                        <Route path="/requests" component={Requests} >
+                            <Route path="/requests/:id" component={RequestDetail} />
+                        </Route>
                     </Route>
                 </Router>
             </div>

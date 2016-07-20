@@ -62,8 +62,6 @@ var UserDetail = React.createClass({
                 user: user
             });
 
-            console.log(this.state.user);
-
         }.bind(this);
     },
     _handleOnBlur: function(e) {
@@ -85,10 +83,10 @@ var UserDetail = React.createClass({
         return (
                 <div className="col-xs-12" id="user-detail">
                     <h4><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.user.email}</h4>
-                    <label className="form-label" htlmFor="userDetailTotalPoints">Points:</label>
+                    <label className="form-label" htmlFor="userDetailTotalPoints">Points:</label>
                     <input type="number" name="totalPoints" id="userDetailTotalPoints" className="form-field" onBlur={this._handleOnBlur()} onChange={this._handlePointsUpdate()} value={this.state.user.totalPoints} />
 
-                <label className="form-label" htmlFor="userDetailRole" >Role:</label>
+                    <label className="form-label" htmlFor="userDetailRole">Role:</label>
                     <select name="role" id="userDetailRole" className="form-field" onChange={this._handleRoleChange()} value={this.state.user.role} >
                         {   this.state.roles.map(function(role, index) {
                             return (
