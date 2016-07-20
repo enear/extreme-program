@@ -33,20 +33,35 @@ var GoalsList = React.createClass({
         return (
             <div className="container-fluid admin-content">
                 <div className="row">
+                    <div className="col-xs-12">
+                        <h3 className="underline">Goals</h3>
+                    </div>
                     { this.state.goals && this.state.goals.length > 0
                         ?  (this.state.goals.map(function(goal, index) {
                             var link = '/goals/' + goal._id;
 
                             return (
-                                <div key={index} className="goal col-xs-12 col-sm-3">
-                                   <h3>{goal.name}</h3>
+                                <div key={index} className="goal col-xs-12 col-sm-3 content-item">
+                                   <h4 className="content-item-title"><i className="fa fa-star" aria-hidden="true"></i><span className="spacing"></span>{goal.name}</h4>
+                                   <Link to={link} className="button edit pull-right">Edit</Link>
+                                       <label className="form-label">
+                                           Summary
+                                       </label>
                                    <p>
                                        {goal.summary}
                                    </p>
-                                   <div className="cost-container">{goal.points} Points</div>
-                                   <div>
-                                       <Link to={link} className="btn btn-default">Edit</Link>
-                                   </div>
+                                   <label className="form-label">
+                                       Description
+                                   </label>
+                                   <p>
+                                       {goal.description}
+                                   </p>
+                                   <label className="form-label">
+                                       Points
+                                   </label>
+                                   <p>
+                                       {goal.points} Points
+                                   </p>
 
                                </div>
                             )
@@ -54,11 +69,7 @@ var GoalsList = React.createClass({
                         :   null
                     }
                 </div>
-                <div className="row">
-                    <div className="col-xs-12">
-                        <Link to="/goals/new" className="btn btn-default"> Add new</Link>
-                    </div>
-                </div>
+                <Link to="/goals/new" className="button add"><i className="fa fa-plus" aria-hidden="true"></i> <span className="hidden-xs"><span className="spacing"></span>Add new</span></Link>
             </div>
         )
     }

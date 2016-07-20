@@ -35,7 +35,7 @@
                 border-bottom: 5px solid $darkGray;
                 padding: 15px 0;
                 position: relative;
-                
+
                 &:hover {
                     text-decoration: none;
                     background-color: $hoverGray;
@@ -71,6 +71,9 @@
 }
 
 #admin-top-nav {
+    position: fixed;
+    width: 100%;
+    
     .user-info {
         padding: 0;
         background-color: $orange;

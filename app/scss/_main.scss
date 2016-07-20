@@ -18,6 +18,10 @@ html, body {
     h4 {
         margin-bottom: $gutter;
     }
+
+    .underline {
+        border-bottom: 1px solid $lightGray;
+    }
 }
 
 .button {
@@ -42,9 +46,32 @@ html, body {
     border-radius: 4px;
     width:100%;
 
-    &.submit {
-        background-color: $orange;
+    &:hover {
+        text-decoration: none;
+
+    }
+
+    &.submit,
+    &.edit {
         color: $white;
+        background-color: $orange;
+        border: 1px solid $orange;
+
+        &:hover {
+            color: $orange;
+            background-color: $white;
+        }
+    }
+
+    &.add {
+        color: $white;
+        background-color: $green;
+        border: 1px solid $green;
+
+        &:hover {
+            color: $green;
+            background-color: $white;
+        }
     }
 }
 

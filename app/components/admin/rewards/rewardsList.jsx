@@ -33,32 +33,44 @@ var RewardsList = React.createClass({
         return (
             <div className="container-fluid admin-content">
                 <div className="row">
+                    <div className="col-xs-12">
+                        <h3 className="underline">Rewards</h3>
+                    </div>
                     { this.state.rewards && this.state.rewards.length > 0
-                        ?  (this.state.rewards.map(function(reward, index) {
-                            var link = '/rewards/' + reward._id;
+                    ?   (this.state.rewards.map(function(reward, index) {
+                        var link = '/rewards/' + reward._id;
 
-                            return (
-                                <div key={index} className="reward col-xs-12 col-sm-3">
-                                   <h3>{reward.name}</h3>
-                                   <p>
-                                       {reward.summary}
-                                   </p>
-                                   <div className="cost-container">{reward.points} Points</div>
-                                   <div>
-                                       <Link to={link} className="btn btn-default">Edit</Link>
-                                   </div>
+                        return (
+                            <div key={index} className="reward col-xs-12 col-sm-3 content-item">
+                               <h4 className="content-item-title"><i className="fa fa-trophy" aria-hidden="true"></i><span className="spacing"></span>{reward.name}</h4>
+                               <Link to={link} className="button edit pull-right">Edit</Link>
 
-                               </div>
-                            )
-                        }))
-                        :   null
+                               <label className="form-label">
+                                   Summary
+                               </label>
+                               <p>
+                                   {reward.summary}
+                               </p>
+                               <label className="form-label">
+                                   Description
+                               </label>
+                               <p>
+                                   {reward.description}
+                               </p>
+                               <label className="form-label">
+                                   Points
+                               </label>
+                               <p>
+                                   {reward.points} Points
+                               </p>
+
+                           </div>
+                        )
+                    }))
+                    :   null
                     }
                 </div>
-                <div className="row">
-                    <div className="col-xs-12">
-                        <Link to="/rewards/new" className="btn btn-default"> Add new</Link>
-                    </div>
-                </div>
+                <Link to="/rewards/new" className="button add"><i className="fa fa-plus" aria-hidden="true"></i> <span className="hidden-xs"><span className="spacing"></span>Add new</span></Link>
             </div>
         )
     }

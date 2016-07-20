@@ -1,0 +1,14 @@
+.content-item {
+    .content-item-title {
+        display: inline-block;
+    }
+
+    .button {
+        width: auto;
+    }
+    
+    p {
+        margin-bottom: $spacing;
+        margin-top: 0;
+    }
+}
