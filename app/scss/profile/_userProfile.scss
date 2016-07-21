@@ -1,1 +1,32 @@
+#user-profile {
+    .change-password {
+        display:none;
 
+        &.show {
+            display: block;
+        }
+
+        .form-field {
+            margin-bottom: $spacing;
+        }
+    }
+
+
+    .profile-title {
+        margin-bottom: $gutter;
+    }
+
+    .points {
+        color: $orange;
+        font-weight: bold;
+    }
+
+    .link {
+        color: $orange;
+        text-decoration: underline;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
+}

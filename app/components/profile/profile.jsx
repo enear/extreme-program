@@ -1,4 +1,5 @@
 var React = require('react');
+var Link = require('react-router').Link;
 var dateFormat = require('dateformat');
 var ProfileStore = require('../../stores/ProfileStore');
 var ProfileActions = require('../../actions/profileActions');
@@ -27,7 +28,8 @@ var Profile = React.createClass({
             user: ProfileStore.getUser(),
             oldPassword: '',
             newPassword: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            changingPassword: false
         };
     },
     _handleBlur: function() {
@@ -49,29 +51,42 @@ var Profile = React.createClass({
                 user: this.state.user,
                 action: "changePassword",
                 password: this.state.oldPassword,
-                newPassword: this.state.newPassword
+                newPassword: this.state.newPassword,
+                changingPassword: false
             });
         }
     },
+    _togglePasswordChangeForm: function(show) {
+        var that = this;
+        return function() {
+            that.setState({
+                changingPassword: true
+            })
+        }
+
+    },
     render: function() {
+        console.log(this.state.changingPassword);
+
         return (
-            <div className="user-profile container">
+            <div id="user-profile" className="container">
                 <div className="row" >
                     <div className="col-xs-12">
-                        <h3><i className="fa fa-user"></i><span className="spacing"></span> {this.state.user.email}</h3>
+                        <h3 className="profile-title"><i className="fa fa-user"></i><span className="spacing"></span> {this.state.user.email}</h3>
+                        <p>You have <span className="points">{this.state.user.totalPoints}</span> points</p>
+                        <p>Redeem them  <Link className="link" to="/rewards">here</Link></p>
+                        <button id="change-password-button" onClick={this._togglePasswordChangeForm(true)} className={"button submit " + (this.state.changingPassword ? "hidden" : "")}>Change Your Password</button>
                     </div>
                 </div>
                 <div className="row">
-                    <form  className="col-xs-12"  onSubmit={this._handleSubmit} >
+                    <form  className={"col-xs-12 change-password " + (this.state.changingPassword ? "show" : "")}  onSubmit={this._handleSubmit} >
                         <label htmlFor="oldPassword" className="form-label">Old Password</label>
                         <input className="form-field"  type="password" id="oldPassword" name="oldPassword" onBlur={this._handleBlur()} />
                         <label htmlFor="newPassword" className="form-label">New Password</label>
                         <input className="form-field"  type="password" id="newPassword" name="newPassword" onBlur={this._handleBlur()} />
                         <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
                         <input className="form-field"  type="password" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur()} />
-                        <div className="form-group col-xs-12">
-                            <input type="submit" className="btn btn-primary" value="Submit" />
-                        </div>
+                        <input type="submit" className="button submit" value="Submit" />
                     </form>
                 </div>
                 <div className="row">
