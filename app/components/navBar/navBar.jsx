@@ -13,13 +13,13 @@ var NavBar = React.createClass({
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  <Link className="navbar-brand" to="/">Brand</Link>
+                  <Link className="navbar-brand" to="/"><img src="/assets/enear-logo1.png" alt="logo" title="logo" /></Link>
                 </div>
 
                 <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                    <li className="active"><Link to="/profile">My Profile</Link></li>
-
+                    <li className="hidden-xs email">email: {this.props.user.email} |</li>
+                    <li><Link activeClassName="active" to="/profile">My Profile</Link></li>
                     <li ><a href="/logout">Log Out</a></li>
                   </ul>
                 </div>

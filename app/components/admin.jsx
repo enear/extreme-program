@@ -15,8 +15,7 @@ var GoalDetailManagement = require('./admin/goals/goalDetail.jsx');
 var NewGoal = require('./admin/goals/newGoal.jsx');
 var Requests = require('./admin/requests/requests.jsx');
 var RequestDetail = require('./admin/requests/requestDetail.jsx');
-var AdminStore = require('../stores/AdminStore');
-var AdminActions = require('../actions/adminActions');
+var Home = require('./admin/home.jsx');
 
 
 var Admin = React.createClass({
@@ -26,6 +25,7 @@ var Admin = React.createClass({
             <div>
                 <Router history={hashHistory}>
                     <Route path="/" component={Index}>
+                        <IndexRoute component={Home} />
                         <Route path="/users" component={UsersManagement} >
                             <Route path="/users/:id" component={UserDetailManagement} />
                         </Route>

@@ -61,6 +61,20 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
     getRequestStates: function() {
         return _requestStates;
     },
+    getNewUsers: function() {
+        var users = [],
+        that = this;
+
+        _users.forEach(function(user) {
+            console.log(user);
+            if(that._dayDiff(new Date(user.created) - new Date()) <= 7) {
+                console.log(user);
+                users.push(user);
+            }
+        });
+
+        return users;
+    },
     _updateRequests: function() {
         _requests = [];
         if(_users.length > 0) {
@@ -74,6 +88,12 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
                 });
             });
         }
+    },
+    _dayDiff: function(date1, date2) {
+        var timeDiff = Math.abs(date1.getTime() - date2.getTime());
+        console.log(date1);
+        console.log("diff " + timeDiff);
+        return(Math.ceil(timeDiff / (1000 * 3600 * 24)));
     },
     addChangeListener: function(callback) {
         this.on('change', callback);

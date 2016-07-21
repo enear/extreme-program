@@ -4,8 +4,47 @@
     border-radius: 0;
     width: 100%;
     background-color: $white;
-    opacity: 0.3;
-    color: $white;
+    color: $darkGray2;
     top: 0;
     z-index: 1000;
+
+    .navbar-collapse  {
+        width: 100%;
+
+        ul {
+            width: 100%;
+
+            li {
+                width: 100%;
+                margin-bottom: 0;
+
+                .active {
+                    color: $orange;
+                    border-bottom: 2px solid $orange;
+                }
+            }
+        }
+    }
+}
+
+@media( min-width: $screen-xs) {
+    #topNavigation {
+        .navbar-collapse {
+            width: auto;
+
+            ul {
+                width: auto;
+
+                li {
+                    width: auto;
+                }
+            }
+        }
+    }
+
+
+    .email {
+        padding-top: $spacing;
+        padding-bottom: $spacing;
+    }
 }
