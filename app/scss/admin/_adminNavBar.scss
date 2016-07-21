@@ -95,11 +95,7 @@
     }
 }
 
-.spacing {
-    display: inline-block;
-    line-height: 22px;
-    margin-left: $spacing;
-}
+
 
 @media(min-width: $screen-xs) {
     #admin-side-nav {

@@ -58,17 +58,17 @@ var Profile = React.createClass({
             <div className="user-profile container">
                 <div className="row" >
                     <div className="col-xs-12">
-                        <h1>This is the user profile page</h1>
+                        <h3><i className="fa fa-user"></i><span className="spacing"></span> {this.state.user.email}</h3>
                     </div>
-                    <form  className="form-horizontal col-xs-12"  onSubmit={this._handleSubmit} >
-                        <div className="form-group">
-                            <label htmlFor="oldPassword" className="col-xs-12">Old Password</label>
-                            <input className="col-xs-12 form-control"  type="password" id="oldPassword" name="oldPassword" onBlur={this._handleBlur()} />
-                            <label htmlFor="newPassword" className="col-xs-12">New Password</label>
-                            <input className="col-xs-12 form-control"  type="password" id="newPassword" name="newPassword" onBlur={this._handleBlur()} />
-                            <label htmlFor="confirmPassword" className="col-xs-12">Confirm Password</label>
-                            <input className="col-xs-12 form-control"  type="password" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur()} />
-                        </div>
+                </div>
+                <div className="row">
+                    <form  className="col-xs-12"  onSubmit={this._handleSubmit} >
+                        <label htmlFor="oldPassword" className="form-label">Old Password</label>
+                        <input className="form-field"  type="password" id="oldPassword" name="oldPassword" onBlur={this._handleBlur()} />
+                        <label htmlFor="newPassword" className="form-label">New Password</label>
+                        <input className="form-field"  type="password" id="newPassword" name="newPassword" onBlur={this._handleBlur()} />
+                        <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                        <input className="form-field"  type="password" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur()} />
                         <div className="form-group col-xs-12">
                             <input type="submit" className="btn btn-primary" value="Submit" />
                         </div>

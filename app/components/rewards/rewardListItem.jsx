@@ -6,16 +6,15 @@ var Reward = React.createClass( {
         var link = "/rewards/" + this.props.reward._id;
 
         return(
-            <div className="reward col-xs-12 col-sm-4">
-                <img  src="/assets/reward.jpg" alt="name" title="name" />
-                <h3><Link to={link}>{this.props.reward.name}</Link></h3>
+            <div className="content-item reward col-xs-12 col-sm-3">
+                <h3 className="content-item-title"><Link to={link}><i className="fa fa-trophy"></i><span className="spacing"></span>{this.props.reward.name}</Link></h3>
+                <label className="form-label">Summary</label>
                 <p>
                     {this.props.reward.summary}
                 </p>
-                <div className="cost-container">{this.props.reward.points} Points</div>
-                <div className="text-center">
-                    <Link className="btn btn-default" to={link}>Apply</Link>
-                </div>
+                <label className="form-label">Points</label>
+                <p>{this.props.reward.points} Points</p>
+                <Link className="button submit" to={link}>Apply</Link>
             </div>
         );
     }

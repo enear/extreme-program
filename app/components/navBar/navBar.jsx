@@ -18,7 +18,7 @@ var NavBar = React.createClass({
 
                 <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                    <li className="hidden-xs email">email: {this.props.user.email} |</li>
+                    <li className="hidden-xs email">email: {this.props.user.email} | You have <span className="points">{this.props.user.totalPoints}</span> Points | </li>
                     <li><Link activeClassName="active" to="/profile">My Profile</Link></li>
                     <li ><a href="/logout">Log Out</a></li>
                   </ul>

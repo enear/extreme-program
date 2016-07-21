@@ -4,6 +4,7 @@
     border-radius: 0;
     width: 100%;
     background-color: $white;
+    border-bottom: 1px solid $hoverOrange;
     color: $darkGray2;
     top: 0;
     z-index: 1000;
@@ -29,6 +30,8 @@
 
 @media( min-width: $screen-xs) {
     #topNavigation {
+        min-height: $column;
+
         .navbar-collapse {
             width: auto;
 
@@ -37,14 +40,24 @@
 
                 li {
                     width: auto;
+
+                    .points {
+                        color: $orange;
+                        font-weight: bold;
+                    }
+
+                    a {
+                        font-size: 16px;
+                        line-height: 26px;
+                    }
                 }
             }
         }
     }
 
-
     .email {
         padding-top: $spacing;
         padding-bottom: $spacing;
+        line-height: 26px;
     }
 }

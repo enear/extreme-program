@@ -69,26 +69,21 @@ var GoalDetail = React.createClass({
         return (
             <div className="container goal-detail">
                 <div className="row">
-                    <div className="col-xs-12 col-sm-6">
-                        <img  src="/assets/goal.jpg" alt="name" title="name" />
-                    </div>
-                    <div className="col-xs-12 col-sm-6">
-                        <h3>{this.state.goal.name}</h3>
+                    <div className="content-item col-xs-12 col-sm-6">
+                        <h3 className="content-item-title"><i className="fa fa-star"></i><span className="spacing"></span>{this.state.goal.name}</h3>
+                        <label className="form-label">Description</label>
                         <p>{this.state.goal.description}</p>
-                        <div>
-                            {this.state.goal.points}
-                        </div>
-                        <form  className="form-horizontal col-xs-12" onSubmit={this.handleSubmit}  >
+                        <label className="form-label">Points</label>
+                        <p>{this.state.goal.points}</p>
+                        <form onSubmit={this.handleSubmit}  >
+                                <label htmlFor="Comment" className="form-label">Comment</label>
+                                <textarea className="form-field text-area" id="comment" name="comment" onBlur={this._handleBlur()}></textarea>
                             <div className="form-group">
-                                <label htmlFor="Comment" className="col-xs-12">Comment</label>
-                                <textarea className="form-control col-xs-12" id="comment" name="comment" onBlur={this._handleBlur()}></textarea>
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                                <button type="submit" className="button submit">Submit</button>
                             </div>
                         </form>
                         <div>
-                            <Link to="/" className="btn btn-default">Back</Link>
+                            <Link to="/goals" className="btn btn-default">Back</Link>
                         </div>
                     </div>
                 </div>

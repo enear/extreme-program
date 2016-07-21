@@ -1,5 +1,5 @@
 html, body {
-    height: 100%;
+    min-height: 100%;
 
     * {
         font-family: 'Open Sans', sans-serif;
@@ -19,9 +19,23 @@ html, body {
         margin-bottom: $gutter;
     }
 
+    a {
+        color: $darkGray;
+
+        &:hover {
+            color: $orange;
+            text-decoration: none;
+        }
+    }
     .underline {
         border-bottom: 1px solid $lightGray;
     }
+}
+
+.spacing {
+    display: inline-block;
+    line-height: 16px;
+    margin-left: $spacing;
 }
 
 .button {

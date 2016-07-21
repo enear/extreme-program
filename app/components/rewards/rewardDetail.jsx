@@ -60,19 +60,16 @@ var RewardDetail = React.createClass({
         return (
             <div className="container reward-detail">
                 <div className="row">
-                    <div className="col-xs-12 col-sm-6">
-                        <img  src="/assets/reward.jpg" alt="name" title="name" />
-                    </div>
-                    <div className="col-xs-12 col-sm-6">
-                        <h3>{this.state.reward.name}</h3>
+                    <div className="content-item col-xs-12 col-sm-6">
+                        <h3 className="content-item-title"><i className="fa fa-trophy"></i><span className="spacing"></span>{this.state.reward.name}</h3>
+                        <label className="form-label">Description</label>
                         <p>{this.state.reward.description}</p>
-                            <div>
-                                {this.state.reward.points}
-                            </div>
-                            <button className="btn btn-primary" onClick={this._showConfirmationDialog}>Apply</button>
-                            <div>
-                                <Link to="/" className="btn btn-default">Back</Link>
-                            </div>
+                        <label className="form-label">Points</label>
+                        <p>{this.state.reward.points}</p>
+                        <button className="button submit" onClick={this._showConfirmationDialog}>Apply</button>
+                        <div>
+                            <Link to="/rewards" className="btn btn-default">Back</Link>
+                        </div>
                     </div>
                 </div>
                 <div id="confirmation" className={this.state.confirmation ? "modal show" : "modal"}>

@@ -4,6 +4,7 @@ var RewardList = require('../rewards/rewardList.jsx');
 var NavBar = require('../navBar/navBar.jsx');
 var IndexStore = require('../../stores/IndexStore');
 var IndexActions = require('../../actions/indexActions');
+var Link = require('react-router').Link;
 
 var Index = React.createClass({
     getInitialState: function() {
@@ -33,7 +34,17 @@ var Index = React.createClass({
         return (
             <div>
                 <NavBar user={this.state.user} />
-                {this.props.children}
+                <div id="main-container" className="container-fluid">
+                    <div className="row hidden-xs spacing-section">
+                        <div className="col-xs-12 ">
+
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        {this.props.children}
+                    </div>
+                </div>
             </div>
         );
     }

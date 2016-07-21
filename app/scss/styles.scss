@@ -6,15 +6,7 @@
 @import "homepage/_topNavigation.scss";
 @import "homepage/_mainContainer.scss";
 @import "homepage/_footer.scss";
-
-
-//Single Components
-
-//Goals & rewards
-@import "components/_goalList.scss";
-@import "components/_goalDetail.scss";
-@import "components/_rewardsList.scss";
-@import "components/_rewardDetail.scss";
+@import "homepage/_goalsAndRewards.scss";
 
 
 //Profile

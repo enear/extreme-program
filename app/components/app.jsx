@@ -4,8 +4,9 @@ var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var IndexRoute = require('react-router').IndexRoute;
 var hashHistory = require('react-router').hashHistory;
-var Index = require('./mainTemplates/index.jsx');
-var Home = require('./mainTemplates/home.jsx');
+var Index = require('./home/index.jsx');
+var Home = require('./home/home.jsx');
+var Intro = require('./home/intro.jsx');
 var GoalsList = require('./goals/goalList.jsx');
 var Goal = require('./goals/goalDetail.jsx');
 var RewardsList = require('./rewards/rewardList.jsx');
@@ -19,13 +20,14 @@ var App = React.createClass({
             <div>
                 <Router history={hashHistory}>
                     <Route path="/" component={Index} >
-                        <IndexRoute component={Home} />
-                        <Route path="/goals" component={GoalsList} />
-                        <Route path="/goals/:id" component={Goal} />
-                        <Route path="/rewards" component={RewardsList} />
-                        <Route path="/rewards/:id" component={Reward}  />
+                        <Route component={Home}>
+                            <IndexRoute component={Intro} />
+                            <Route path="/goals" component={GoalsList} />
+                            <Route path="/goals/:id" component={Goal} />
+                            <Route path="/rewards" component={RewardsList} />
+                            <Route path="/rewards/:id" component={Reward}  />
+                        </Route>
                         <Route path="/profile" component={Profile} />
-
                     </Route>
                 </Router>
             </div>

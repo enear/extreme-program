@@ -1,22 +1,66 @@
-#mainContainer {
+#main-container {
     height: 100%;
     min-height: 100%;
-    width: 100%;
-    background-color: black;
-    color: green;
-    display: table;
-    margin-bottom: $gutter;
+    padding-top: $column;
+
+    .spacing-section {
+        background-color: $hoverOrange;
+        min-height: $gutter;
+        height: $gutter;
+    }
+
+    #navigation {
+        display: flex;
+        background-color: $whiteSmoke;
+        width: 100%;
+        
+
+        li {
+            flex: 1;
+            margin: 0;
+
+            a {
+                padding: $spacing;
+                width: 100%;
+                text-align: center;
+                display:block;
+                color: $darkGray2;
+                @include font-size(16px);
+
+                &:hover,
+                &.active {
+                    background-color: $hoverGray;
+                    text-decoration: none;
+                    color: $white;
+                }
+            }
+        }
+    }
 }
 
-.text-container {
-    display: table-cell;
-    vertical-align: middle;
 
-    h2 {
-        margin: 0 0 $gutter 0;
+@media (min-width: $screen-xs) {
+    #main-container {
+
+        #navigation {
+            display: block;
+            width: 100%;
+            float: left;
+            li {
+                flex: none;
+                display: inline-block;
+                a {
+                    text-align: left;
+                    padding: $spacing $gutter;
+                }
+            }
+        }
+
+        .spacing-section {
+            background-color: $hoverOrange;
+            min-height: $gutter;
+            height: $gutter;
+        }
     }
 
-    p {
-        margin-bottom: $spacing;
-    }
 }
