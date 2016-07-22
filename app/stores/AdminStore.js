@@ -66,9 +66,7 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
         that = this;
 
         _users.forEach(function(user) {
-            console.log(user);
             if(that._dayDiff(new Date(user.created) - new Date()) <= 7) {
-                console.log(user);
                 users.push(user);
             }
         });
@@ -91,8 +89,6 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
     },
     _dayDiff: function(date1, date2) {
         var timeDiff = Math.abs(date1.getTime() - date2.getTime());
-        console.log(date1);
-        console.log("diff " + timeDiff);
         return(Math.ceil(timeDiff / (1000 * 3600 * 24)));
     },
     addChangeListener: function(callback) {

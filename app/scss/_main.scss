@@ -118,8 +118,21 @@ html, body {
     font-size: 16px;
 }
 
+.link {
+    color: $orange;
+    text-decoration: underline;
+
+    &:hover {
+        font-weight: bold;
+    }
+}
+
+.orange {
+    color: $orange;
+}
+
 #confirmation {
-    color: $black;
+    color: $darkGray;
 }
 
 @media(min-width: $screen-xs) {
@@ -137,6 +150,16 @@ html, body {
     .error-message,
     .info-text {
         margin-bottom: $gutter;
+    }
+
+    #confirmation {
+        .modal-footer {
+            button {
+                &:first-child {
+                    margin-right: $spacing;
+                }
+            }
+        }
     }
 
 }

@@ -13,7 +13,7 @@ var RequestDetail = React.createClass({
 
     },
     componentWillMount: function() {
-        this.props.checkPermission(this.props.permissions.Attributor);
+        this.props.checkPermission(this.props.permissions.Approver);
 
         if(this.state.requestStates.length === 0 ) {
             AdminActions.getRequestStates('/api/requeststates');
@@ -103,8 +103,8 @@ var RequestDetail = React.createClass({
                             Are you sure you want to set this request state as: <span>{this.state.request.state}</span>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
-                        <button type="button" className="btn btn-primary" onClick={this._updateRequest}>Accept</button>
+                        <button type="button" className="button" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
+                        <button type="button" className="button submit" onClick={this._updateRequest}>Accept</button>
                     </div>
                 </div>
             </div>

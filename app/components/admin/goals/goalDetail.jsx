@@ -83,7 +83,7 @@ var GoalDetail = React.createClass({
                             <input type="submit" className="button submit pull-right" value="Save" />
                         </div>
                         <div>
-                            <Link to="/goals" className="btn btn-default">Back</Link>
+                            <Link to="/goals" className="button">Back</Link>
                         </div>
                     </form>
                 </div>
@@ -98,8 +98,8 @@ var GoalDetail = React.createClass({
                           Are you sure you want to delete this Goal?
                       </div>
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
-                        <button type="button" className="btn btn-primary" onClick={this._deleteGoal}>Accept</button>
+                        <button type="button" className="button" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
+                        <button type="button" className="button delete" onClick={this._deleteGoal}>Accept</button>
                       </div>
                     </div>
                   </div>

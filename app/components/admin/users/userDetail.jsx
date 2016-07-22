@@ -85,15 +85,20 @@ var UserDetail = React.createClass({
                     <h4><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.user.email}</h4>
                     <label className="form-label" htmlFor="userDetailTotalPoints">Points:</label>
                     <input type="number" name="totalPoints" id="userDetailTotalPoints" className="form-field" onBlur={this._handleOnBlur()} onChange={this._handlePointsUpdate()} value={this.state.user.totalPoints} />
+                    {this.props.permissions.Admin.indexOf(this.state.admin.role) >= 0
+                    ?   <div>
+                            <label className="form-label" htmlFor="userDetailRole">Role:</label>
+                            <select name="role" id="userDetailRole" className="form-field" onChange={this._handleRoleChange()} value={this.state.user.role} >
+                                {   this.state.roles.map(function(role, index) {
+                                    return (
+                                        <option key={index} value={role.role}>{role.role}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                    :   null
+                    }
 
-                    <label className="form-label" htmlFor="userDetailRole">Role:</label>
-                    <select name="role" id="userDetailRole" className="form-field" onChange={this._handleRoleChange()} value={this.state.user.role} >
-                        {   this.state.roles.map(function(role, index) {
-                            return (
-                                <option key={index} value={role.role}>{role.role}</option>
-                            )
-                        })}
-                    </select>
                     <h4 className="user-history-title"><i className="fa fa-th-list" aria-hidden="true"></i><span className="spacing"></span>User history</h4>
                     {this.state.user.history && this.state.user.history.length > 0
                     ?   <ul className="user-detail-history">
@@ -101,7 +106,7 @@ var UserDetail = React.createClass({
                                 return(
                                     <li className="user-detail-history-item" key={index}>
                                         <h4 className="user-history-item-title">{item.operation} - {dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</h4>
-                                        <p>{item.name} {item.operation === 'request' ? '- state: ' + item.state : ""} </p>
+                                        <p>{item.name} {item.operation === 'Request' ? '- state: ' + item.state : ""} </p>
                                     </li>
                                 )
                             })}

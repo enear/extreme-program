@@ -32,6 +32,8 @@
             @include font-size(20px);
 
         }
+
+
     }
 
 
@@ -69,8 +71,16 @@
                 top: auto;
                 right: auto;
                 border-radius: 0;
-                @include font-size(20px);
 
+            }
+
+            .intro-message {
+                padding-top: $gutter;
+                
+                p {
+                    @include font-size(18px);
+                    margin-bottom: $gutter;
+                }
             }
         }
     }

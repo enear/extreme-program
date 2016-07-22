@@ -33,6 +33,8 @@ body {
     .form-field {
         margin-bottom: $spacing;
     }
+
+
 }
 
 .intro-logo {
@@ -43,6 +45,19 @@ body {
     .signin {
         .info-graphic {
             padding: $column 0;
+        }
+
+        .index {
+            background-color: $darkGray;
+            color: $whiteSmoke;
+            @include font-size(24px);
+            padding: 20px 30px;
+            border-radius: 50%;
+
+            &.active {
+                background-color: $orange;
+                color: $white;
+            }
         }
     }
 

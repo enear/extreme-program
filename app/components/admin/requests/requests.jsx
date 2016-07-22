@@ -11,7 +11,7 @@ var Requests = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
-        this.props.checkPermission(this.props.permissions.Attributor);
+        this.props.checkPermission(this.props.permissions.Approver);
 
         if(this.state.requestStates.length === 0 ) {
             AdminActions.getRequestStates('/api/requeststates');

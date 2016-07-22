@@ -83,7 +83,7 @@ var GoalDetail = React.createClass({
                             </div>
                         </form>
                         <div>
-                            <Link to="/goals" className="btn btn-default">Back</Link>
+                            <Link to="/goals" className="button">Back</Link>
                         </div>
                     </div>
                 </div>

@@ -66,19 +66,19 @@ var Profile = React.createClass({
 
     },
     render: function() {
-        console.log(this.state.changingPassword);
-
         return (
             <div id="user-profile" className="container">
                 <div className="row" >
-                    <div className="col-xs-12">
+                    <div className="col-xs-12 info-section">
                         <h3 className="profile-title"><i className="fa fa-user"></i><span className="spacing"></span> {this.state.user.email}</h3>
                         <p>You have <span className="points">{this.state.user.totalPoints}</span> points</p>
                         <p>Redeem them  <Link className="link" to="/rewards">here</Link></p>
-                        <button id="change-password-button" onClick={this._togglePasswordChangeForm(true)} className={"button submit " + (this.state.changingPassword ? "hidden" : "")}>Change Your Password</button>
                     </div>
                 </div>
                 <div className="row">
+                    <div className="col-xs-12">
+                        <button id="change-password-button" onClick={this._togglePasswordChangeForm(true)} className={"button submit " + (this.state.changingPassword ? "hidden" : "")}>Change Your Password</button>
+                    </div>
                     <form  className={"col-xs-12 change-password " + (this.state.changingPassword ? "show" : "")}  onSubmit={this._handleSubmit} >
                         <label htmlFor="oldPassword" className="form-label">Old Password</label>
                         <input className="form-field"  type="password" id="oldPassword" name="oldPassword" onBlur={this._handleBlur()} />
@@ -90,46 +90,70 @@ var Profile = React.createClass({
                     </form>
                 </div>
                 <div className="row">
-                    <h3 className="col-xs-12">My Requests</h3>
-                    {this.state.user.requests && this.state.user.requests.length > 0
-                    ?   (this.state.user.requests.map(function(request, index) {
-                        return (
-                            <div key={index} className="col-xs-12">
-                                <h4 >{request.name}</h4>
-                                <p>{dateFormat(request.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
-                                <p>{request.summary}</p>
-                                <p>{request.comment}</p>
-                            </div>
-                        )
-                    }))
-                    :   <p className="col-xs-12">There are no requests at the moment</p>
+                    <div className="col-xs-12 col-sm-4">
+                        <h3 className="profile-item-list-title"><i className="fa fa-exchange"></i><span className="spacing"></span>My Requests</h3>
+                        {this.state.user.requests && this.state.user.requests.length > 0
+                            ?   <ul className="profile-item-list">
+                            {this.state.user.requests.map(function(request, index) {
+                                return (
+                                    <li key={index} className="profile-item">
+                                        <h4><Link to={"/goals/" + (request._id)}></Link> {request.name}</h4>
+                                        <label className="form-label">Date</label>
+                                        <p>{dateFormat(request.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
+                                        <label className="form-label">Summary</label>
+                                        <p>{request.summary}</p>
+                                        <label className="form-label">Comment</label>
+                                        <p>{request.comment}</p>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                        :   <p>There are no requests at the moment</p>
 
-                    }
-                    <h3 className="col-xs-12">My Rewards</h3>
-                    {this.state.user.rewards && this.state.user.rewards.length > 0
-                    ?   (this.state.user.rewards.map(function(reward, index) {
-                            return (
-                                <div key={index} className="col-xs-12">
-                                    <h4 >{reward.name}</h4>
-                                    <p>{reward.date}</p>
-                                    <p>{reward.summary}</p>
-                                </div>
-                            )
-                        }))
-                    :    <p className="col-xs-12">There are no rewards at the moment</p>
-                    }
-                    <h3 className="col-xs-12">My history</h3>
-                    {this.state.user.history && this.state.user.history.length > 0
-                    ?   (this.state.user.history.map(function(item, index) {
-                        return(
-                            <div key={index} className="col-xs-12">
-                                <h4>{item.name} - {item.operation}</h4>
-                                <p>{dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
-                            </div>
-                        )
-                    }))
-                    : null
-                    }
+                }
+
+                    </div>
+                    <div className="col-xs-12 col-sm-4">
+                        <h3 className="profile-item-list-title"><i className="fa fa-trophy"></i><span className="spacing"></span>My Rewards</h3>
+                        {this.state.user.rewards && this.state.user.rewards.length > 0
+                        ?   <ul className="profile-item-list">
+                            {this.state.user.rewards.map(function(reward, index) {
+                                return (
+                                    <li key={index} className="profile-item">
+                                        <h4 ><Link to={"/rewards/"+ (reward._id)}>{reward.name}</Link></h4>
+                                        <label className="form-label">Date</label>
+                                        <p>{reward.date}</p>
+                                        <label className="form-label">Summary</label>
+                                        <p>{reward.summary}</p>
+                                        <label className="form-label">Date</label>
+                                        <p>{reward.points}</p>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                        :    <p>You haven't redeem any rewards yet!</p>
+                }
+
+                    </div>
+                    <div className="col-xs-12 col-sm-4">
+                        <h3 className="profile-item-list-title"><i className="fa fa-th-list" aria-hidden="true"></i><span className="spacing"></span>My history</h3>
+                        {this.state.user.history && this.state.user.history.length > 0
+                        ?   <ul className="profile-item-list">
+                                {this.state.user.history.map(function(item, index) {
+                                    return(
+                                        <li key={index} className="profile-item">
+                                            <h4>{item.operation}</h4>
+                                            <label className="form-label">Date</label>
+                                            <p>{dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
+                                            <label className="form-label">Item</label>
+                                            <p>{item.name} {item.operation === 'Request' ? '- state: ' + item.state : ""} </p>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        : <p>You don't have any activity yet</p>
+                        }
+                    </div>
                 </div>
             </div>
         );

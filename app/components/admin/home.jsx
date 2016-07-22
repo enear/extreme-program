@@ -22,7 +22,7 @@ var Home = React.createClass({
         return {
             users: AdminStore.getUsers(),
             admin: AdminStore.getAdmin(),
-            newUsers: AdminStore.getNewUsers()
+            newUsers: []
         }
     },
 
@@ -35,11 +35,14 @@ var Home = React.createClass({
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-xs-12">
-                        <h3>
-                            Newest Users:
-                        </h3>
+                    <div className="col-xs-12 intro-message">
+                        <p>This is the <span className="orange">e.</span>near Extreme Program Admin Area.</p>
 
+                        <p>Here you can manage your <Link className="link" to="/goals">Goals</Link> and <Link className="link" to="/Rewards">Rewards</Link></p>
+
+                        <p>You can also change the uses permissions and their total points <Link className="link" to="/users">Here</Link></p>
+
+                        <p>Reply to their <Link to="/requests" className="link">Requests</Link> so that thei can earn their points or not, in case you reject that request</p>
                     </div>
                 </div>
             </div>

@@ -100,8 +100,8 @@ var RewardDetail = React.createClass({
                           Are you sure you want to delete this reward?
                       </div>
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
-                        <button type="button" className="btn btn-primary" onClick={this._deleteReward}>Accept</button>
+                        <button type="button" className="button" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
+                        <button type="button" className="button delete" onClick={this._deleteReward}>Accept</button>
                       </div>
                     </div>
                   </div>

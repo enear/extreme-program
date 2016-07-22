@@ -68,7 +68,7 @@ var RewardDetail = React.createClass({
                         <p>{this.state.reward.points}</p>
                         <button className="button submit" onClick={this._showConfirmationDialog}>Apply</button>
                         <div>
-                            <Link to="/rewards" className="btn btn-default">Back</Link>
+                            <Link to="/rewards" className="button">Back</Link>
                         </div>
                     </div>
                 </div>
@@ -87,9 +87,9 @@ var RewardDetail = React.createClass({
 
                       </div>
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
+                        <button type="button" className="button" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
                         {this._affordReward()
-                        ?   <button type="button" className="btn btn-primary" onClick={this._requestApplication}>Accept</button>
+                        ?   <button type="button" className="button submit" onClick={this._requestApplication}>Accept</button>
                         :   null
                         }
 

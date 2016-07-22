@@ -1,4 +1,14 @@
 #user-profile {
+
+    .profile-title {
+        margin-bottom: $gutter;
+    }
+
+    .info-section {
+        margin-bottom: $gutter;
+    }
+
+
     .change-password {
         display:none;
 
@@ -12,21 +22,23 @@
     }
 
 
-    .profile-title {
-        margin-bottom: $gutter;
-    }
 
     .points {
         color: $orange;
         font-weight: bold;
     }
 
-    .link {
-        color: $orange;
-        text-decoration: underline;
+    
 
-        &:hover {
-            font-weight: bold;
+    .profile-item-list-title {
+        margin-bottom: $spacing;
+    }
+
+    .profile-item {
+        margin-bottom: $spacing;
+
+        h4 {
+            margin-bottom: 5px;
         }
     }
 }
