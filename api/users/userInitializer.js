@@ -12,21 +12,21 @@ User.find({}, function(err, result) {
 function generateTestUsers() {
     var users = [
             {
-                username: "admin@test.com",
+                username: "Admin",
                 email: "admin@test.com",
                 role: "Admin",
                 totalPoints: 20,
                 password: bcrypt.hashSync("tester", bcrypt.genSaltSync(8), null)
             },
             {
-                username: "attributor@test.com",
+                username: "Attributor",
                 email: "attributor@test.com",
                 role: "Attributor",
                 totalPoints: 20,
                 password: bcrypt.hashSync("tester", bcrypt.genSaltSync(8), null)
             },
             {
-                username: "approver@test.com",
+                username: "Approver",
                 email: "approver@test.com",
                 role: "Approver",
                 totalPoints: 20,

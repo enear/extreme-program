@@ -23,6 +23,11 @@ body {
     .form-field {
         margin-bottom: $spacing;
     }
+
+    .error-message {
+        text-decoration: underline;
+        @include font-size(18px);
+    }
 }
 
 .signin {
@@ -33,8 +38,6 @@ body {
     .form-field {
         margin-bottom: $spacing;
     }
-
-
 }
 
 .intro-logo {

@@ -10,18 +10,18 @@ var changePassword = function(Model, user, options, callback){
 };
 
 var submitNewRequest = function(Model, user, options, callback) {
-    user.requests.push(options.newRequest);
+    user.requests.unshift(options.newRequest);
     options.newRequest.operation = "Request";
-    user.history.push(options.newRequest);
+    user.history.unshift(options.newRequest);
 
     user.save(callback);
 };
 
 var addReward = function(Model, user, options, callback) {
     if(_hasEnoughPoints(user, options.newReward.points)) {
-        user.rewards.push(options.newReward);
+        user.rewards.unshift(options.newReward);
         options.newReward.operation = "Reward";
-        user.history.push(options.newReward);
+        user.history.unshift(options.newReward);
         user.totalPoints -= options.newReward.points;
     }
 
@@ -38,11 +38,27 @@ var updatePoints = function(Model, user, options, callback) {
         }
     }
 
+    user.history.unshift({
+        operation: "Points",
+        description: "Points balance updated to " + user.totalPoints + " by " + options.admin.username,
+        date: new Date(),
+        points: user.totalPoints,
+        admin: options.admin
+    });
+
     user.save(callback);
 };
 
 var changeRole = function(Model, user, options, callback) {
+    var previousRole = user.role;
+
     user.role = options.role;
+    user.history.unshift({
+        operation: "Role",
+        description: "Role changed from " + previousRole + " to " + user.role + " by " + options.admin.username,
+        date: new Date(),
+        admin: options.admin
+    });
 
     user.save(callback);
 };

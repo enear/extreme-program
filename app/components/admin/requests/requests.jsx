@@ -2,6 +2,7 @@ var React = require('react');
 var AdminStore = require('../../../stores/AdminStore');
 var AdminActions = require('../../../actions/adminActions');
 var Link = require('react-router').Link;
+var dateFormat = require('dateformat');
 
 var Requests = React.createClass({
     contextTypes: {
@@ -50,10 +51,12 @@ var Requests = React.createClass({
                         ?   <ul className="requests-list">
                                 {this.state.requests.map(function(request, index){
                                     var link = '/requests/' + request.id;
+                                    console.log(request);
                                     return (
                                         <li className="requests-list-item" key={index}>
                                             <Link onClick={that._setRequest(request)} activeClassName="active" to={link}>
                                                 <p className="request-item-user">{request.userName}</p>
+                                                <p className="request-item-date">{dateFormat(request.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
                                                 <p className="request-item-name">{request.name}</p>
                                                 <p className="request-comment">{request.comment}</p>
                                             </Link>

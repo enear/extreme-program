@@ -38,7 +38,8 @@
             font-weight: bold;
         }
 
-        .request-item-name {
+        .request-item-name,
+        .request-item-date {
             @include font-size(14px);
         }
 

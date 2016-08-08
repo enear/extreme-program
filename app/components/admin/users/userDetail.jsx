@@ -45,6 +45,7 @@ var UserDetail = React.createClass({
 
             AdminActions.updateUser({
                 role: user.role,
+                admin: this.state.admin,
                 url: '/api/users/' + user._id,
                 action: 'changeRole'
             });
@@ -73,6 +74,7 @@ var UserDetail = React.createClass({
 
             AdminActions.updateUser({
                 points: points,
+                admin: this.state.admin,
                 url: '/api/users/' + user._id,
                 action: 'updatePoints'
             });
@@ -80,6 +82,7 @@ var UserDetail = React.createClass({
         }.bind(this);
     },
     render: function() {
+        console.log(this.state);
         return (
                 <div className="col-xs-12" id="user-detail">
                     <h4><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.user.email}</h4>
@@ -105,8 +108,8 @@ var UserDetail = React.createClass({
                             {this.state.user.history.map(function(item, index) {
                                 return(
                                     <li className="user-detail-history-item" key={index}>
-                                        <h4 className="user-history-item-title">{item.operation} - {dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</h4>
-                                        <p>{item.name} {item.operation === 'Request' ? '- state: ' + item.state : ""} </p>
+                                        <h4 className="user-history-item-title">{dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</h4>
+                                        <p>{item.description} </p>
                                     </li>
                                 )
                             })}

@@ -31,7 +31,7 @@ var Home = React.createClass({
             <div className="container-fluid admin-content">
                 <div className="row">
                     <div className="col-xs-12">
-                        <h3 className="underline">Welcome {this.state.admin.email}</h3>
+                        <h3 className="underline">Welcome {this.state.admin.username}</h3>
                     </div>
                 </div>
                 <div className="row">

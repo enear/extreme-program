@@ -2,7 +2,7 @@ var React = require('react');
 var AdminStore = require('../../../stores/AdminStore');
 var AdminActions = require('../../../actions/adminActions');
 var Link = require('react-router').Link;
-
+var dateFormat = require('dateformat');
 
 var RequestDetail = React.createClass({
     contextTypes: {
@@ -74,6 +74,8 @@ var RequestDetail = React.createClass({
         return (
             <div className="col-xs-12" id="request-detail">
                 <h4><i className="fa fa-exchange"></i><span className="spacing"></span>{this.state.request.name}</h4>
+                <label className="form-label">Date</label>
+                <p>{dateFormat(this.state.request.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
                 <label className="form-label">Summary</label>
                 <p>{this.state.request.summary}</p>
                 <label className="form-label">Comment</label>

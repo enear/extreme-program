@@ -37,7 +37,6 @@ var RewardDetail = React.createClass({
                 newReward: this.state.reward,
                 action: 'addReward'
             });
-
         }
     },
     _hideConfirmationDialog: function() {

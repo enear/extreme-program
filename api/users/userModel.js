@@ -10,7 +10,8 @@ var userSchema = new mongoose.Schema({
     requests: {type: Array, default: []},
     totalPoints: {type: Number, default: 0, required: true},
     history: {type:Array, default: []},
-    rewards: {type:Array, default: []}
+    rewards: {type:Array, default: []},
+    goals: {type:Array, default: []}
 });
 
 userSchema.methods = {

@@ -2,6 +2,10 @@
 
     .profile-title {
         margin-bottom: $gutter;
+
+        .profile-title-email {
+            @include font-size(14px);
+        }
     }
 
     .info-section {
@@ -21,21 +25,19 @@
         }
     }
 
-
-
     .points {
         color: $orange;
         font-weight: bold;
     }
 
-    
+
 
     .profile-item-list-title {
         margin-bottom: $spacing;
     }
 
     .profile-item {
-        margin-bottom: $spacing;
+        margin-bottom: $column;
 
         h4 {
             margin-bottom: 5px;

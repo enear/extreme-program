@@ -20,6 +20,8 @@ module.exports = function(passport, User) {
     },
     function(req, email, password, done){
         process.nextTick(function(){
+            console.log("inside passport");
+            console.log(req.body);
             User.findOne({'email': email}, function(err, user) {
                 if(err){
                     return done(err);
@@ -31,7 +33,7 @@ module.exports = function(passport, User) {
                 else {
 
                     var newUser = new User({
-                        username: email,
+                        username: req.body.username,
                         email: email,
                         points: 0,
                         role: "Standard"
@@ -64,7 +66,7 @@ module.exports = function(passport, User) {
                 return done(err);
 
             if (!user)
-                return done(null, false, {message: "User/Password incorrect!"});
+                return done(null, false, {message: "User not found! Please Register first!"});
 
             if (!user.validPassword(password))
                 return done(null, false, {message: "User/Password incorrect!"});
