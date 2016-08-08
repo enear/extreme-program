@@ -5,3 +5,4 @@ config.js
 /app/public/css
 /app/public/js
 npm-debug.log
+/.idea
