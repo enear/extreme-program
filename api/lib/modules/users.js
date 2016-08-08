@@ -72,6 +72,7 @@ var changeRequestState = function(Model, user, options, callback) {
         update.totalPoints = user.totalPoints + options.request.points;
     }
 
+    //TODO: change the state of the request and considering its type, push it into the correct collection.
     Model.findOneAndUpdate({_id: mongo.ObjectID(user._id), 'requests.id': options.request.id}, {
         '$set': update,
         '$push': {'history': options.request}

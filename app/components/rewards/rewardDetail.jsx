@@ -32,10 +32,22 @@ var RewardDetail = React.createClass({
     },
     _requestApplication: function() {
         if(this._affordReward()){
+          var date = new Date();
+
             RewardsActions.sendReward({
                 user: this.state.user,
                 newReward: this.state.reward,
-                action: 'addReward'
+                action: 'submitNewRequest',
+                newRequest: {
+                  type: "Reward",
+                  name: this.state.reward.name,
+                  summary: this.state.reward.summary,
+                  description: "Applied for a Reward - " + this.state.reward.name,
+                  date: date,
+                  id: date.getTime(),
+                  state: "Pending",
+                  subject: this.state.reward
+                }
             });
         }
     },
@@ -80,7 +92,7 @@ var RewardDetail = React.createClass({
                       </div>
                       <div className="modal-body">
                           {this._affordReward()
-                          ?   <p>Are you sure you want to get this reward? {this.state.reward.points} will be removed from your points balance</p>
+                          ?   <p>Are you sure you want to apply for this reward? Your request will be revised </p>
                           :   <p>You can't afford this reward!</p>
                           }
 

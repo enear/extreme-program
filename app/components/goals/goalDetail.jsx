@@ -33,13 +33,16 @@ var GoalDetail = React.createClass({
             user: this.state.user,
             action: 'submitNewRequest',
             newRequest: {
+                type: "Goal",
                 name: this.state.goal.name,
                 points: this.state.goal.points,
                 summary: this.state.goal.summary,
+                description: "Applied for a Goal - " + this.state.goal.name ,
                 comment: this.state.comment,
                 date: date,
                 id: date.getTime(),
-                state: "Pending"
+                state: "Pending",
+                subject: this.state.goal
             }
         };
 

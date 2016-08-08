@@ -97,13 +97,15 @@ var Profile = React.createClass({
                             {this.state.user.requests.map(function(request, index) {
                                 return (
                                     <li key={index} className="profile-item">
-                                        <h4><Link to={"/goals/" + (request._id)}></Link> {request.name}</h4>
+                                        <h4><Link to={"/" + (request.type) + "s/" + (request.subject._id)}>{request.name}</Link></h4>
                                         <label className="form-label">Date</label>
                                         <p>{dateFormat(request.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
+                                        <label className="form-label">Type</label>
+                                        <p>{request.type}</p>
                                         <label className="form-label">Summary</label>
                                         <p>{request.summary}</p>
-                                        <label className="form-label">Comment</label>
-                                        <p>{request.comment}</p>
+                                        <label className="form-label">State</label>
+                                        <p>{request.state}</p>
                                     </li>
                                 )
                             })}
@@ -142,11 +144,10 @@ var Profile = React.createClass({
                                 {this.state.user.history.map(function(item, index) {
                                     return(
                                         <li key={index} className="profile-item">
-                                            <h4>{item.operation}</h4>
-                                            <label className="form-label">Date</label>
-                                            <p>{dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
-                                            <label className="form-label">Item</label>
-                                            <p>{item.name} {item.operation === 'Request' ? '- state: ' + item.state : ""} </p>
+                                            <h4>{dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</h4>
+                                            <label className="form-label">Description</label>
+                                            <p>{item.description}</p>
+
                                         </li>
                                     )
                                 })}
