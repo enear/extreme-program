@@ -163,6 +163,22 @@ var AdminActions = {
             });
         });
     },
+    getSettings: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.ADMIN_GET_SETTINGS,
+                settings: data
+            });
+        });
+    },
+    updateSettings: function(settings) {
+        $.post('/api/settings', settings, function(data) {
+           AppDispatcher.handleAction({
+               actionType: constants.ADMIN_UPDATE_SETTINGS,
+               settings: data
+           }) ;
+        });
+    },
     setRequest: function(payload) {
         AppDispatcher.handleAction({
             actionType: constants.ADMIN_GET_REQUEST,

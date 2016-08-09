@@ -20,6 +20,14 @@ var GoalsActions = {
             });
         });
     },
+    getMaxPoints: function(url) {
+        $.getJSON(url, function(data) {
+            AppDispatcher.handleAction({
+                actionType: constants.GET_MAX_POINTS,
+                maxPoints: data.maxUserPoints
+            });
+        });
+    },
     sendRequest: function(request) {
         $.post("/api/users/" + request.user._id, request, function(data) {
             AppDispatcher.handleAction({

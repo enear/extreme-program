@@ -23,6 +23,9 @@ var Admin = React.createClass({
             AdminActions.getRoles('/api/roles');
         }
 
+        if(Object.keys(this.state.settings).length === 0) {
+            AdminActions.getSettings('/api/settings');
+        }
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
@@ -33,7 +36,8 @@ var Admin = React.createClass({
             admin: AdminStore.getAdmin(),
             users: AdminStore.getUsers(),
             roles: AdminStore.getRoles(),
-            requests: AdminStore.getNewRequests()
+            requests: AdminStore.getNewRequests(),
+            settings: AdminStore.getSettings()
         }
     },
     _onChange: function() {
@@ -80,7 +84,10 @@ var Admin = React.createClass({
                         ?   <li><Link activeClassName="active" to="/goals"><i className="fa fa-star" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Goals</span></Link></li>
                         :   null
                         }
-
+                        {this._hasPermission(this._userPermissions.Admin)
+                        ? <li><Link activeClassName="active" to="/settings"><i className="fa fa-wrench" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Settings</span></Link></li>
+                        :   null
+                        }
                         <li><Link activeClassName="active" to="/requests"><i className="fa fa-exchange" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Requests</span> {this.state.requests.length > 0 ? <span className="pull-right request-notification">{this.state.requests.length}</span> : ""}</Link></li>
                         <li className="logout"><a href="/logout"><i className="fa fa-sign-out" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span> Sign Out</span></a></li>
                     </ul>

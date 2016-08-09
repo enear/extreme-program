@@ -13,7 +13,8 @@ var _users = [],
     _admin = {},
     _reward = {},
     _goal = {},
-    _request = {};
+    _request = {},
+    _settings = {};
 
 var AdminStore = _.extend({}, EventEmitter.prototype, {
     getAdmin: function() {
@@ -60,6 +61,9 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
     },
     getRequestStates: function() {
         return _requestStates;
+    },
+    getSettings: function() {
+        return _settings;
     },
     getNewUsers: function() {
         var users = [],
@@ -162,6 +166,11 @@ AppDispatcher.register(function(payload) {
             break;
         case constants.ADMIN_GET_REQUESTSTATES:
             _requestStates = action.requestStates;
+            AdminStore.emit('change');
+            break;
+        case constants.ADMIN_GET_SETTINGS:
+        case constants.ADMIN_UPDATE_SETTINGS:
+            _settings = action.settings;
             AdminStore.emit('change');
             break;
         case constants.ADMIN_GET_REQUEST:

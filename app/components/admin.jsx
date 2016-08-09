@@ -15,6 +15,7 @@ var GoalDetailManagement = require('./admin/goals/goalDetail.jsx');
 var NewGoal = require('./admin/goals/newGoal.jsx');
 var Requests = require('./admin/requests/requests.jsx');
 var RequestDetail = require('./admin/requests/requestDetail.jsx');
+var Settings = require('./admin/settings/settings.jsx');
 var Home = require('./admin/home.jsx');
 
 
@@ -38,6 +39,7 @@ var Admin = React.createClass({
                         <Route path="/requests" component={Requests} >
                             <Route path="/requests/:id" component={RequestDetail} />
                         </Route>
+                        <Route path="/settings" component={Settings} />
                     </Route>
                 </Router>
             </div>

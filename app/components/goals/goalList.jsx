@@ -11,6 +11,7 @@ var GoalList = React.createClass({
     componentWillMount: function() {
         GoalsActions.getGoals('/api/goals');
         GoalsStore.addChangeListener(this._onChange);
+
     },
     componentWillUnmount: function() {
         GoalsStore.removeChangeListener(this._onChange);

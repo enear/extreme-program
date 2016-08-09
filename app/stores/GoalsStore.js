@@ -6,7 +6,8 @@ var _ = require('underscore');
 
 var _goals = [],
     _goal = {},
-    _user = {};
+    _user = {},
+    _maxPoints;
 
 var GoalsStore = _.extend({}, EventEmitter.prototype, {
     getGoals: function() {
@@ -26,6 +27,9 @@ var GoalsStore = _.extend({}, EventEmitter.prototype, {
         });
 
         return obj;
+    },
+    getMaxPoints: function() {
+        return _maxPoints;
     },
     getUser: function(){
         return _user;
@@ -56,6 +60,10 @@ AppDispatcher.register(function(payload) {
             break;
         case constants.SEND_REQUEST:
             _user = action.data;
+            GoalsStore.emit('change');
+            break;
+        case constants.GET_MAX_POINTS:
+            _maxPoints = action.maxPoints;
             GoalsStore.emit('change');
             break;
         default:

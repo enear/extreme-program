@@ -3,6 +3,7 @@ var keyMirror = require('key-mirror');
 module.exports = keyMirror({
     GET_GOALS: null,
     GET_GOAL: null,
+    GET_MAX_POINTS: null,
     GET_REWARDS: null,
     GET_REWARD: null,
     GET_USER: null,
@@ -25,5 +26,7 @@ module.exports = keyMirror({
     ADMIN_UPDATE_GOAL: null,
     ADMIN_DELETE_GOAL: null,
     ADMIN_GET_REQUESTSTATES: null,
-    ADMIN_GET_REQUEST: null
+    ADMIN_GET_REQUEST: null,
+    ADMIN_GET_SETTINGS: null,
+    ADMIN_UPDATE_SETTINGS: null
 });

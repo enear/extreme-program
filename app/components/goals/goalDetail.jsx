@@ -13,12 +13,19 @@ var GoalDetail = React.createClass({
     getInitialState: function() {
         return {
             goal: GoalsStore.getGoalById(this.props.params.id),
-            user: GoalsStore.getUser()
+            user: GoalsStore.getUser(),
+            maxPoints: GoalsStore.getMaxPoints(),
+            warning: false
         };
     },
     componentWillMount: function() {
         if(Object.keys(this.state.goal).length === 0) {
             GoalsActions.getGoal('/api/goals/' + this.props.params.id);
+        }
+
+        if(typeof this.state.maxPoints === 'undefined') {
+            console.log("toasty");
+            GoalsActions.getMaxPoints('/api/settings');
         }
         GoalsStore.addChangeListener(this._onChange);
     },
@@ -27,29 +34,40 @@ var GoalDetail = React.createClass({
     },
     handleSubmit: function(e) {
         e.preventDefault();
-        var date = new Date();
 
-        var request = {
-            user: this.state.user,
-            action: 'submitNewRequest',
-            newRequest: {
-                type: "Goal",
-                collection: 'goals',
-                name: this.state.goal.name,
-                points: this.state.goal.points,
-                summary: this.state.goal.summary,
-                description: "Applied for a Goal - " + this.state.goal.name ,
-                comment: this.state.comment,
-                date: date,
-                id: date.getTime(),
-                state: "Pending",
-                subject: this.state.goal
-            }
-        };
+        if(this._allowedToRequest()) {
+            var date = new Date();
 
-        GoalsActions.sendRequest(request);
+            var request = {
+                user: this.state.user,
+                action: 'submitNewRequest',
+                newRequest: {
+                    type: "Goal",
+                    collection: 'goals',
+                    name: this.state.goal.name,
+                    points: this.state.goal.points,
+                    summary: this.state.goal.summary,
+                    description: "Applied for a Goal - " + this.state.goal.name ,
+                    comment: this.state.comment,
+                    date: date,
+                    id: date.getTime(),
+                    state: "Pending",
+                    subject: this.state.goal
+                }
+            };
 
-        this.context.router.push('/goals');
+            GoalsActions.sendRequest(request);
+
+            this.context.router.push('/goals');
+        }
+        else {
+            this.setState( {
+                warning: true
+            })
+        }
+    },
+    _allowedToRequest: function() {
+      return this.state.user.totalPoints + this.state.goal.points < this.state.maxPoints;
     },
     _onChange: function() {
         this.setState(
@@ -59,7 +77,9 @@ var GoalDetail = React.createClass({
     _getState: function() {
         return {
             goal: GoalsStore.getGoal(),
-            user: GoalsStore.getUser()
+            user: GoalsStore.getUser(),
+            maxPoints: GoalsStore.getMaxPoints(),
+            warning: false
         }
     },
     _handleBlur: function() {
@@ -88,6 +108,23 @@ var GoalDetail = React.createClass({
                         </form>
                         <div>
                             <Link to="/goals" className="button">Back</Link>
+                        </div>
+                    </div>
+                </div>
+                <div id="confirmation" className={this.state.warning ? "modal show" : "modal"}>
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <Link type="button" className="close" data-dismiss="modal" aria-hidden="true" to="/">&times;</Link>
+                                <h4 className="modal-title">Confirmation</h4>
+                            </div>
+                            <div className="modal-body">
+                                You've reached the maximum points allowed per user. Please redeem some rewards first or contact an admin. <br />
+                                Thank you
+                            </div>
+                            <div className="modal-footer">
+                                <Link type="button" className="button" data-dismiss="modal" to="/">Close</Link>
+                            </div>
                         </div>
                     </div>
                 </div>
