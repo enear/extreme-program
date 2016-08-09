@@ -34,6 +34,7 @@ var GoalDetail = React.createClass({
             action: 'submitNewRequest',
             newRequest: {
                 type: "Goal",
+                collection: 'goals',
                 name: this.state.goal.name,
                 points: this.state.goal.points,
                 summary: this.state.goal.summary,
@@ -48,7 +49,7 @@ var GoalDetail = React.createClass({
 
         GoalsActions.sendRequest(request);
 
-        this.context.router.push('/');
+        this.context.router.push('/goals');
     },
     _onChange: function() {
         this.setState(

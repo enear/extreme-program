@@ -30,7 +30,6 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/:id', function(req, res){
-    console.log(req.body);
     User.findOne({'_id': req.params.id}, function(err, result) {
         lib.users[req.body.action](User, result, req.body, function(err, result) {
             res.json(err || result);

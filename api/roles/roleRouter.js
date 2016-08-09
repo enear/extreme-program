@@ -1,6 +1,5 @@
 var router = require('express').Router();
 var Role = require('./roleModel');
-var lib = require('../lib/lib');
 
 router.get('/', function(req, res) {
     Role.find({}, function(err, result) {

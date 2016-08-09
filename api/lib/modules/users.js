@@ -65,20 +65,48 @@ var changeRole = function(Model, user, options, callback) {
 
 var changeRequestState = function(Model, user, options, callback) {
     var update = {
-        'requests.$.state': options.request.state
-    };
+            'requests.$.state': options.request.state
+        },
+        pushQuery = {
+        },
+        historyItem = {
+            operation: 'Request State',
+            date: new Date(),
+            admin: options.admin,
+            description: ''
+        };
+
 
     if(options.request.state === 'Approved'){
-        update.totalPoints = user.totalPoints + options.request.points;
+        pushQuery[options.request.collection] = {
+            $each: [options.request.subject],
+            $position: 0
+        };
+
+        if(options.request.type === 'Goal'){
+           update.totalPoints = parseInt(user.totalPoints) + parseInt(options.request.subject.points);
+       }
+        if (options.request.type === 'Reward') {
+            update.totalPoints = parseInt(user.totalPoints) - parseInt(options.request.subject.points);
+        }
+
+        historyItem.description = "'" + options.request.subject.name + "' was approved by " + options.admin.username + " and the total points balance was updated from " +
+          user.totalPoints + " to " + update.totalPoints + ". '" + options.request.subject.name + "' added to the user " + options.request.collection;
+    }
+    else {
+        historyItem.description = "'" + options.request.subject.name + "' was rejected by " + options.admin.username;
     }
 
-    //TODO: change the state of the request and considering its type, push it into the correct collection.
+    pushQuery['history'] = {
+        $each: [historyItem],
+        $position: 0
+    };
+
     Model.findOneAndUpdate({_id: mongo.ObjectID(user._id), 'requests.id': options.request.id}, {
         '$set': update,
-        '$push': {'history': options.request}
+        '$push': pushQuery
+
     }, callback );
-
-
 };
 
 var _hasEnoughPoints = function(user, points) {

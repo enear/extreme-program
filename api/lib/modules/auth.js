@@ -20,8 +20,6 @@ module.exports = function(passport, User) {
     },
     function(req, email, password, done){
         process.nextTick(function(){
-            console.log("inside passport");
-            console.log(req.body);
             User.findOne({'email': email}, function(err, user) {
                 if(err){
                     return done(err);

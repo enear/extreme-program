@@ -82,7 +82,6 @@ var UserDetail = React.createClass({
         }.bind(this);
     },
     render: function() {
-        console.log(this.state);
         return (
                 <div className="col-xs-12" id="user-detail">
                     <h4><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.user.email}</h4>

@@ -5,6 +5,9 @@ var Link = require('react-router').Link;
 
 
 var RewardDetail = React.createClass({
+    contextTypes: {
+      router: React.PropTypes.object.isRequired
+    },
     getInitialState: function () {
         return this._getState();
     },
@@ -40,6 +43,7 @@ var RewardDetail = React.createClass({
                 action: 'submitNewRequest',
                 newRequest: {
                   type: "Reward",
+                  collection: 'rewards',
                   name: this.state.reward.name,
                   summary: this.state.reward.summary,
                   description: "Applied for a Reward - " + this.state.reward.name,
@@ -49,6 +53,9 @@ var RewardDetail = React.createClass({
                   subject: this.state.reward
                 }
             });
+
+          this.context.router.push('/rewards');
+
         }
     },
     _hideConfirmationDialog: function() {

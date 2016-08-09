@@ -34,6 +34,7 @@ var RequestDetail = React.createClass({
             users: AdminStore.getUsers(),
             request: AdminStore.getRequest(),
             requestStates: AdminStore.getRequestStates(),
+            admin: AdminStore.getAdmin(),
             confirmation: false
         };
     },
@@ -64,6 +65,7 @@ var RequestDetail = React.createClass({
     _updateRequest: function() {
         AdminActions.updateUser({
             request: this.state.request,
+            admin: this.state.admin,
             url: '/api/users/' + this.state.request.user,
             action: 'changeRequestState'
         });

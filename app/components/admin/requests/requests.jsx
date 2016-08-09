@@ -57,10 +57,6 @@ var Requests = React.createClass({
                                                 <p className="request-item-user">{request.userName}</p>
                                                 <p className="request-item-date">{dateFormat(request.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
                                                 <p className="request-item-name">{request.type} - {request.name}</p>
-                                                {request.comment
-                                                ?   <p className="request-comment">{request.comment}</p>
-                                                :   null
-                                                }
                                             </Link>
                                         </li>
                                     )
