@@ -78,17 +78,24 @@ var RequestDetail = React.createClass({
                 <p>{dateFormat(this.state.request.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
                 <label className="form-label">Summary</label>
                 <p>{this.state.request.summary}</p>
-                <label className="form-label">Comment</label>
-                <p>{this.state.request.comment}</p>
+                {this.state.request.comment
+                ?   <div>
+                        <label className="form-label">Comment</label>
+                        <p>{this.state.request.comment}</p>
+                    </div>
+                : null
+                }
+
+
                 <label className="form-label">State</label>
                 {this.state.requestStates && this.state.requestStates.length > 0
-                    ?   <select id="state" className="form-field" onChange={this._handleStateChange()} name="state" value={this.state.request.state}>
-                    {this.state.requestStates.map(function(state, index) {
-                        return (
-                            <option key={index}>{state.state}</option>
-                        )
-                    })}
-                </select>
+                ?   <select id="state" className="form-field" onChange={this._handleStateChange()} name="state" value={this.state.request.state}>
+                        {this.state.requestStates.map(function(state, index) {
+                            return (
+                                <option key={index}>{state.state}</option>
+                            )
+                        })}
+                    </select>
                 :   null
             }
             <div>
