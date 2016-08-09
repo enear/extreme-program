@@ -14,6 +14,7 @@ var express = require('express'),
   rewards = require('./api/rewards/rewardRouter'),
   goals = require('./api/goals/goalRouter'),
   requestStates = require('./api/requestsStates/requestStateRouter'),
+  settings = require('./api/settings/settingsRouter'),
 
   index = require('./routes/index'),
   admin = require('./routes/admin'),
@@ -29,6 +30,7 @@ require('./api/roles/roleInitializer');
 require('./api/rewards/rewardInitializer');
 require('./api/goals/goalInitializer');
 require('./api/requestsStates/requestsStatesInitializer');
+require('./api/settings/settingsInitializer');
 
 require('./api/lib/lib').auth(passport, UserModel);
 
@@ -63,9 +65,11 @@ app.use('/api/roles', roles);
 app.use('/api/rewards', rewards);
 app.use('/api/goals', goals);
 app.use('/api/requeststates', requestStates);
+app.use('/api/settings', settings);
 app.use('/admin', admin);
 app.use('/login', require('./routes/login')(passport));
 app.use('/signin', require('./routes/signin')(passport, UserModel));
+
 
 app.listen(process.env.PORT_NUMBER, function () {
   console.log("listening to " + process.env.PORT_NUMBER);
