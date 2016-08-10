@@ -29,7 +29,8 @@ var GoalsActions = {
         });
     },
     sendRequest: function(request) {
-        $.post("/api/users/" + request.user._id, request, function(data) {
+        console.log(request);
+        $.post("/api/users/" + request.userID, request, function(data) {
             AppDispatcher.handleAction({
                 actionType: constants.SEND_REQUEST,
                 data: data

@@ -25,7 +25,7 @@ var Settings = React.createClass( {
   _onChange: function() {
     this.setState(
       this._getState()
-    )
+    );
   },
   _getState: function() {
     return {
@@ -43,9 +43,24 @@ var Settings = React.createClass( {
       })
     }.bind(this);
   },
+  _handleBlur: function() {
+    return function(e) {
+      var settings = this.state.settings;
+
+      settings[e.target.name] = e.target.value < 0 ? 0 : e.target.value || 0;
+
+      this.setState({
+        settings: settings
+      })
+    }.bind(this);
+  },
   _handleSubmit: function(e) {
     e.preventDefault();
     AdminActions.updateSettings(this.state.settings);
+    this.context.router.push('/');
+  },
+  _resetValues: function() {
+    AdminActions.getSettings('/api/settings');
     this.context.router.push('/');
   },
   render: function() {
@@ -57,13 +72,13 @@ var Settings = React.createClass( {
             <label htmlFor="maxUserPoints" className="form-label">
               Maximum points per user
             </label>
-            <input className="form-field" id="maxUserPoints" type="number" value={this.state.settings.maxUserPoints} onChange={this._handleChange()} name="maxUserPoints" />
+            <input className="form-field" id="maxUserPoints" type="number" value={this.state.settings.maxUserPoints} onBlur={this._handleBlur()} onChange={this._handleChange()} name="maxUserPoints" />
             <label htmlFor="maxApprovePoints" className="form-label">
               Maximum points to approve
             </label>
-            <input className="form-field" id="maxApprovePoints" type="number" value={this.state.settings.maxApprovePoints} onChange={this._handleChange()} name="maxApprovePoints" />
+            <input className="form-field" id="maxApprovePoints" type="number" value={this.state.settings.maxApprovePoints} onBlur={this._handleBlur()} onChange={this._handleChange()} name="maxApprovePoints" />
             <div>
-              <Link to="/" className="button"> Cancel</Link>
+              <button type="button" className="button" onClick={this._resetValues}> Cancel</button>
               <input type="submit" className="button submit pull-right" value="Save" />
             </div>
           </form>

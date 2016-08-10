@@ -20,7 +20,7 @@ var RewardActions = {
         });
     },
     sendReward: function(request) {
-        $.post('/api/users/' + request.user._id, request, function(data) {
+        $.post('/api/users/' + request.userID, request, function(data) {
             AppDispatcher.handleAction({
                 actionType: constants.SEND_REWARD,
                 data: data

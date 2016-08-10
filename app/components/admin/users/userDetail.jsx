@@ -25,7 +25,10 @@ var UserDetail = React.createClass({
         return {
             admin: AdminStore.getAdmin(),
             user: AdminStore.getUser(),
-            roles: AdminStore.getRoles()
+            roles: AdminStore.getRoles(),
+            settings: AdminStore.getSettings(),
+            pointsWarning: false,
+            userPoints: AdminStore.getUser().totalPoints
         }
     },
     _onChange: function() {
@@ -54,39 +57,51 @@ var UserDetail = React.createClass({
     },
     _handlePointsUpdate: function(e) {
         return function(e) {
-            var user = this.state.user,
-                points = e.target.value ;
-
-            user.totalPoints = points;
-
             this.setState({
-                user: user
+            userPoints: parseInt(e.target.value)
             });
-
         }.bind(this);
     },
     _handleOnBlur: function(e) {
         return function(e) {
-            var user = this.state.user,
-                points = e.target.value || 0;
+            var points = parseInt(e.target.value) || 0;
 
-            user.totalPoints = points;
-
-            AdminActions.updateUser({
-                points: points,
-                admin: this.state.admin,
-                url: '/api/users/' + user._id,
-                action: 'updatePoints'
-            });
+            if(!this._pointsExceeded(points) && !this.props.isAdmin || this.props.isAdmin) {
+                if(points >= 0) {
+                    AdminActions.updateUser({
+                        points: points,
+                        admin: this.state.admin,
+                        url: '/api/users/' + this.state.user._id,
+                        action: 'updatePoints'
+                    });
+                }
+            }
+            else {
+                this._showWarning();
+            }
 
         }.bind(this);
+    },
+    _hideWarningDialog: function() {
+        this.setState({
+            pointsWarning: false,
+            userPoints: this.state.user.totalPoints
+        })
+    },
+    _pointsExceeded: function(points) {
+        return Math.abs(this.state.user.totalPoints - points) > this.state.settings.maxApprovePoints;
+    },
+    _showWarning: function() {
+        this.setState( {
+            pointsWarning: true
+        });
     },
     render: function() {
         return (
                 <div className="col-xs-12" id="user-detail">
                     <h4><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.user.email}</h4>
                     <label className="form-label" htmlFor="userDetailTotalPoints">Points:</label>
-                    <input type="number" name="totalPoints" id="userDetailTotalPoints" className="form-field" onBlur={this._handleOnBlur()} onChange={this._handlePointsUpdate()} value={this.state.user.totalPoints} />
+                    <input type="number" name="totalPoints" id="userDetailTotalPoints" className="form-field" onBlur={this._handleOnBlur()} onChange={this._handlePointsUpdate()} value={this.state.userPoints} />
                     {this.props.permissions.Admin.indexOf(this.state.admin.role) >= 0
                     ?   <div>
                             <label className="form-label" htmlFor="userDetailRole">Role:</label>
@@ -116,8 +131,25 @@ var UserDetail = React.createClass({
 
                     : <p>This user has no activity at the moment</p>
                     }
+
+                    <div id="confirmation" className={this.state.pointsWarning ? "modal show" : "modal"}>
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <button type="button" className="close" data-dismiss="modal" aria-hidden="true" onClick={this._hideWarningDialog}>&times;</button>
+                                    <h4 className="modal-title">Confirmation</h4>
+                                </div>
+                                <div className="modal-body">
+                                    You are not allowed to change more than {this.state.settings.maxApprovePoints} points
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="button" data-dismiss="modal" onClick={this._hideWarningDialog}>Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-        )
+            )
     }
 });
 

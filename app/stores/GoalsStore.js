@@ -26,6 +26,8 @@ var GoalsStore = _.extend({}, EventEmitter.prototype, {
             }
         });
 
+        _goal = obj;
+
         return obj;
     },
     getMaxPoints: function() {

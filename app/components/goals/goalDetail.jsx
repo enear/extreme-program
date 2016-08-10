@@ -24,7 +24,6 @@ var GoalDetail = React.createClass({
         }
 
         if(typeof this.state.maxPoints === 'undefined') {
-            console.log("toasty");
             GoalsActions.getMaxPoints('/api/settings');
         }
         GoalsStore.addChangeListener(this._onChange);
@@ -39,7 +38,7 @@ var GoalDetail = React.createClass({
             var date = new Date();
 
             var request = {
-                user: this.state.user,
+                userID: this.state.user._id,
                 action: 'submitNewRequest',
                 newRequest: {
                     type: "Goal",
@@ -55,6 +54,7 @@ var GoalDetail = React.createClass({
                     subject: this.state.goal
                 }
             };
+
 
             GoalsActions.sendRequest(request);
 

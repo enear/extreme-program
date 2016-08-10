@@ -38,7 +38,7 @@ var RewardDetail = React.createClass({
           var date = new Date();
 
             RewardsActions.sendReward({
-                user: this.state.user,
+                userID: this.state.user._id,
                 newReward: this.state.reward,
                 action: 'submitNewRequest',
                 newRequest: {

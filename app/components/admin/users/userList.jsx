@@ -10,6 +10,7 @@ UsersManagement = React.createClass({
     },
     componentWillMount: function() {
         this.props.checkPermission(this.props.permissions.Attributor);
+
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
@@ -55,7 +56,7 @@ UsersManagement = React.createClass({
                         }
                     </div>
                     <div className="col-xs-12 col-sm-8">
-                        {this.props.children && React.cloneElement(this.props.children, { permissions: this.props.permissions, checkPermission: this.props.checkPermission}) }
+                        {this.props.children && React.cloneElement(this.props.children, { permissions: this.props.permissions, checkPermission: this.props.checkPermission, isAdmin: this.props.isAdmin}) }
                     </div>
                 </div>
             </div>

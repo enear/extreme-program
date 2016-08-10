@@ -53,6 +53,9 @@ var Admin = React.createClass({
     _hasPermission: function(roles) {
         return roles.indexOf(this.state.admin.role) >= 0
     },
+    _isAdmin: function() {
+        return this._userPermissions.Admin.indexOf(this.state.admin.role) >= 0;
+    },
     checkPermission: function() {
         return function(permission) {
             if( permission.indexOf(this.state.admin.role) < 0)  {
@@ -93,7 +96,7 @@ var Admin = React.createClass({
                     </ul>
                 </div>
                 <div id="admin-content-container">
-                    {this.props.children && React.cloneElement(this.props.children, { permissions: this._userPermissions, checkPermission: this.checkPermission()}) }
+                    {this.props.children && React.cloneElement(this.props.children, { permissions: this._userPermissions, checkPermission: this.checkPermission(), isAdmin: this._isAdmin()}) }
                 </div>
             </div>
 
