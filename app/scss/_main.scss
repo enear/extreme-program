@@ -106,6 +106,10 @@ html, body {
 .form-label {
     width:100%;
     float: left;
+
+    &.error {
+        color: $red;
+    }
 }
 
 .error-message,
