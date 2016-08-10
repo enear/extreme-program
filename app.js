@@ -70,7 +70,25 @@ app.use('/admin', admin);
 app.use('/login', require('./routes/login')(passport));
 app.use('/signin', require('./routes/signin')(passport, UserModel));
 
+app.use(function(req, res, next){
+  res.status(404);
 
+  // respond with html page
+  if (req.accepts('html')) {
+    console.log(req.url);
+    res.render('404', { url: req.url });
+    return;
+  }
+
+  // respond with json
+  if (req.accepts('json')) {
+    res.send({ error: 'Not found' });
+    return;
+  }
+
+  // default to plain-text. send()
+  res.type('txt').send('Not found');
+});
 app.listen(process.env.PORT_NUMBER, function () {
   console.log("listening to " + process.env.PORT_NUMBER);
 });
