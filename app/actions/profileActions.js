@@ -11,11 +11,25 @@ var profileActions = {
             });
         });
     },
+    //TODO: Notice if password was changed successfully or not.
     changePassword: function(request) {
-        $.post('/api/users/' + request.user._id, request, function(data) {
+        $.post('/api/users/' + request.userID, request, function(data) {
+            var passwordState = '';
+
+            //This will always be true because the password is encrypted in the BE and it's being compared with the 'unencrypted' one in the FE.
+            if(data.password !== request.password && data.password !== request.newPassword) {
+                passwordState = 'Wrong Password!';
+            }
+
+            if(data.password === request.newPassword) {
+                passwordState = 'Password Changed with success!';
+            }
+
+
             AppDispatcher.handleAction({
                 actionType: constants.CHANGE_PASSWORD,
-                user: data
+                user: data,
+                passwordState: passwordState
             });
         });
     }

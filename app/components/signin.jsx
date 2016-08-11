@@ -9,7 +9,8 @@ var SignIn = React.createClass({
     getInitialState: function() {
         return {
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
+            errorMessage: ""
         };
     },
     componentWillMount: function() {
@@ -29,7 +30,27 @@ var SignIn = React.createClass({
         }
     },
     _validForm: function() {
-        return this.state.password.length >= 4 && this.state.confirmPassword.length >= 4 && this._matchingPasswords();
+        this.setState({
+            errorMEssage: ''
+        });
+
+        if(this.state.password === '' || this.state.confirmPassword === '') {
+            this.setState({
+              errorMessage: "All fields must be filled!"
+            });
+
+            return false;
+        }
+
+        if(!this._matchingPasswords()) {
+            this.setState({
+                errorMessage: "Passwords don't match!"
+            });
+
+            return false;
+        }
+
+        return true;
     },
     _matchingPasswords: function() {
         return this.state.password === this.state.confirmPassword;
@@ -52,6 +73,10 @@ var SignIn = React.createClass({
         return (
             <form  className="form-horizontal col-xs-12" action="/signin" method="POST" onSubmit={this.handleSubmit} >
                 <div className="form-group">
+                    {this.state.errorMessage !== ''
+                    ?   <label className="form-label error">{this.state.errorMessage}</label>
+                    :   null
+                    }
                     <label htmlFor="password" className="form-label">Password</label>
                     <input className="col-xs-12 col-sm-6 form-field"  type="password" id="password" name="password" onBlur={this._handleBlur('password')} />
                     <label htmlFor="confirmPassword" className="form-label">Confirm your password</label>

@@ -29,10 +29,12 @@ var Profile = React.createClass({
             oldPassword: '',
             newPassword: '',
             confirmPassword: '',
+            passwordState: ProfileStore.getPasswordState(),
+            errorMessage: '',
             changingPassword: false
         };
     },
-    _handleBlur: function() {
+    _handleChange: function() {
         return function(e) {
             var state = {};
             state[e.target.name] = e.target.value;
@@ -40,37 +42,71 @@ var Profile = React.createClass({
         }.bind(this);
     },
     _validForm: function() {
-        return this.state.newPassword === this.state.confirmPassword && this.state.oldPassword !== ''
-                && this.state.newPassword !== '' && this.state.confirmPassword !== '';
+        this.setState({
+          errorMessage: ''
+        });
+
+      if(this.state.oldPassword === '' || this.state.newPassword === '' || this.state.confirmPassword === '') {
+        this.setState({
+          errorMessage: 'Please fill all fields'
+        });
+
+        return false;
+      }
+
+      if(this.state.newPassword != this.state.confirmPassword) {
+        this.setState({
+          errorMessage: "Your new password and confirmation don't match!"
+        });
+
+        return false;
+      }
+
+      return true;
+
     },
     _handleSubmit: function(e) {
         e.preventDefault();
 
         if(this._validForm()) {
             ProfileActions.changePassword({
-                user: this.state.user,
+                userID: this.state.user._id,
                 action: "changePassword",
                 password: this.state.oldPassword,
                 newPassword: this.state.newPassword,
                 changingPassword: false
             });
+
+
         }
     },
     _togglePasswordChangeForm: function(show) {
         var that = this;
         return function() {
             that.setState({
-                changingPassword: true
+                changingPassword: show
             })
         }
-
+    },
+    _resetPasswordForm: function() {
+      this.setState({
+        oldPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+        errorMessage: ''
+      });
+    },
+    _cancelForm: function() {
+      (this._togglePasswordChangeForm(false))();
+      this._resetPasswordForm();
     },
     render: function() {
+      console.log(this.state);
         return (
             <div id="user-profile" className="container">
                 <div className="row" >
                     <div className="col-xs-12 info-section">
-                        <h3 className="profile-title"><i className="fa fa-user"></i><span className="spacing"></span> {this.state.user.username} <span className="profile-title-email">( {this.state.user.email} )</span></h3>
+                        <h3 className="profile-title"><i className="fa fa-user"></i><span className="spacing"></span> {this.state.user.username} <span className="profile-title-email">({this.state.user.email})</span></h3>
                         <p>You have <span className="points">{this.state.user.totalPoints}</span> points</p>
                         <p>Redeem them  <Link className="link" to="/rewards">here</Link></p>
                     </div>
@@ -80,12 +116,18 @@ var Profile = React.createClass({
                         <button id="change-password-button" onClick={this._togglePasswordChangeForm(true)} className={"button submit " + (this.state.changingPassword ? "hidden" : "")}>Change Your Password</button>
                     </div>
                     <form  className={"col-xs-12 change-password " + (this.state.changingPassword ? "show" : "")}  onSubmit={this._handleSubmit} >
+                        {this.state.errorMessage.length > 0
+                        ?   <label className="form-label error">{this.state.errorMessage}</label>
+                        :   null
+                        }
                         <label htmlFor="oldPassword" className="form-label">Old Password</label>
-                        <input className="form-field"  type="password" id="oldPassword" name="oldPassword" onBlur={this._handleBlur()} />
+                        <input className="form-field"  type="password" id="oldPassword" name="oldPassword" value={this.state.oldPassword} onChange={this._handleChange()} />
                         <label htmlFor="newPassword" className="form-label">New Password</label>
-                        <input className="form-field"  type="password" id="newPassword" name="newPassword" onBlur={this._handleBlur()} />
+                        <input className="form-field"  type="password" id="newPassword" name="newPassword" value={this.state.newPassword} onChange={this._handleChange()} />
                         <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                        <input className="form-field"  type="password" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur()} />
+                        <input className="form-field"  type="password" id="confirmPassword" name="confirmPassword" value={this.state.confirmPassword} onChange={this._handleChange()} />
+                        <button type="button" className="button" onClick={this._cancelForm}>Cancel</button>
+                        <span className="spacing hidden-xs"></span>
                         <input type="submit" className="button submit" value="Submit" />
                     </form>
                 </div>

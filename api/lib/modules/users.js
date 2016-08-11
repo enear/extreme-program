@@ -4,7 +4,14 @@ var mongo = require('mongodb');
 var changePassword = function(Model, user, options, callback){
     if(user.validPassword(options.password)) {
         user.password = user.generateHash(options.newPassword);
+
+        user.history.unshift({
+            operation: "Password",
+            description: "Changed Password",
+            date: new Date()
+        });
     }
+
 
     user.save(callback);
 };

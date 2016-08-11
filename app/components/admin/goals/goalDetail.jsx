@@ -13,9 +13,8 @@ var GoalDetail = React.createClass({
     componentWillMount: function() {
         this.props.checkPermission(this.props.permissions.Admin);
 
-        if(Object.keys(this.state.goal).length === 0  || this.state.goal._id !== this.props.params.id) {
-            AdminActions.getGoal('/api/goals/' + this.props.params.id);
-        }
+        AdminActions.getGoal('/api/goals/' + this.props.params.id);
+
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function(){
@@ -29,7 +28,8 @@ var GoalDetail = React.createClass({
     _getState: function() {
         return {
             goal: AdminStore.getGoal(),
-            deleteMode: false
+            deleteMode: false,
+            errorMessage: ''
         }
     },
     _handleChange: function() {
@@ -43,10 +43,28 @@ var GoalDetail = React.createClass({
             })
         }.bind(this);
     },
+    _validForm: function() {
+      this.setState({
+        errorMessage: ''
+      });
+
+      if(this.state.goal.name === '' || this.state.goal.summary === '' || this.state.goal.description === '' || this.state.goal.points === '') {
+        this.setState({
+          errorMessage: 'Please fill all fields!'
+        });
+
+        return false;
+      }
+
+      return true;
+
+    },
     _handleSubmit: function(e) {
         e.preventDefault();
+      if(this._validForm()) {
         AdminActions.updateGoal(this.state.goal);
         this.context.router.push('/goals');
+      }
     },
     _hideConfirmationDialog: function() {
         this._handleConfirmation(false);
@@ -70,6 +88,10 @@ var GoalDetail = React.createClass({
             <div className="container-fluid admin-content">
                 <div className="row">
                     <form onSubmit={this._handleSubmit} className="col-xs-12 col-sm-6 content-item-form">
+                        {this.state.errorMessage !== ''
+                        ? <label className="form-label error">{this.state.errorMessage}</label>
+                        : null
+                        }
                         <label htmlFor="name" className="form-label"><i className="fa fa-star"></i><span className="spacing"></span>Name</label>
                         <input className="form-field" id="name" type="text" value={this.state.goal.name} onChange={this._handleChange()} name="name" />
                         <label htmlFor="summary" className="form-label">Summary</label>

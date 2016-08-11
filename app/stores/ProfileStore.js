@@ -3,11 +3,16 @@ var EventEmitter = require('events').EventEmitter;
 var constants = require('../constants/constants');
 var _ = require('underscore');
 
-var _user = {};
+var _user = {},
+    _passwordState = '';
+
 
 var ProfileStore = _.extend({}, EventEmitter.prototype, {
     getUser: function() {
         return _user;
+    },
+    getPasswordState: function() {
+      return _passwordState;
     },
     addChangeListener: function(callback) {
         this.on('change', callback);
@@ -24,6 +29,8 @@ AppDispatcher.register(function(payload) {
         case constants.GET_USER:
         case constants.CHANGE_PASSWORD:
             _user = action.user;
+            _passwordState = action.passwordState;
+
             ProfileStore.emit('change');
             break;
         case constants.SEND_REQUEST:

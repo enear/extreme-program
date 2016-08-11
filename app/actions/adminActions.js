@@ -122,7 +122,7 @@ var AdminActions = {
         $.post('/api/goals/', goal, function(newGoal) {
             $.getJSON('/api/goals', function(goals) {
                 AppDispatcher.handleAction( {
-                    actionType: constants.ADMIN_CREATE_GOALS,
+                    actionType: constants.ADMIN_CREATE_GOAL,
                     goal: newGoal,
                     goals: goals
                 });

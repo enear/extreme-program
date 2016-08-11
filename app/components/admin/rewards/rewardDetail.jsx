@@ -13,9 +13,8 @@ var RewardDetail = React.createClass({
     componentWillMount: function() {
         this.props.checkPermission(this.props.permissions.Admin);
 
-        if(Object.keys(this.state.reward).length === 0  || this.state.reward._id !== this.props.params.id) {
-            AdminActions.getReward('/api/rewards/' + this.props.params.id);
-        }
+        AdminActions.getReward('/api/rewards/' + this.props.params.id);
+
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function(){
@@ -29,7 +28,8 @@ var RewardDetail = React.createClass({
     _getState: function() {
         return {
             reward: AdminStore.getReward(),
-            deleteMode: false
+            deleteMode: false,
+            errorMessage: ''
         }
     },
     _handleChange: function() {
@@ -43,10 +43,28 @@ var RewardDetail = React.createClass({
             })
         }.bind(this);
     },
+  _validForm: function() {
+    this.setState({
+      errorMessage: ''
+    });
+
+    if(this.state.reward.name === '' || this.state.reward.summary === '' || this.state.reward.description === '' || this.state.reward.points === '') {
+      this.setState({
+        errorMessage: 'Please fill all fields!'
+      });
+
+      return false;
+    }
+
+    return true;
+
+  },
     _handleSubmit: function(e) {
         e.preventDefault();
-        AdminActions.updateReward(this.state.reward);
-        this.context.router.push('/rewards');
+        if(this._validForm()) {
+            AdminActions.updateReward(this.state.reward);
+            this.context.router.push('/rewards');
+      }
     },
     _hideConfirmationDialog: function() {
         this._handleConfirmation(false);
@@ -70,6 +88,10 @@ var RewardDetail = React.createClass({
             <div className="container-fluid admin-content">
                 <div className="row">
                     <form onSubmit={this._handleSubmit} className="col-xs-12 col-sm-6 content-item-form">
+                        {this.state.errorMessage !== ''
+                          ? <label className="form-label error">{this.state.errorMessage}</label>
+                          : null
+                        }
                         <label htmlFor="name" className="form-label"><i className="fa fa-trophy" aria-hidden="true"></i><span className="spacing"></span>Name</label>
                         <input id="name" type="text" className="form-field" value={this.state.reward.name} onChange={this._handleChange()} name="name" />
                         <label htmlFor="summary" className="form-label">Summary</label>
