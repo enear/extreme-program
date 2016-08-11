@@ -31,7 +31,7 @@ var SignIn = React.createClass({
     },
     _validForm: function() {
         this.setState({
-            errorMEssage: ''
+            errorMessage: ''
         });
 
         if(this.state.password === '' || this.state.confirmPassword === '') {
@@ -55,7 +55,7 @@ var SignIn = React.createClass({
     _matchingPasswords: function() {
         return this.state.password === this.state.confirmPassword;
     },
-    _handleBlur: function(key) {
+    _handleChange: function(key) {
         return function(e) {
             var state = {};
             state[key] = e.target.value;
@@ -78,9 +78,9 @@ var SignIn = React.createClass({
                     :   null
                     }
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input className="col-xs-12 col-sm-6 form-field"  type="password" id="password" name="password" onBlur={this._handleBlur('password')} />
+                    <input className="col-xs-12 col-sm-6 form-field"  type="password" id="password" name="password" onChange={this._handleChange('password')} />
                     <label htmlFor="confirmPassword" className="form-label">Confirm your password</label>
-                    <input className="col-xs-12 col-sm-6 form-field" type="password" id="confirmPassword" name="confirmPassword" onBlur={this._handleBlur('confirmPassword')} />
+                    <input className="col-xs-12 col-sm-6 form-field" type="password" id="confirmPassword" name="confirmPassword" onChange={this._handleChange('confirmPassword')} />
                 </div>
                 <div className="form-group">
                     <button type="submit" className="button submit">Submit</button>

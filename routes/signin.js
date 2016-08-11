@@ -2,10 +2,7 @@ var router = require('express').Router();
 
 module.exports = function(passport, User) {
     router.get('/', function(req, res) {
-        var user = {
-            name: req.flash('name'),
-            email: req.flash('email')
-        };
+        var user = req.session.info.user;
 
         if(user.email.length === 0) {
             res.redirect('/#login');
@@ -20,8 +17,7 @@ module.exports = function(passport, User) {
                     res.redirect('/login');
                 }
                 else{
-                    req.flash('email', user.email);
-                    req.flash('name', user.name);
+
                     res.render('signin', {user: user.email, name: user.name});
                 }
             });
@@ -29,9 +25,10 @@ module.exports = function(passport, User) {
     });
 
     router.post('/', function(req, res, next) {
-        console.log(req.body);
-        req.body.email = req.flash('email').toString();
-        req.body.username = req.flash('name').toString();
+        req.body.email = req.session.info.user.email;
+        req.body.username = req.session.info.user.name;
+
+        req.session.info = null;
 
         next();
     },

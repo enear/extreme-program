@@ -29,8 +29,15 @@ router.get('/slack/return', function(req, res) {
             res.redirect('/login');
         }
         else{
-            req.flash('email', obj.user.email);
-            req.flash('name', obj.user.name);
+            req.session.info = {
+                user: {
+                    email:  obj.user.email,
+                    name: obj.user.name
+                }
+            } ;
+
+            console.log("AUTH");
+            console.log(req.session);
             res.redirect('/signin');
         }
     });
