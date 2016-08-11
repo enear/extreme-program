@@ -33,7 +33,7 @@ var GoalsActions = {
         $.post("/api/users/" + request.userID, request, function(data) {
             AppDispatcher.handleAction({
                 actionType: constants.SEND_REQUEST,
-                data: data
+                data: data.user
             });
         });
     }

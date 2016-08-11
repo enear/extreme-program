@@ -31,9 +31,27 @@ router.get('/:id', function(req, res) {
 
 router.post('/:id', function(req, res){
     User.findOne({'_id': req.params.id}, function(err, result) {
-        lib.users[req.body.action](User, result, req.body, function(err, result) {
-            console.log(result);
-            res.json(err || result);
+        var passwordState = '';
+
+        if(req.body.action === 'changePassword') {
+            if(!result.validPassword(req.body.password)) {
+                passwordState = "Wrong Password!";
+            }
+        }
+
+        lib.users[req.body.action](User, result, req.body, function(err, user) {
+
+            if(req.body.action === 'changePassword') {
+                if(user.validPassword(req.body.newPassword) && passwordState === '') {
+                    passwordState = "Password changed with success!";
+                }
+                else {
+                    passwordState = "Wrong Password!";
+                }
+            }
+
+
+            res.json(err || {user: user, passwordState: passwordState} );
         });
     });
 });

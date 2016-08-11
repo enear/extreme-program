@@ -27,11 +27,22 @@ AppDispatcher.register(function(payload) {
 
     switch(action.actionType) {
         case constants.GET_USER:
+            _user = action.user;
+
+            ProfileStore.emit('change');
+            break;
+
         case constants.CHANGE_PASSWORD:
             _user = action.user;
             _passwordState = action.passwordState;
 
+            console.log(action);
+
             ProfileStore.emit('change');
+            break;
+        case constants.RESET_PASSWORD_STATE:
+            _passwordState = '';
+
             break;
         case constants.SEND_REQUEST:
         case constants.SEND_REWARD:

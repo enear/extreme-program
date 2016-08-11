@@ -39,11 +39,11 @@ var AdminActions = {
         });
     },
     updateUser: function(request) {
-        $.post(request.url, request, function(user) {
+        $.post(request.url, request, function(data) {
             $.get('/api/users', function(users) {
                 AppDispatcher.handleAction({
                     actionType: constants.ADMIN_UPDATE_USER,
-                    user: user,
+                    user: data.user,
                     users: users
                 });
             });

@@ -23,7 +23,7 @@ var RewardActions = {
         $.post('/api/users/' + request.userID, request, function(data) {
             AppDispatcher.handleAction({
                 actionType: constants.SEND_REWARD,
-                data: data
+                data: data.user
             });
         });
     }

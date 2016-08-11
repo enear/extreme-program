@@ -10,6 +10,7 @@ module.exports = keyMirror({
     SEND_REQUEST: null,
     SEND_REWARD: null,
     CHANGE_PASSWORD: null,
+    RESET_PASSWORD_STATE: null,
     ADMIN_GET_ADMIN: null,
     ADMIN_GET_USER: null,
     ADMIN_GET_USERS: null,

@@ -16,6 +16,10 @@ var Profile = React.createClass({
         ProfileStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
+        if(this.state.errorMessage !== '') {
+          ProfileActions.resetPasswordState();
+        }
+
         ProfileStore.removeChangeListener(this._onChange);
     },
     _onChange: function() {
@@ -29,8 +33,7 @@ var Profile = React.createClass({
             oldPassword: '',
             newPassword: '',
             confirmPassword: '',
-            passwordState: ProfileStore.getPasswordState(),
-            errorMessage: '',
+            errorMessage: ProfileStore.getPasswordState(),
             changingPassword: false
         };
     },
@@ -101,7 +104,6 @@ var Profile = React.createClass({
       this._resetPasswordForm();
     },
     render: function() {
-      console.log(this.state);
         return (
             <div id="user-profile" className="container">
                 <div className="row" >
@@ -113,13 +115,15 @@ var Profile = React.createClass({
                 </div>
                 <div className="row">
                     <div className="col-xs-12">
+                        {this.state.errorMessage.length > 0
+                          ?   <label className="form-label error">{this.state.errorMessage}</label>
+                          :   null
+                        }
+
                         <button id="change-password-button" onClick={this._togglePasswordChangeForm(true)} className={"button submit " + (this.state.changingPassword ? "hidden" : "")}>Change Your Password</button>
                     </div>
                     <form  className={"col-xs-12 change-password " + (this.state.changingPassword ? "show" : "")}  onSubmit={this._handleSubmit} >
-                        {this.state.errorMessage.length > 0
-                        ?   <label className="form-label error">{this.state.errorMessage}</label>
-                        :   null
-                        }
+
                         <label htmlFor="oldPassword" className="form-label">Old Password</label>
                         <input className="form-field"  type="password" id="oldPassword" name="oldPassword" value={this.state.oldPassword} onChange={this._handleChange()} />
                         <label htmlFor="newPassword" className="form-label">New Password</label>
