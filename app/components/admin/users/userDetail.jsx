@@ -48,7 +48,7 @@ var UserDetail = React.createClass({
 
             AdminActions.updateUser({
                 role: user.role,
-                admin: this.state.admin,
+                admin: this.state.admin.username,
                 url: '/api/users/' + user._id,
                 action: 'changeRole'
             });
@@ -67,10 +67,10 @@ var UserDetail = React.createClass({
             var points = parseInt(e.target.value) || 0;
 
             if(!this._pointsExceeded(points) && !this.props.isAdmin || this.props.isAdmin) {
-                if(points >= 0) {
+                if(points >= 0 && points !== this.state.user.totalPoints) {
                     AdminActions.updateUser({
                         points: points,
-                        admin: this.state.admin,
+                        admin: this.state.admin.username,
                         url: '/api/users/' + this.state.user._id,
                         action: 'updatePoints'
                     });

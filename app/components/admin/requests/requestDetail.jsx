@@ -65,7 +65,7 @@ var RequestDetail = React.createClass({
     _updateRequest: function() {
         AdminActions.updateUser({
             request: this.state.request,
-            admin: this.state.admin,
+            admin: this.state.admin.username,
             url: '/api/users/' + this.state.request.user,
             action: 'changeRequestState'
         });

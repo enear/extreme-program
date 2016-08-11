@@ -47,7 +47,7 @@ var updatePoints = function(Model, user, options, callback) {
 
     user.history.unshift({
         operation: "Points",
-        description: "Points balance updated to " + user.totalPoints + " by " + options.admin.username,
+        description: "Points balance updated to " + user.totalPoints + " by " + options.admin,
         date: new Date(),
         points: user.totalPoints,
         admin: options.admin
@@ -62,7 +62,7 @@ var changeRole = function(Model, user, options, callback) {
     user.role = options.role;
     user.history.unshift({
         operation: "Role",
-        description: "Role changed from " + previousRole + " to " + user.role + " by " + options.admin.username,
+        description: "Role changed from " + previousRole + " to " + user.role + " by " + options.admin,
         date: new Date(),
         admin: options.admin
     });
@@ -97,11 +97,11 @@ var changeRequestState = function(Model, user, options, callback) {
             update.totalPoints = parseInt(user.totalPoints) - parseInt(options.request.subject.points);
         }
 
-        historyItem.description = "'" + options.request.subject.name + "' was approved by " + options.admin.username + " and the total points balance was updated from " +
+        historyItem.description = "'" + options.request.subject.name + "' was approved by " + options.admin + " and the total points balance was updated from " +
           user.totalPoints + " to " + update.totalPoints + ". '" + options.request.subject.name + "' added to the user " + options.request.collection;
     }
     else {
-        historyItem.description = "'" + options.request.subject.name + "' was rejected by " + options.admin.username;
+        historyItem.description = "'" + options.request.subject.name + "' was rejected by " + options.admin;
     }
 
     pushQuery['history'] = {
