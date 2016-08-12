@@ -20,7 +20,9 @@ var express = require('express'),
   admin = require('./routes/admin'),
   auth = require('./routes/auth'),
 
-  UserModel = require('./api/users/userModel');
+  UserModel = require('./api/users/userModel'),
+
+  permission = require('./api/lib/lib').auth.permission(UserModel);
 
   app = express();
 
@@ -37,7 +39,7 @@ require('./api/lib/lib').auth.passport(passport, UserModel);
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
 app.set('views', path.join(__dirname, 'app/public/views'));
-// override this setting to choose the view engine to be used
+
 app.set('view engine', 'hbs');
 
 app.use(morgan('dev'));
@@ -61,11 +63,11 @@ app.use(flash());
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/api/users', users);
-app.use('/api/roles', roles);
-app.use('/api/rewards', rewards);
-app.use('/api/goals', goals);
-app.use('/api/requeststates', requestStates);
-app.use('/api/settings', settings);
+app.use('/api/roles', permission.std, roles);
+app.use('/api/rewards', permission.std, rewards);
+app.use('/api/goals', permission.std, goals);
+app.use('/api/requeststates', permission.std, requestStates);
+app.use('/api/settings', permission.std, settings);
 app.use('/admin', admin);
 app.use('/login', require('./routes/login')(passport));
 app.use('/signin', require('./routes/signin')(passport, UserModel));
