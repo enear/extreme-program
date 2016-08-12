@@ -100,6 +100,8 @@ var UserDetail = React.createClass({
         return (
                 <div className="col-xs-12" id="user-detail">
                     <h4><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.user.email}</h4>
+                    <label className="form-label">Created:</label>
+                    <p>{dateFormat(this.state.user.created, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
                     <label className="form-label" htmlFor="userDetailTotalPoints">Points:</label>
                     <input type="number" name="totalPoints" id="userDetailTotalPoints" className="form-field" onBlur={this._handleOnBlur()} onChange={this._handlePointsUpdate()} value={this.state.userPoints} />
                     {this.props.permissions.Admin.indexOf(this.state.admin.role) >= 0

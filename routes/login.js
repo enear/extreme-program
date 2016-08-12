@@ -13,9 +13,9 @@ module.exports = function(passport) {
     }));
 
     router.get('/redirectHandler', function(req, res) {
-        var redirectTo = req.session.returnTo !== '' ? req.session.returnTo : '/';
+        var redirectTo = req.session.previousUrl !== '' ? req.session.previousUrl: '/';
 
-        req.session.returnTo = '';
+        req.session.previousUrl = '';
 
         res.redirect(redirectTo);
     });

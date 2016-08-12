@@ -11,13 +11,15 @@ router.get("/", function(req, res) {
         }
     }
     else {
-        req.session.returnTo = '/';
+        req.session.previousUrl = '/';
+
         res.redirect('/login');
     }
 });
 
 router.get("/logout", function(req, res) {
     req.logout();
+
     res.redirect('/login');
 });
 

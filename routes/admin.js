@@ -4,7 +4,9 @@ router.get("/", function(req, res) {
     if(req.isAuthenticated()) {
         if(req.user.role === 'Standard') {
             req.logout();
-            req.session.returnTo = '';
+
+            req.session.previousUrl = '';
+
             res.redirect('/login');
         }
         else {
@@ -12,7 +14,8 @@ router.get("/", function(req, res) {
         }
     }
     else {
-        req.session.returnTo = '/admin';
+        req.session.previousUrl = '/admin';
+
         res.redirect('/login');
     }
 });

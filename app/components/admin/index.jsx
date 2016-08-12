@@ -75,6 +75,7 @@ var Admin = React.createClass({
                 <div id="admin-side-nav">
                     <ul className="navigation" >
                         <li><Link to="/"><i className="fa fa-home" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Home</span></Link></li>
+                        <li><a href="/" target="_blank"><i className="fa fa-play" aria-hidden="true"></i><span className="spacing">Extreme App </span></a></li>
                         {this._hasPermission(this._userPermissions.Attributor)
                         ?   <li><Link activeClassName="active" to="/users"><i className="fa fa-users" aria-hidden="true"></i><span className="hidden-xs"><span className="spacing"></span>Users</span></Link></li>
                         :   null

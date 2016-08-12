@@ -55,7 +55,6 @@ var Login = React.createClass({
         e.preventDefault();
 
         if(this._validForm()){
-            AdminActions.getAdmin('/?getuser=true');
             e.target.submit();
         }
     },
