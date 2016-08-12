@@ -32,7 +32,7 @@ require('./api/goals/goalInitializer');
 require('./api/requestsStates/requestsStatesInitializer');
 require('./api/settings/settingsInitializer');
 
-require('./api/lib/lib').auth(passport, UserModel);
+require('./api/lib/lib').auth.passport(passport, UserModel);
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 

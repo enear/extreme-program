@@ -11,7 +11,6 @@ var profileActions = {
             });
         });
     },
-    //TODO: Notice if password was changed successfully or not.
     changePassword: function(request) {
         $.post('/api/users/' + request.userID, request, function(data) {
 
