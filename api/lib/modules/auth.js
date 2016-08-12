@@ -79,36 +79,48 @@ module.exports = {
         }));
 
     },
-    api: {
-        std: function(req, res, callback) {
-            if(req.isAuthenticated()) {
-                callback();
-            }
-            else {
-                res.json("Access Denied!");
-            }
-        },
-        user: function(req, res, User, callback) {
-            User.findOne({'_id': req.session.passport.user}, function(err, user) {
-                if(err|| !user || user.role === 'Standard' && user._id != req.params.id) {
-                    res.json("Access Denied!");
-                }
-                else {
-                    callback();
-                }
-
-            });
-        },
-        admin: function(req, res, User, callback) {
-            User.findOne({'_id': req.session.passport.user}, function(err, user) {
-                if(err|| !user || user.role === 'Standard') {
-                    res.json("Access Denied!");
-                }
-                else {
-                    callback();
-                }
-
-            });
-        }
-     }
+    permission: function(UserModel) {
+        return {
+          test: function(req, res, next) {
+              if(!req.isAuthenticated()) {
+                  res.json("Access Denied!");
+              }
+              else {
+                  next();
+              }
+          }
+        };
+    }
+    //api: {
+    //    std: function(req, res, callback) {
+    //        if(req.isAuthenticated()) {
+    //            callback();
+    //        }
+    //        else {
+    //            res.json("Access Denied!");
+    //        }
+    //    },
+    //    user: function(req, res, User, callback) {
+    //        User.findOne({'_id': req.session.passport.user}, function(err, user) {
+    //            if(err|| !user || user.role === 'Standard' && user._id != req.params.id) {
+    //                res.json("Access Denied!");
+    //            }
+    //            else {
+    //                callback();
+    //            }
+    //
+    //        });
+    //    },
+    //    admin: function(req, res, User, callback) {
+    //        User.findOne({'_id': req.session.passport.user}, function(err, user) {
+    //            if(err|| !user || user.role === 'Standard') {
+    //                res.json("Access Denied!");
+    //            }
+    //            else {
+    //                callback();
+    //            }
+    //
+    //        });
+    //    }
+    // }
 };
