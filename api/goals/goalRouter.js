@@ -3,8 +3,18 @@ var Goal = require('./goalModel');
 var lib = require('../lib/lib');
 
 router.get('/', function(req, res) {
+
     Goal.find({}, function(err, result) {
-        res.json(err || result);
+        if(req.query.published && req.query.published === "true") {
+            var publishedGoals = result.filter(function(obj) {
+                return obj.published == true;
+            });
+
+            res.json(err || publishedGoals);
+        }
+        else {
+            res.json(err || result);
+        }
     });
 });
 

@@ -42,7 +42,7 @@ var GoalsList = React.createClass({
 
                             return (
                                 <div key={index} className="goal col-xs-12 col-sm-3 content-item">
-                                   <h4 className="content-item-title"><i className="fa fa-star" aria-hidden="true"></i><span className="spacing"></span>{goal.name}</h4>
+                                   <h4 className="content-item-title"><i className={"fa fa-star " + (goal.published ? "orange" : "")} aria-hidden="true"></i><span className="spacing"></span>{goal.name}</h4>
                                    <Link to={link} className="button edit pull-right">Edit</Link>
                                        <label className="form-label">
                                            Summary

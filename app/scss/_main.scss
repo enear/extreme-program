@@ -112,6 +112,10 @@ html, body {
     }
 }
 
+.checkboxContainer {
+    margin-bottom: $gutter;
+}
+
 .error-message,
 .info-text {
     margin-bottom: $spacing;

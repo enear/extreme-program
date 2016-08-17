@@ -9,7 +9,7 @@ var GoalList = React.createClass({
         return this._getState();
     },
     componentWillMount: function() {
-        GoalsActions.getGoals('/api/goals');
+        GoalsActions.getGoals('/api/goals?published=true');
         GoalsStore.addChangeListener(this._onChange);
 
     },
