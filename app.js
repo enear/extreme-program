@@ -91,9 +91,7 @@ app.use(function(req, res, next){
   // default to plain-text. send()
   res.type('txt').send('Not found');
 });
-app.listen(process.env.PORT_NUMBER, function () {
-  console.log("listening to " + process.env.PORT_NUMBER);
-});
+app.listen(process.env.PORT_NUMBER, process.env.IP_ADDRESS);
 
 
 module.exports = app;

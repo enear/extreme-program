@@ -66,7 +66,7 @@ var Login = React.createClass({
         }.bind(this);
     },
     render: function(){
-        console.log(this.state);
+        
         return (
             <div>
                 <form className="form-horizontal col-xs-12" action="/login" method="POST" onSubmit={this._handleSubmit} noValidate>
