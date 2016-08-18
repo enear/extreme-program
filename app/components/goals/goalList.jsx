@@ -2,6 +2,7 @@ var React = require('react');
 var Goal = require('./goalListItem.jsx');
 var GoalsStore = require('../../stores/GoalsStore');
 var GoalsActions = require('../../actions/goalsActions');
+var Link = require('react-router').Link;
 
 
 var GoalList = React.createClass({
@@ -33,9 +34,7 @@ var GoalList = React.createClass({
                     <div className="col-xs-12">
                         <h2 className="goal-list-title">Goals</h2>
                         <p className="goal-list-paragraph">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            You can apply for any of these Goals in order to win points, and to redeem them for <Link to="/rewards">Rewards</Link>. Your request will be revised by an admin in order to award you the points.
                         </p>
                     </div>
                 </div>
