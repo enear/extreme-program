@@ -101,7 +101,7 @@ var GoalDetail = React.createClass({
                         <label htmlFor="points" className="form-label">Points</label>
                         <input className="form-field" id="points" type="number" value={this.state.goal.points} onChange={this._handleChange()} name="points" />
                         <label htmlFor="published" className="form-label">Published</label>
-                        <div className="">
+                        <div className="checkboxContainer">
                           <input id="published" type="checkbox" checked={this.state.goal.published} onChange={this._handleChange()} name="published" />
                         </div>
                         <div>

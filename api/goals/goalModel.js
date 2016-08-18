@@ -8,7 +8,7 @@ var goalSchema = new mongoose.Schema({
     image: String,
     summary: {type: String, required: true},
     description: {type: String, required: true},
-    published: {type: Boolean, required: true, default: true}
+    published: {type: Boolean, required: true, default: false}
 });
 
 module.exports = mongoose.model('Goal', goalSchema);

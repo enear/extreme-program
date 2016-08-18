@@ -33,7 +33,7 @@ var NewGoal = React.createClass({
         return function(e) {
             var goal = this.state.goal;
 
-            goal[e.target.name] = e.target.value;
+            goal[e.target.name] =  e.target.type === 'checkbox' ? e.target.checked :  e.target.value;
 
             this.setState({
                 goal: goal
@@ -80,7 +80,11 @@ var NewGoal = React.createClass({
                         <label htmlFor="description" className="form-label">Description</label>
                         <textarea className="form-field text-area" id="description" value={this.state.goal.description} name="description" onChange={this._handleChange()}></textarea>
                         <label htmlFor="points" className="form-label">Points</label>
-                        <input className="form-field" id="points" type="number" value={this.state.goal.points} onChange={this._handleChange()} name="points" />
+                        <input className="form-field" id="points" type="number" value={this.state.goal.points} onChange={this._handleChange()} name="points" /><label htmlFor="published" className="form-label">Published</label>
+                        <div className="checkboxContainer">
+                            <input id="published" type="checkbox" checked={this.state.goal.published} onChange={this._handleChange()} name="published" />
+                        </div>
+
                         <Link to="/goals" className="button">Back</Link>
                         <input type="submit" className="button submit pull-right" value="Save" />
                     </form>
