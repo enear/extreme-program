@@ -36,7 +36,7 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
         return _reward;
     },
     getGoals: function() {
-        return _goals;
+        return _goals.sort(this._compare);
     },
     getGoal: function() {
         return _goal;
@@ -94,6 +94,16 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
     _dayDiff: function(date1, date2) {
         var timeDiff = Math.abs(date1.getTime() - date2.getTime());
         return(Math.ceil(timeDiff / (1000 * 3600 * 24)));
+    },
+    _compare: function(a, b) {
+        var aName = a.name.toLowerCase(),
+          bName = b.name.toLowerCase();
+
+        if (aName < bName)
+            return -1;
+        if (aName > bName)
+            return 1;
+        return 0;
     },
     addChangeListener: function(callback) {
         this.on('change', callback);

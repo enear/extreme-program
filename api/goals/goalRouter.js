@@ -15,13 +15,13 @@ router.get('/', function(req, res) {
         else {
             res.json(err || result);
         }
+
+
     });
 });
 
 router.post('/', function(req, res) {
     var newGoal = new Goal(req.body);
-
-    console.log(newGoal);
 
     newGoal.save(function(err, result) {
         res.json(err || result);

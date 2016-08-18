@@ -45,8 +45,9 @@ var RewardsList = React.createClass({
 
                         return (
                             <div key={index} className="reward col-xs-12 col-sm-3 content-item">
-                               <h4 className="content-item-title"><i className="fa fa-trophy" aria-hidden="true"></i><span className="spacing"></span>{reward.name}</h4>
-                               <Link to={link} className="button edit pull-right">Edit</Link>
+                              <Link to={link} >
+                                <h4 className="content-item-title"><i className="fa fa-trophy" aria-hidden="true"></i><span className="spacing"></span>{reward.name}</h4>
+                               </Link>
 
                                <label className="form-label">
                                    Summary
