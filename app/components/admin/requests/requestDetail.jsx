@@ -42,7 +42,9 @@ var RequestDetail = React.createClass({
         this._handleConfirmation(false);
     },
     _showConfirmationDialog: function() {
-        this._handleConfirmation(true);
+        if(this.state.request.state !== 'Pending') {
+            this._handleConfirmation(true);
+        }
     },
     _handleConfirmation: function(show) {
         this.setState(
@@ -76,10 +78,14 @@ var RequestDetail = React.createClass({
         return (
             <div className="col-xs-12" id="request-detail">
                 <h4><i className="fa fa-exchange"></i><span className="spacing"></span>{this.state.request.name}</h4>
+                <label className="form-label">Type</label>
+                <p>{this.state.request.type}</p>
                 <label className="form-label">Date</label>
                 <p>{dateFormat(this.state.request.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
                 <label className="form-label">Summary</label>
                 <p>{this.state.request.summary}</p>
+                <label className="form-label">Points</label>
+                <p>{this.state.request.points}</p>
                 {this.state.request.comment
                 ?   <div>
                         <label className="form-label">Comment</label>
@@ -101,7 +107,7 @@ var RequestDetail = React.createClass({
                 :   null
             }
             <div>
-                <button className="button submit" onClick={this._showConfirmationDialog}>Save</button>
+                <button type="button" className={"button" + (this.state.request.state !== 'Pending' ? " submit" : "")} onClick={this._showConfirmationDialog}>Save</button>
             </div>
             <div id="confirmation" className={this.state.confirmation ? "modal show" : "modal"}>
                 <div className="modal-dialog">
