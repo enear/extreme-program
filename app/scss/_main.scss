@@ -79,6 +79,10 @@ html, body {
     &.delete {
         @include invert-on-hover($white, $red);
     }
+
+    &.disabled {
+        cursor: not-allowed;
+    }
 }
 
 

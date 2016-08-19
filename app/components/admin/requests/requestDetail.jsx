@@ -107,7 +107,7 @@ var RequestDetail = React.createClass({
                 :   null
             }
             <div>
-                <button type="button" className={"button" + (this.state.request.state !== 'Pending' ? " submit" : "")} onClick={this._showConfirmationDialog}>Save</button>
+                <button type="button" className={"button" + (this.state.request.state !== 'Pending' ? " submit" : " disabled")} onClick={this._showConfirmationDialog}>Save</button>
             </div>
             <div id="confirmation" className={this.state.confirmation ? "modal show" : "modal"}>
                 <div className="modal-dialog">
