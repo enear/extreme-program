@@ -10,7 +10,7 @@ var _rewards = [],
 
 var RewardStore = _.extend({}, EventEmitter.prototype, {
     getRewards: function() {
-        return _rewards;
+        return _rewards.sort(this._compare);
     },
     getRewardById: function(id) {
         _rewards.forEach(function(reward) {
@@ -32,7 +32,17 @@ var RewardStore = _.extend({}, EventEmitter.prototype, {
     },
     removeChangeListener: function(callback) {
         this.removeListener('change', callback);
-    }
+    },
+    _compare: function(a, b) {
+        var aName = a.name.toLowerCase(),
+          bName = b.name.toLowerCase();
+
+        if (aName < bName)
+            return -1;
+        if (aName > bName)
+            return 1;
+        return 0;
+    },
 });
 
 AppDispatcher.register(function(payload) {

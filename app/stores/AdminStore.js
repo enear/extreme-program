@@ -30,7 +30,7 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
         return _roles;
     },
     getRewards: function() {
-        return _rewards;
+        return _rewards.sort(this._compare);
     },
     getReward: function() {
         return _reward;

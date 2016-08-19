@@ -11,7 +11,7 @@ var _goals = [],
 
 var GoalsStore = _.extend({}, EventEmitter.prototype, {
     getGoals: function() {
-        return _goals;
+        return _goals.sort(this._compare);
     },
     getGoal: function() {
         return _goal;
@@ -41,7 +41,17 @@ var GoalsStore = _.extend({}, EventEmitter.prototype, {
     },
     removeChangeListener: function(callback) {
         this.removeListener('change', callback);
-    }
+    },
+    _compare: function(a, b) {
+        var aName = a.name.toLowerCase(),
+          bName = b.name.toLowerCase();
+
+        if (aName < bName)
+            return -1;
+        if (aName > bName)
+            return 1;
+        return 0;
+    },
 });
 
 AppDispatcher.register(function(payload) {
