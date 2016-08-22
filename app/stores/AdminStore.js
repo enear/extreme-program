@@ -30,19 +30,19 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
         return _roles;
     },
     getRewards: function() {
-        return _rewards.sort(this._compare);
+        return _rewards.sort(this._compare("name"));
     },
     getReward: function() {
         return _reward;
     },
     getGoals: function() {
-        return _goals.sort(this._compare);
+        return _goals.sort(this._compare("name"));
     },
     getGoal: function() {
         return _goal;
     },
     getNewRequests: function() {
-        return _requests;
+        return _requests.sort(this._compare("date"));
     },
     getRequestById: function(id) {
         _request = {};
@@ -95,15 +95,18 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
         var timeDiff = Math.abs(date1.getTime() - date2.getTime());
         return(Math.ceil(timeDiff / (1000 * 3600 * 24)));
     },
-    _compare: function(a, b) {
-        var aName = a.name.toLowerCase(),
-          bName = b.name.toLowerCase();
+    _compare: function(prop) {
+        return function(a, b) {
+            var isDate = prop === 'date',
+              aComp = isDate ? new Date(a[prop]) : a[prop].toLowerCase(),
+              bComp = isDate ? new Date(b[prop]) :  b[prop].toLowerCase();
 
-        if (aName < bName)
-            return -1;
-        if (aName > bName)
-            return 1;
-        return 0;
+            if (aComp < bComp)
+                return isDate ? 1 : -1;
+            if (aComp > bComp)
+                return isDate ? -1 : 1;
+            return 0;
+        }
     },
     addChangeListener: function(callback) {
         this.on('change', callback);
