@@ -109,7 +109,7 @@ var Profile = React.createClass({
                 <div className="row" >
                     <div className="col-xs-12 info-section">
                         <h3 className="profile-title"><i className="fa fa-user"></i><span className="spacing"></span> {this.state.user.username} <span className="profile-title-email">({this.state.user.email})</span></h3>
-                        <p>You have <span className="points">{this.state.user.totalPoints}</span> points</p>
+                        <p>You have <span className="points">{(this.state.user.totalPoints || '').toLocaleString('pt')}</span> points</p>
                         <p>Redeem them  <Link className="link" to="/rewards">here</Link></p>
                     </div>
                 </div>
@@ -174,7 +174,7 @@ var Profile = React.createClass({
                                         <label className="form-label">Summary</label>
                                         <p>{reward.summary}</p>
                                         <label className="form-label">Date</label>
-                                        <p>{reward.points}</p>
+                                        <p>{(reward.points || '').toLocaleString('pt')}</p>
                                     </li>
                                 )
                             })}

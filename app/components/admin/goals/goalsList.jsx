@@ -61,7 +61,7 @@ var GoalsList = React.createClass({
                                        Cost
                                    </label>
                                    <p>
-                                       {goal.points} Points
+                                       {(goal.points || '').toLocaleString('pt')} Points
                                    </p>
 
                                </div>

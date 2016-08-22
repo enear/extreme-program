@@ -130,7 +130,7 @@ var GoalDetail = React.createClass({
                         <label className="form-label">Description</label>
                         <p>{this.state.goal.description}</p>
                         <label className="form-label">Points</label>
-                        <p>{this.state.goal.points}</p>
+                        <p>{(this.state.goal.points || '').toLocaleString('pt')}</p>
                         <form onSubmit={this._handleSubmit}  >
                                 <label htmlFor="Comment" className="form-label">Comment</label>
                                 <textarea className="form-field text-area" id="comment" name="comment" onBlur={this._handleBlur()}></textarea>

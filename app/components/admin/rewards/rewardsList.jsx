@@ -65,7 +65,7 @@ var RewardsList = React.createClass({
                                    Points
                                </label>
                                <p>
-                                   {reward.points} Points
+                                   {(reward.points || '').toLocaleString('pt')} Points
                                </p>
                            </div>
                         )

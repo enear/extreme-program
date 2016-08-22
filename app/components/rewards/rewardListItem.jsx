@@ -13,7 +13,7 @@ var Reward = React.createClass( {
                     {this.props.reward.summary}
                 </p>
                 <label className="form-label">Points</label>
-                <p>{this.props.reward.points} Points</p>
+                <p>{this.props.reward.points.toLocaleString('pt')} Points</p>
                 <Link className="button submit" to={link}>Apply</Link>
             </div>
         );

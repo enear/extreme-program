@@ -142,7 +142,7 @@ var UserDetail = React.createClass({
                                     <h4 className="modal-title">Confirmation</h4>
                                 </div>
                                 <div className="modal-body">
-                                    You are not allowed to change more than {this.state.settings.maxApprovePoints} points
+                                    You are not allowed to change more than {(this.state.settings.maxApprovePoints || '').toLocaleString('pt')} points
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="button" data-dismiss="modal" onClick={this._hideWarningDialog}>Close</button>
