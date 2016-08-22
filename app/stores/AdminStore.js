@@ -85,7 +85,7 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
                     if(request.state === 'Pending') {
                         request.user = user._id;
                         request.userName = user.email;
-                        _requests.unshift(request);
+                        _requests.push(request);
                     }
                 });
             });

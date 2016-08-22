@@ -97,8 +97,10 @@ var changeRequestState = function(Model, user, options, callback) {
             update.totalPoints = parseInt(user.totalPoints) - parseInt(options.request.subject.points);
         }
 
-        historyItem.description = "'" + options.request.subject.name + "' was approved by " + options.admin + " and the total points balance was updated from " +
-          user.totalPoints + " to " + update.totalPoints + ". '" + options.request.subject.name + "' added to the user " + options.request.collection;
+        var pointsStatement = options.request.subject.points != 0 ?  " and the total points balance was updated from " +
+          user.totalPoints + " to " + update.totalPoints : '';
+
+        historyItem.description = "'" + options.request.subject.name + "' was approved by " + options.admin + pointsStatement + ". '" + options.request.subject.name + "' added to the user " + options.request.collection;
     }
     else {
         historyItem.description = "'" + options.request.subject.name + "' was rejected by " + options.admin;
