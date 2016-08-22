@@ -20,8 +20,6 @@ var GoalDetail = React.createClass({
         };
     },
     componentWillMount: function() {
-        console.log(this.state);
-
         if(Object.keys(this.state.goal).length === 0) {
             GoalsActions.getGoal('/api/goals/' + this.props.params.id);
         }
