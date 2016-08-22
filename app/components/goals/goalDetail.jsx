@@ -54,7 +54,7 @@ var GoalDetail = React.createClass({
         }
         else {
             this.setState( {
-                warningMessage: "You've reached the maximum points allowed per user. Please redeem some rewards first or contact an admin. <br /> Thank you",
+                warningMessage: "You've reached the maximum points allowed per user. Please redeem some rewards first or contact an admin.",
                 warning: true
             })
         }
