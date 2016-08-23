@@ -85,7 +85,7 @@ var RequestDetail = React.createClass({
                 <label className="form-label">Summary</label>
                 <p>{this.state.request.summary}</p>
                 <label className="form-label">Points</label>
-                <p>{(this.state.request.points || '').toLocaleString('pt')}</p>
+                <p>{parseInt(this.state.request.points || '').toLocaleString('pt')}</p>
                 {this.state.request.comment
                 ?   <div>
                         <label className="form-label">Comment</label>
