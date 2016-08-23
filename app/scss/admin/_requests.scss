@@ -51,6 +51,12 @@
     }
 }
 
+#confirmation {
+    .comment-container {
+        margin-bottom: $gutter;
+    }
+}
+
 @media (min-width: $screen-xs) {
     .requests-list {
         max-height: 100%;

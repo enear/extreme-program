@@ -72,7 +72,8 @@ var changeRole = function(Model, user, options, callback) {
 
 var changeRequestState = function(Model, user, options, callback) {
     var update = {
-            'requests.$.state': options.request.state
+            'requests.$.state': options.request.state,
+            'requests.$.rejectComment': options.request.rejectComment
         },
         pushQuery = {
         },
@@ -81,7 +82,10 @@ var changeRequestState = function(Model, user, options, callback) {
             date: new Date(),
             admin: options.admin,
             description: ''
-        };
+        },
+        pointsStatement = '',
+        rejectComment = options.request.state === 'Rejected' && options.request.rejectComment &&
+                        options.request.rejectComment !== '' ? options.admin + " said:  '"+ options.request.rejectComment + "'." : '';
 
 
     if(options.request.state === 'Approved'){
@@ -97,13 +101,13 @@ var changeRequestState = function(Model, user, options, callback) {
             update.totalPoints = parseInt(user.totalPoints) - parseInt(options.request.subject.points);
         }
 
-        var pointsStatement = options.request.subject.points != 0 ?  " and the total points balance was updated from " +
+        pointsStatement = options.request.subject.points != 0 ?  " and the total points balance was updated from " +
           user.totalPoints + " to " + update.totalPoints : '';
 
         historyItem.description = "'" + options.request.subject.name + "' was approved by " + options.admin + pointsStatement + ". '" + options.request.subject.name + "' added to the user " + options.request.collection;
     }
     else {
-        historyItem.description = "'" + options.request.subject.name + "' was rejected by " + options.admin;
+        historyItem.description = "'" + options.request.subject.name + "' was rejected by " + options.admin + ". " + rejectComment;
     }
 
     pushQuery['history'] = {

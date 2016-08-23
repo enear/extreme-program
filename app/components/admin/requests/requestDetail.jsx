@@ -47,13 +47,19 @@ var RequestDetail = React.createClass({
         }
     },
     _handleConfirmation: function(show) {
+        var request = this.state.request;
+
+        request.rejectComment = '';
+
         this.setState(
             {
-                confirmation: show
+                confirmation: show,
+                request: request
             }
-        )
+        );
+
     },
-    _handleStateChange: function() {
+    _handleChange: function() {
         return function(e) {
             var request = this.state.request;
 
@@ -97,7 +103,7 @@ var RequestDetail = React.createClass({
 
                 <label className="form-label">State</label>
                 {this.state.requestStates && this.state.requestStates.length > 0
-                ?   <select id="state" className="form-field" onChange={this._handleStateChange()} name="state" value={this.state.request.state}>
+                ?   <select id="state" className="form-field" onChange={this._handleChange()} name="state" value={this.state.request.state}>
                         {this.state.requestStates.map(function(state, index) {
                             return (
                                 <option key={index}>{state.state}</option>
@@ -117,15 +123,22 @@ var RequestDetail = React.createClass({
                             <h4 className="modal-title">Confirmation</h4>
                         </div>
                         <div className="modal-body">
-                            Are you sure you want to set this request state as: <span>{this.state.request.state}</span>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="button" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
-                        <button type="button" className="button submit" onClick={this._updateRequest}>Accept</button>
+                            <p>Are you sure you want to set this request state as: <span>{this.state.request.state}</span></p>
+
+                            {this.state.request.state === 'Rejected'
+                            ? <div className="comment-container">
+                                <label htmlFor="rejectComment"className="form-label" >Tell {this.state.request.userName} why you are rejecting his Request: </label>
+                                <textarea className="form-field text-area" id="rejectComment" name="rejectComment" value={this.state.request.rejectComment} onChange={this._handleChange()}></textarea>
+                            </div>
+                            :    null   }
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="button" data-dismiss="modal" onClick={this._hideConfirmationDialog}>Close</button>
+                            <button type="button" className="button submit" onClick={this._updateRequest}>Accept</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
             </div>
         );
     }

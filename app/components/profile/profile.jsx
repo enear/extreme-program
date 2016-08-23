@@ -152,6 +152,12 @@ var Profile = React.createClass({
                                         <p>{request.summary}</p>
                                         <label className="form-label">State</label>
                                         <p>{request.state}</p>
+                                      {request.state === 'Rejected' && request.rejectComment && request.rejectComment != ''
+                                      ?   <div>
+                                            <label className="form-label">Admin Comment:</label>
+                                            <p>{request.rejectComment}</p>
+                                          </div>
+                                      :   null}
                                     </li>
                                 )
                             })}
