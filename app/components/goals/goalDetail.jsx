@@ -36,14 +36,14 @@ var GoalDetail = React.createClass({
         e.preventDefault();
 
         if(this._allowedToRequest()) {
-            if(this._userHasGoal()){
+            if(this._userHasGoal() && this._awardPointsOnce()){
                 var goal = this.state.goal;
 
                 goal.points = 0;
 
                 this.setState( {
 
-                    warningMessage: "You've already applied once for this goal, and you will only earn points ONCE per Goal.",
+                    warningMessage: "You've already applied once for this goal, and you will only earn points ONCE for this Goal.",
                     warning: true,
                     goal: goal
                 });
@@ -70,6 +70,9 @@ var GoalDetail = React.createClass({
         });
 
         return result.length > 0;
+    },
+    _awardPointsOnce: function(){
+      return this.state.goal.pointsOnce;
     },
     _submit: function() {
         var date = new Date();

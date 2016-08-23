@@ -9,7 +9,7 @@ var goalSchema = new mongoose.Schema({
     summary: {type: String, required: true},
     description: {type: String, required: true},
     published: {type: Boolean, required: true, default: false},
-    onlyOnce: Boolean
+    pointsOnce: {type: Boolean, default: false}
 
 });
 

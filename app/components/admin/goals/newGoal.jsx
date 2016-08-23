@@ -80,9 +80,14 @@ var NewGoal = React.createClass({
                         <label htmlFor="description" className="form-label">Description</label>
                         <textarea className="form-field text-area" id="description" value={this.state.goal.description} name="description" onChange={this._handleChange()}></textarea>
                         <label htmlFor="points" className="form-label">Points</label>
-                        <input className="form-field" id="points" type="number" value={this.state.goal.points} onChange={this._handleChange()} name="points" /><label htmlFor="published" className="form-label">Published</label>
+                        <input className="form-field" id="points" type="number" value={this.state.goal.points} onChange={this._handleChange()} name="points" />
+                        <label htmlFor="published" className="form-label">Published</label>
                         <div className="checkboxContainer">
                             <input id="published" type="checkbox" checked={this.state.goal.published} onChange={this._handleChange()} name="published" />
+                        </div>
+                        <label htmlFor="pointsOnce" className="form-label">Award points only once</label>
+                        <div className="checkboxContainer">
+                            <input id="pointsOnce" type="checkbox" checked={this.state.goal.pointsOnce} onChange={this._handleChange()} name="pointsOnce" />
                         </div>
 
                         <Link to="/goals" className="button">Back</Link>

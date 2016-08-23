@@ -104,6 +104,10 @@ var GoalDetail = React.createClass({
                         <div className="checkboxContainer">
                           <input id="published" type="checkbox" checked={this.state.goal.published} onChange={this._handleChange()} name="published" />
                         </div>
+                      <label htmlFor="pointsOnce" className="form-label">Award points only once</label>
+                      <div className="checkboxContainer">
+                        <input id="pointsOnce" type="checkbox" checked={this.state.goal.pointsOnce} onChange={this._handleChange()} name="pointsOnce" />
+                      </div>
                         <div>
                             <button type="button" className="button delete" onClick={this._showConfirmationDialog}>Delete</button>
                             <input type="submit" className="button submit pull-right" value="Save" />
