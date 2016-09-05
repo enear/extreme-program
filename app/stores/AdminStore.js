@@ -9,6 +9,7 @@ var _users = [],
     _goals = [],
     _requests = [],
     _requestStates = [],
+    _totalPoints = 0,
     _user = {},
     _admin = {},
     _reward = {},
@@ -76,6 +77,13 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
         });
 
         return users;
+    },
+    getTotalPoints: function() {
+        _users.forEach(function(user) {
+            _totalPoints += user.totalPoints;
+        });
+
+        return _totalPoints;
     },
     _updateRequests: function() {
         _requests = [];

@@ -26,6 +26,7 @@ UsersManagement = React.createClass({
             admin: AdminStore.getAdmin(),
             users: AdminStore.getUsers(),
             roles: AdminStore.getRoles(),
+            totalPoints: AdminStore.getTotalPoints(),
             user: {}
         }
     },
@@ -39,19 +40,22 @@ UsersManagement = React.createClass({
         return (
             <div className="container-fluid admin-content">
                 <div className="row">
-                    <div className="col-xs-12 col-sm-4" >
-                        <h3 className="underline">Users</h3>
+                    <div id="admin-user-list-container" className="col-xs-12 col-sm-4 " >
+                        <h3 className="underline">Users <span className="pull-right">(Points)</span></h3>
                         { this.state.users && this.state.users.length > 0
-                        ?    <ul id="admin-user-list">
-                                {this.state.users.map(function(user, index) {
-                                    var link = '/users/' + user._id;
-                                    return (
-                                        <li className="user-list-item" key={index}>
-                                            <Link activeClassName="active" to={link} onClick={that._setUser(user)} ><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{user.email}</Link>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
+                        ?   <div>
+                                <ul id="admin-user-list">
+                                    {this.state.users.map(function(user, index) {
+                                        var link = '/users/' + user._id;
+                                        return (
+                                            <li className="user-list-item" key={index}>
+                                                <Link activeClassName="active" to={link} onClick={that._setUser(user)} ><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{user.email}<span className="pull-right">({user.totalPoints})</span></Link>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                              <p className="users-total-points">Total Points: <span className="spacing">{this.state.totalPoints}</span></p>
+                            </div>
                         :  null
                         }
                     </div>

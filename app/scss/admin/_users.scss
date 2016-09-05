@@ -2,36 +2,51 @@
     margin: 0 0 $spacing 0;
     @include font-size(16px) ;
 }
+#admin-user-list-container {
+    position: relative;
+    padding-bottom: $gutter;
+    min-height: 100%;
+    height: 100%;
 
-#admin-user-list {
-    margin: 0;
-    padding: 0;
+    #admin-user-list {
+        margin: 0;
+        padding: 0;
 
-    .user-list-item {
-        margin-bottom: 0;
+        .user-list-item {
+            margin-bottom: 0;
 
-        a {
-            @include font-size(16px) ;
-            display: block;
-            padding: $spacing;
-            color: $darkGray;
-            border-left: 5px solid $white;
+            a {
+                @include font-size(16px) ;
+                display: block;
+                padding: $spacing;
+                color: $darkGray;
+                border-left: 5px solid $white;
 
-            &:hover {
-                text-decoration: none;
-                border-left: 5px solid $hoverOrange;
-                background-color: $whiteSmoke;
-            }
+                &:hover {
+                    text-decoration: none;
+                    border-left: 5px solid $hoverOrange;
+                    background-color: $whiteSmoke;
+                }
 
-            &.active {
-                border-left: 5px solid $orange;
-                background-color: $hoverOrange;
-                color: $white;
-                text-decoration: none;
+                &.active {
+                    border-left: 5px solid $orange;
+                    background-color: $hoverOrange;
+                    color: $white;
+                    text-decoration: none;
+                }
             }
         }
     }
+
+    .users-total-points {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: $spacing $gutter;
+        @include font-size(16px);
+    }
 }
+
 
 #user-detail {
     .user-history-title,
@@ -46,9 +61,12 @@
 }
 
 @media( min-width: $screen-xs) {
-    #admin-user-list {
-        max-height: 100%;
-        overflow: auto;
+    #admin-user-list-container {
+        min-height: 100%;
+        #admin-user-list {
+            max-height: 100%;
+            overflow: auto;
+        }
     }
 
     #user-detail {
