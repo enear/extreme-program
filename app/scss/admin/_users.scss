@@ -3,8 +3,6 @@
     @include font-size(16px) ;
 }
 #admin-user-list-container {
-    position: relative;
-    padding-bottom: $gutter;
     min-height: 100%;
     height: 100%;
 
@@ -39,10 +37,7 @@
     }
 
     .users-total-points {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding: $spacing $gutter;
+        padding: $gutter $spacing;
         @include font-size(16px);
     }
 }
