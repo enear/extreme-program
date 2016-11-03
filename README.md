@@ -11,15 +11,14 @@
  - [Install Bower on your machine](https://bower.io/#install-bower)
  - [Install MongoDB on your machine](https://www.mongodb.com/download-center#community)
    - Note: Set up MongoDB environment
-     - Create a Folder on "C:\data\db" to old the db files or set your dbpaths
+     - Create a Folder on "C:\data\db" to hold the db files (or set your dbpaths)
      - Launch your DB process, i.e. Windows: "C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe"
- 
  
 2. Download Code Dependencies
    - Run `npm install` on the root folder
    - Run `bower install` on the root folder
 
-3. Configure your server
+3. Set your configurations
    - Add a `config.js` to your root folder
    - Copy the following into the file and edit accordingly: 
  ```javascript
@@ -32,7 +31,7 @@
   }();
   ```
  
-4. Transform your code to run
+4. Launch your HTTP server
  - Run `grunt` on the root folder
 
 5. Access the app on a HTTP server
