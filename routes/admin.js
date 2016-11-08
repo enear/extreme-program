@@ -7,6 +7,8 @@ router.get("/", function(req, res) {
 
             req.session.previousUrl = '';
 
+            
+
             res.redirect('/login');
         }
         else {
@@ -19,5 +21,6 @@ router.get("/", function(req, res) {
         res.redirect('/login');
     }
 });
+
 
 module.exports = router;

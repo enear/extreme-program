@@ -9,7 +9,11 @@ var RewardDetail = React.createClass({
       router: React.PropTypes.object.isRequired
     },
     getInitialState: function () {
-        return this._getState();
+        return {
+            reward: RewardsStore.getRewardById(this.props.params.id),
+            user: RewardsStore.getUser(),
+            confirmation: false
+        }
     },
     componentWillMount: function() {
         if(Object.keys(this.state.reward).length === 0) {
