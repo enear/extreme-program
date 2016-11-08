@@ -13,7 +13,9 @@ var GoalListItem = React.createClass( {
                 </p>
                 <label className="form-label">Points</label>
                 <p>{(this.props.goal.points || '').toLocaleString('pt')} Points</p>
-                <Link className="button submit" to={link}>Apply</Link>
+	            {this.props.goal.canApply
+		            ?   <Link className="button submit" to={link}>Apply</Link>
+		            :   null}
             </div>
         );
     }

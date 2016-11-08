@@ -85,6 +85,10 @@ var NewGoal = React.createClass({
                         <div className="checkboxContainer">
                             <input id="published" type="checkbox" checked={this.state.goal.published} onChange={this._handleChange()} name="published" />
                         </div>
+	                    <label htmlFor="canApply" className="form-label">User can apply</label>
+	                    <div className="checkboxContainer">
+		                    <input id="canApply" type="checkbox" checked={this.state.goal.canApply} onChange={this._handleChange()} name="canApply" />
+	                    </div>
                         <label htmlFor="pointsOnce" className="form-label">Award points only once</label>
                         <div className="checkboxContainer">
                             <input id="pointsOnce" type="checkbox" checked={this.state.goal.pointsOnce} onChange={this._handleChange()} name="pointsOnce" />

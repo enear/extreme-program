@@ -9,8 +9,8 @@ var goalSchema = new mongoose.Schema({
     summary: {type: String, required: true},
     description: {type: String, required: true},
     published: {type: Boolean, required: true, default: false},
-    pointsOnce: {type: Boolean, default: false}
-
+    pointsOnce: {type: Boolean, default: false},
+	canApply: {type: Boolean, default: true}
 });
 
 module.exports = mongoose.model('Goal', goalSchema);
