@@ -125,7 +125,9 @@ var UserDetail = React.createClass({
                                 return(
                                     <li className="user-detail-history-item" key={index}>
                                         <h4 className="user-history-item-title">{dateFormat(item.date, "dddd, mmmm dS, yyyy, h:MM TT")}</h4>
-                                        <p>{item.description} </p>
+	                                    {item.description.split('\n').map(function(line, index){
+	                                    	return (<p key={index}>{line}</p>)
+	                                    })}
                                     </li>
                                 )
                             })}

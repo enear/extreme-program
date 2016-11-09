@@ -84,8 +84,7 @@ var changeRequestState = function(Model, user, options, callback) {
             description: ''
         },
         pointsStatement = '',
-        rejectComment = options.request.state === 'Rejected' && options.request.rejectComment &&
-                        options.request.rejectComment !== '' ? options.admin + " said:  '"+ options.request.rejectComment + "'." : '';
+	    rejectComment = options.request.state === 'Rejected' && options.request.rejectComment ? options.request.rejectComment : '';
 
 
     if(options.request.state === 'Approved'){
@@ -101,13 +100,15 @@ var changeRequestState = function(Model, user, options, callback) {
             update.totalPoints = parseInt(user.totalPoints) - parseInt(options.request.subject.points);
         }
 
-        pointsStatement = options.request.subject.points != 0 ?  " and the total points balance was updated from " +
-          user.totalPoints + " to " + update.totalPoints : '';
+        pointsStatement = options.request.subject.points != 0 ?  " (total points: " + user.totalPoints + " -> " + update.totalPoints + ')' : '';
 
-        historyItem.description = "'" + options.request.subject.name + "' was approved by " + options.admin + pointsStatement + ". '" + options.request.subject.name + "' added to the user " + options.request.collection;
+        historyItem.description = "'" + options.request.subject.name + "' with comment: '" + options.request.comment + "'.\n" +
+	                              "Was approved by " + options.admin + pointsStatement + ".\n" +
+	                              "And added to the user list of " + options.request.collection + ".";
     }
     else {
-        historyItem.description = "'" + options.request.subject.name + "' was rejected by " + options.admin + ". " + rejectComment;
+        historyItem.description = "'" + options.request.subject.name + "' with comment: '" + options.request.comment + "'.\n" +
+	                              "Was rejected by " + options.admin + " with reject comment: '" + options.request.rejectComment + "'";
     }
 
     pushQuery['history'] = {
