@@ -3,7 +3,7 @@ var router = require('express').Router();
 module.exports = function(passport) {
     router.get('/', function(req, res) {
 
-        res.render('login', {message: req.flash('error')});
+        res.render('login', { message: req.flash('error') });
     });
 
     router.post('/', passport.authenticate('login', {
@@ -12,8 +12,14 @@ module.exports = function(passport) {
         failureFlash: true
     }));
 
+    router.post('/slack', passport.authenticate('slack-login', {
+        successRedirect: '/login/redirectHandler',
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+
     router.get('/redirectHandler', function(req, res) {
-        var redirectTo = req.session.previousUrl !== '' ? req.session.previousUrl: '/';
+        var redirectTo = req.session.previousUrl !== '' ? req.session.previousUrl : '/';
 
         req.session.previousUrl = '';
 

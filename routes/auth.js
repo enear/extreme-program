@@ -24,28 +24,30 @@ router.get('/slack/return', function(req, res) {
 
     request('https://slack.com/api/oauth.access?' + params, function(error, response, body) {
         var obj = JSON.parse(body);
-        if(obj.team.id !== process.env.TEAM_ID) {
+
+        console.log(obj);
+
+        if (obj.team.id !== process.env.TEAM_ID) {
             req.flash('error', "You must belong to Enear Slack team in order to register! Please sign out from your actual team and sign in to Enear Team please");
             res.redirect('/login');
-        }
-        else{
+        } else {
             req.session.info = {
                 user: {
-                    email:  obj.user.email,
+                    email: obj.user.email,
                     name: obj.user.name
-                }
-            } ;
+                },
+                slack: obj
+            };
 
-            console.log("AUTH");
-            console.log(req.session);
-            res.redirect('/signin');
+            //TODO: Fix this url
+            request.post('http://localhost:3000/login/slack').form({ email: obj.user.email, accessToken: obj.access_token, userName: obj.user.name });
         }
     });
 });
 
 function serialize(params) {
     var str = [];
-    for(var p in params)
+    for (var p in params)
         if (params.hasOwnProperty(p)) {
             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(params[p]));
         }

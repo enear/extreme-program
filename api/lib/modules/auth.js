@@ -15,97 +15,147 @@ module.exports = {
         });
 
         passport.use('signin', new LocalStrategy({
+                usernameField: 'email',
+                passwordField: 'password',
+                passReqToCallback: true
+            },
+            function(req, email, password, done) {
+                process.nextTick(function() {
+                    User.findOne({ 'email': email }, function(err, user) {
+                        if (err) {
+                            return done(err);
+                        }
+
+                        if (user) {
+                            return done(null, user);
+                        } else {
+
+                            var newUser = new User({
+                                username: req.body.username,
+                                email: email,
+                                points: 0,
+                                role: "Standard"
+                            });
+
+                            newUser.password = newUser.generateHash(password);
+
+                            newUser.save(function(err) {
+                                if (err) {
+                                    throw err;
+                                }
+
+                                return done(null, newUser);
+                            });
+
+                        }
+                    });
+                });
+            }));
+
+        passport.use('login', new LocalStrategy({
+                usernameField: 'email',
+                passwordField: 'password',
+                passReqToCallback: true
+            },
+            function(req, email, password, done) {
+                User.findOne({ 'email': email }, function(err, user) {
+                    if (err)
+                        return done(err);
+
+                    if (!user)
+                        return done(null, false, { message: "User not found! Please Register first!" });
+
+                    if (!user.validPassword(password))
+                        return done(null, false, { message: "User/Password incorrect!" });
+
+                    if (req.session.previousUrl === '/admin' && user.role === 'Standard') {
+                        return done(null, false, { message: "User/Password incorrect!" });
+                    }
+
+                    return done(null, user);
+                });
+
+            }));
+
+        passport.use('slack-login', new LocalStrategy({
+            //TODO: Use slack email field as email and access token as password   
             usernameField: 'email',
-            passwordField: 'password',
+            passwordField: 'accessToken',
             passReqToCallback: true
-        },
-        function(req, email, password, done){
-            process.nextTick(function(){
-                User.findOne({'email': email}, function(err, user) {
-                    if(err){
+        }, function(req, email, accessToken, done) {
+            process.nextTick(function() {
+                User.findOne({ 'email': email }, function(err, user) {
+                    if (err) {
                         return done(err);
                     }
 
-                    if(user){
-                        return done(null, user);
-                    }
-                    else {
-
+                    if (!user) {
                         var newUser = new User({
-                            username: req.body.username,
+                            username: req.body.userName,
                             email: email,
                             points: 0,
-                            role: "Standard"
+                            role: "Standard",
+                            slackAccessToken: accessToken
                         });
 
-                        newUser.password = newUser.generateHash(password);
+                        console.log(newUser);
 
                         newUser.save(function(err) {
-                            if(err) {
+                            if (err) {
                                 throw err;
                             }
 
                             return done(null, newUser);
                         });
+                    } else {
+                        if (!user.slackAccessToken) {
+                            user.slackAccessToken = accessToken;
+
+                            user.save(function(err) {
+                                if (err) {
+                                    throw err;
+                                }
+                            });
+
+                        } else {
+                            if (user.slackAccessToken === accessToken) {
+                                return done(null, user);
+                            }
+                        }
 
                     }
+
+
                 });
+
             });
-        }));
-
-        passport.use('login', new LocalStrategy({
-        usernameField : 'email',
-        passwordField : 'password',
-        passReqToCallback : true
-        },
-        function(req, email, password, done) {
-            User.findOne({ 'email' :  email }, function(err, user) {
-                if (err)
-                    return done(err);
-
-                if (!user)
-                    return done(null, false, {message: "User not found! Please Register first!"});
-
-                if (!user.validPassword(password))
-                    return done(null, false, {message: "User/Password incorrect!"});
-
-                if(req.session.previousUrl === '/admin' && user.role === 'Standard') {
-                    return done(null, false, {message: "User/Password incorrect!"});
-                }
-
-                return done(null, user);
-            });
-
         }));
 
     },
     permission: function(UserModel) {
         return {
-          std: function(req, res, next) {
-              if(!req.isAuthenticated()) {
-                  res.json("Access Denied!");
-              }
-              else {
-                  next();
-              }
-          },
+            std: function(req, res, next) {
+                if (!req.isAuthenticated()) {
+                    res.json("Access Denied!");
+                } else {
+                    next();
+                }
+            },
             user: function(req, res, next) {
-                UserModel.findOne({'_id': req.session.passport.user}, function(err, user) {
-                    if(err|| !user || user.role === 'Standard' && user._id != req.params.id) {
+                UserModel.findOne({ '_id': req.session.passport.user }, function(err, user) {
+                    if (err || !user || user.role === 'Standard' && user._id != req.params.id) {
                         res.json("Access Denied!");
-                    }
-                    else {
+                    } else {
                         next();
                     }
 
                 });
             },
             admin: function(req, res, next) {
-                UserModel.findOne({'_id': req.session.passport.user}, function(err, user) {
-                    if(err|| !user || user.role === 'Standard') {
+                UserModel.findOne({ '_id': req.session.passport.user }, function(err, user) {
+                    if (err || !user || user.role === 'Standard') {
                         res.json("Access Denied!");
-                    }
-                    else {
+                    } else {
                         next();
                     }
 
