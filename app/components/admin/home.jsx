@@ -42,7 +42,7 @@ var Home = React.createClass({
 
                         <p>You can also change the uses permissions and their total points <Link className="link" to="/users">Here</Link></p>
 
-                        <p>Reply to their <Link to="/requests" className="link">Requests</Link> so that thei can earn their points or not, in case you reject that request</p>
+                        <p>Reply to their <Link to="/requests" className="link">Requests</Link> so that they can earn their points. Or reject their requests with an explanation.</p>
                     </div>
                 </div>
             </div>

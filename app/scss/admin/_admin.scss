@@ -68,11 +68,9 @@
             .button.add {
                 padding: $spacing;
                 position:fixed;
-                bottom: $gutter;
-                top: auto;
-                right: auto;
+                top: $highSpace + 45px;
+                right: 20px + $spacing;
                 border-radius: 0;
-
             }
 
             .intro-message {
