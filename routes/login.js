@@ -12,12 +12,6 @@ module.exports = function(passport) {
         failureFlash: true
     }));
 
-    router.post('/slack', passport.authenticate('slack-login', {
-        successRedirect: '/login/redirectHandler',
-        failureRedirect: '/login',
-        failureFlash: true
-    }));
-
     router.get('/redirectHandler', function(req, res) {
         var redirectTo = req.session.previousUrl !== '' ? req.session.previousUrl : '/';
 

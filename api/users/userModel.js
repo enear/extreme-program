@@ -3,7 +3,6 @@ var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new mongoose.Schema({
     username: { type: String, required: true },
-    email: { type: String, required: true },
     role: { type: String, required: true },
     created: { type: Date, default: Date.now },
     requests: { type: Array, default: [] },
@@ -11,7 +10,10 @@ var userSchema = new mongoose.Schema({
     history: { type: Array, default: [] },
     rewards: { type: Array, default: [] },
     goals: { type: Array, default: [] },
-    slackAccessToken: String
+    slack: {
+        accessToken: String,
+        userID: String
+    }
 });
 
 userSchema.methods = {

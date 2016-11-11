@@ -1,5 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
-
+var SlackStrategy = require('passport-slack').Strategy;
 
 
 module.exports = {
@@ -53,14 +53,16 @@ module.exports = {
             }));
 
         passport.use('login', new LocalStrategy({
-                usernameField: 'email',
-                passwordField: 'password',
                 passReqToCallback: true
             },
-            function(req, email, password, done) {
-                User.findOne({ 'email': email }, function(err, user) {
-                    if (err)
+            function(req, username, password, done) {
+                User.findOne({ 'username': username }, function(err, user) {
+                    if (err) {
+                        console.log(err);
                         return done(err);
+                    }
+
+                    console.log("here");
 
                     if (!user)
                         return done(null, false, { message: "User not found! Please Register first!" });
@@ -77,57 +79,66 @@ module.exports = {
 
             }));
 
-        passport.use('slack-login', new LocalStrategy({
-            //TODO: Use slack email field as email and access token as password   
-            usernameField: 'email',
-            passwordField: 'accessToken',
-            passReqToCallback: true
-        }, function(req, email, accessToken, done) {
-            process.nextTick(function() {
-                User.findOne({ 'email': email }, function(err, user) {
-                    if (err) {
-                        return done(err);
-                    }
 
-                    if (!user) {
-                        var newUser = new User({
-                            username: req.body.userName,
-                            email: email,
-                            points: 0,
-                            role: "Standard",
-                            slackAccessToken: accessToken
-                        });
+        passport.use('slack-login', new SlackStrategy({
+            clientID: process.env.CLIENT_ID,
+            clientSecret: process.env.CLIENT_SECRET,
+            callbackURL: process.env.REDIRECT_URI,
+            scope: process.env.SCOPE,
+            team: process.env.TEAM_ID
+        }, function(accessToken, refreshToken, profile, done) {
+            console.log(profile);
 
-                        console.log(newUser);
+            if (profile._json.team_id !== process.env.TEAM_ID) {
+                console.log(process.env.TEAM_ID);
+                return done(null, false, { message: "You must belong to Enear Slack team in order to register! Please sign out from your actual team and sign in to Enear Team." });
+            } else {
 
-                        newUser.save(function(err) {
+            }
+            User.findOne({ 'username': profile.displayName }, function(err, user) {
+                if (err) {
+                    return done(err);
+                }
+
+                if (!user) {
+                    var newUser = new User({
+                        username: profile.displayName,
+                        points: 0,
+                        role: "Standard",
+                        slack: {
+                            accessToken: accessToken,
+                            userID: profile.id
+                        }
+                    });
+
+
+                    newUser.save(function(err) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        return done(null, newUser);
+                    });
+                } else {
+                    if (!user.slack) {
+                        user.slack = {
+                            accessToken: accessToken,
+                            userID: profile.id
+                        };
+
+                        user.save(function(err) {
                             if (err) {
                                 throw err;
                             }
-
-                            return done(null, newUser);
+                            return done(null, user);
                         });
+
                     } else {
-                        if (!user.slackAccessToken) {
-                            user.slackAccessToken = accessToken;
-
-                            user.save(function(err) {
-                                if (err) {
-                                    throw err;
-                                }
-                            });
-
-                        } else {
-                            if (user.slackAccessToken === accessToken) {
-                                return done(null, user);
-                            }
+                        if (user.slack.accessToken === accessToken) {
+                            return done(null, user);
                         }
-
                     }
-
-
-                });
-
+                }
             });
         }));
 

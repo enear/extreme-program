@@ -1,62 +1,63 @@
 {
-    "name": "extreme-program",
-    "version": "1.0.0",
-    "description": "enear extreme program",
-    "main": "app.js",
-    "scripts": {
-        "test": "mocha ./api/**/tests.js",
-        "start": "node app.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/enear/extreme-program.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/enear/extreme-program/issues"
-    },
-    "homepage": "https://github.com/enear/extreme-program#readme",
-    "dependencies": {
-        "bcrypt-nodejs": "0.0.3",
-        "body-parser": "^1.15.0",
-        "bower": "^1.7.7",
-        "browserify": "^13.0.1",
-        "connect-flash": "^0.1.1",
-        "connect-mongo": "^1.2.1",
-        "cookie-parser": "^1.4.3",
-        "dateformat": "^1.0.12",
-        "events": "^1.1.1",
-        "express": "^4.13.4",
-        "express-session": "^1.13.0",
-        "flux": "^2.1.1",
-        "grunt": "^0.4.5",
-        "hbs": "^4.0.0",
-        "jquery": "^3.0.0",
-        "key-mirror": "^1.0.1",
-        "mongodb": "^2.2.4",
-        "mongoose": "^4.4.20",
-        "morgan": "^1.7.0",
-        "passport": "^0.3.2",
-        "passport-local": "^1.0.0",
-        "path": "^0.12.7",
-        "react": "^15.1.0",
-        "react-dom": "^15.1.0",
-        "react-router": "^2.5.1",
-        "reactify": "^1.1.1",
-        "request": "^2.72.0",
-        "sass": "^0.5.0",
-        "underscore": "^1.8.3"
-    },
-    "devDependencies": {
-        "chai": "^3.5.0",
-        "chai-http": "^3.0.0",
-        "grunt-browserify": "^5.0.0",
-        "grunt-contrib-concat": "^1.0.0",
-        "grunt-contrib-copy": "^1.0.0",
-        "grunt-contrib-sass": "^1.0.0",
-        "grunt-contrib-watch": "^1.0.0",
-        "grunt-express-server": "^0.5.2",
-        "mocha": "^2.5.3"
-    }
+  "name": "extreme-program",
+  "version": "1.0.0",
+  "description": "enear extreme program",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha ./api/**/tests.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enear/extreme-program.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enear/extreme-program/issues"
+  },
+  "homepage": "https://github.com/enear/extreme-program#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.0",
+    "bower": "^1.7.7",
+    "browserify": "^13.0.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.2.1",
+    "cookie-parser": "^1.4.3",
+    "dateformat": "^1.0.12",
+    "events": "^1.1.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "flux": "^2.1.1",
+    "grunt": "^0.4.5",
+    "hbs": "^4.0.0",
+    "jquery": "^3.0.0",
+    "key-mirror": "^1.0.1",
+    "mongodb": "^2.2.4",
+    "mongoose": "^4.4.20",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-slack": "0.0.6",
+    "path": "^0.12.7",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-router": "^2.5.1",
+    "reactify": "^1.1.1",
+    "request": "^2.72.0",
+    "sass": "^0.5.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-express-server": "^0.5.2",
+    "mocha": "^2.5.3"
+  }
 }

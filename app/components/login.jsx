@@ -5,30 +5,23 @@ var AdminActions = require('../actions/adminActions');
 var Login = React.createClass({
     getInitialState: function() {
         return {
-            email: "",
+            username: "",
             password: "",
-            emailErrorMessage: '',
+            usernameErrorMessage: '',
             passwordErrorMessage: ''
         };
     },
     _validForm: function() {
         this.setState({
-            emailErrorMessage: '',
+            usernameErrorMessage: '',
             passwordErrorMessage: ''
         });
 
-        if(this.state.email.length === 0) {
+        if(this.state.username.length === 0) {
             this.setState({
-                emailErrorMessage: 'Email must be filled'
+                usernameErrorMessage: 'User field must be filled'
             });
 
-            return false;
-        }
-
-        if(this.state.email.length < 10 || this.state.email.indexOf('@') === -1 || this.state.email.indexOf('.') === -1 ) {
-            this.setState({
-               emailErrorMessage: 'Incorrect Email Format'
-            });
             return false;
         }
 
@@ -71,12 +64,12 @@ var Login = React.createClass({
             <div>
                 <form className="form-horizontal col-xs-12" action="/login" method="POST" onSubmit={this._handleSubmit} noValidate>
                     <div className="form-group">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        {this.state.emailErrorMessage.length > 0
-                        ?   <label className="form-label error">{this.state.emailErrorMessage}</label>
+                        <label htmlFor="username" className="form-label">User</label>
+                        {this.state.usernameErrorMessage.length > 0
+                        ?   <label className="form-label error">{this.state.usernameErrorMessage}</label>
                         :   null
                         }
-                        <input className="col-xs-12 col-sm-6 form-field"  type="email" id="email" name="email" onChange={this._handleChange()}/>
+                        <input className="col-xs-12 col-sm-6 form-field"  type="text" id="username" name="username" onChange={this._handleChange()}/>
                         {this.state.passwordErrorMessage.length > 0
                           ?   <label className="form-label error">{this.state.passwordErrorMessage}</label>
                           :   null
