@@ -7,14 +7,14 @@ router.get("/", function(req, res) {
 
             req.session.previousUrl = '';
 
-            res.redirect('/login');
+            res.redirect('/login-admin');
         } else {
             res.render('admin');
         }
     } else {
         req.session.previousUrl = '/admin';
 
-        res.redirect('/login');
+        res.redirect('/login-admin');
     }
 });
 

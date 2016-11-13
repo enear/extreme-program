@@ -108,7 +108,7 @@ var Profile = React.createClass({
             <div id="user-profile" className="container">
                 <div className="row" >
                     <div className="col-xs-12 info-section">
-                        <h3 className="profile-title"><i className="fa fa-user"></i><span className="spacing"></span> {this.state.user.username} <span className="profile-title-email">({this.state.user.email})</span></h3>
+                        <h3 className="profile-title"><i className="fa fa-user"></i><span className="spacing"></span> {this.state.user.username} <span className="profile-title-email">({this.state.user.username})</span></h3>
                         <p>You have <span className="points">{(this.state.user.totalPoints || '').toLocaleString('pt')}</span> points</p>
                         <p>Redeem them  <Link className="link" to="/rewards">here</Link></p>
                     </div>
