@@ -53,28 +53,25 @@ module.exports = {
             }));
 
         passport.use('login', new LocalStrategy({
+                usernameField: 'username',
+                passwordField: 'password',
                 passReqToCallback: true
             },
             function(req, username, password, done) {
-                User.findOne({ 'username': username }, function(err, user) {
-                    if (err) {
-                        console.log(err);
-                        return done(err);
-                    }
+                process.nextTick(function() {
+                    User.findOne({ 'username': username }, function(err, user) {
+                        if (err) {
+                            return done(err);
+                        }
 
-                    console.log("here");
+                        if (!user)
+                            return done(null, false, { message: "User not found! Please Register first!" });
 
-                    if (!user)
-                        return done(null, false, { message: "User not found! Please Register first!" });
+                        if ((user.password && !user.validPassword(password)) || req.session.previousUrl === '/admin' && user.role === 'Standard') 
+                            return done(null, false, { message: "User/Password incorrect!" });
 
-                    if (!user.validPassword(password))
-                        return done(null, false, { message: "User/Password incorrect!" });
-
-                    if (req.session.previousUrl === '/admin' && user.role === 'Standard') {
-                        return done(null, false, { message: "User/Password incorrect!" });
-                    }
-
-                    return done(null, user);
+                        return done(null, user);
+                    });
                 });
 
             }));
@@ -87,10 +84,7 @@ module.exports = {
             scope: process.env.SCOPE,
             team: process.env.TEAM_ID
         }, function(accessToken, refreshToken, profile, done) {
-            console.log(profile);
-
             if (profile._json.team_id !== process.env.TEAM_ID) {
-                console.log(process.env.TEAM_ID);
                 return done(null, false, { message: "You must belong to Enear Slack team in order to register! Please sign out from your actual team and sign in to Enear Team." });
             } else {
 

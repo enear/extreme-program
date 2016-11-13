@@ -20,7 +20,6 @@ describe("Login", function() {
                     .post('/login')
                     .send({email: user.email, password: user.password})
                     .end(function(err, res) {
-                        console.log(res);
 
                         done();
                     });

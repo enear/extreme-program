@@ -36,8 +36,6 @@ AppDispatcher.register(function(payload) {
             _user = action.user;
             _passwordState = action.passwordState;
 
-            console.log(action);
-
             ProfileStore.emit('change');
             break;
         case constants.RESET_PASSWORD_STATE:
