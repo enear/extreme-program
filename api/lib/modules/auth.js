@@ -67,7 +67,7 @@ module.exports = {
                         if (!user)
                             return done(null, false, { message: "User not found! Please Register first!" });
 
-                        if ((user.password && !user.validPassword(password)) || req.session.previousUrl === '/admin' && user.role === 'Standard') 
+                        if ((user.password && !user.validPassword(password)) || req.session.previousUrl === '/admin' && user.role === 'Standard')
                             return done(null, false, { message: "User/Password incorrect!" });
 
                         return done(null, user);
@@ -126,7 +126,6 @@ module.exports = {
                             }
                             return done(null, user);
                         });
-
                     } else {
                         if (user.slack.accessToken === accessToken) {
                             return done(null, user);

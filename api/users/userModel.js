@@ -11,10 +11,7 @@ var userSchema = new mongoose.Schema({
     history: { type: Array, default: [] },
     rewards: { type: Array, default: [] },
     goals: { type: Array, default: [] },
-    slack: {
-        accessToken: String,
-        userID: String
-    }
+    slack: {}
 });
 
 userSchema.methods = {

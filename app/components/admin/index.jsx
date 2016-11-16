@@ -68,7 +68,7 @@ var Admin = React.createClass({
             <div className="admin">
                 <div id="admin-top-nav">
                     <div className="user-info">
-                        <span className="user"><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.admin.email}</span>
+                        <span className="user"><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{this.state.admin.username}</span>
                     </div>
                     <a href="/logout" className="pull-right logout"><i className="fa fa-sign-out" aria-hidden="true"></i></a>
                 </div>
