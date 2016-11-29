@@ -62,7 +62,7 @@ var Login = React.createClass({
         
         return (
             <div>
-                <form className="form-horizontal col-xs-12" action="/login" method="POST" onSubmit={this._handleSubmit} noValidate>
+                <form className="form-horizontal col-xs-12" action="/login-admin" method="POST" onSubmit={this._handleSubmit} noValidate>
                     <div className="form-group">
                         <label htmlFor="username" className="form-label">User</label>
                         {this.state.usernameErrorMessage.length > 0
@@ -82,8 +82,8 @@ var Login = React.createClass({
                     </div>
                 </form>
 
-                <p className="info-text">Not registered? <a href="/auth/slack"><img src="assets/slack-button.png" alt="Sign in with Slack" title="Sign in with Slack"/></a></p>
-                <p className="info-text"><span className="bold">Why Slack?</span> We use it to validate your information before choosing your password</p>
+                <p className="info-text"><span className="bold">Or</span></p>
+                <p className="info-text"><a href="/auth/slack"><img src="assets/slack-button.png" alt="Sign in with Slack" title="Sign in with Slack"/></a></p>
             </div>
         );
     }

@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -12,18 +13,14 @@ body {
     min-height: 100%;
     height: 100%;
     display: table;
-
-
     .content {
         min-height: 100%;
         display: table-cell;
         vertical-align: middle;
     }
-
     .form-field {
         margin-bottom: $spacing;
     }
-
     .error-message {
         text-decoration: underline;
         @include font-size(18px);
@@ -34,7 +31,6 @@ body {
     .info-graphic {
         padding: $spacing 0;
     }
-
     .form-field {
         margin-bottom: $spacing;
     }
@@ -49,19 +45,27 @@ body {
         .info-graphic {
             padding: $column 0;
         }
-
         .index {
             background-color: $darkGray;
             color: $whiteSmoke;
             @include font-size(24px);
             padding: 20px 30px;
             border-radius: 50%;
-
             &.active {
                 background-color: $orange;
                 color: $white;
             }
         }
     }
-
+    .login-container {
+        display: inline-block;
+        padding: $column $highSpace;
+        border: 5px solid $orange;
+        border-radius: 5px;
+        background-color: $white;
+        
+        h3 {
+            font-style: italic;
+        }
+    }
 }

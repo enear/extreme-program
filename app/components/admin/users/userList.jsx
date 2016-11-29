@@ -49,7 +49,7 @@ UsersManagement = React.createClass({
                                         var link = '/users/' + user._id;
                                         return (
                                             <li className="user-list-item" key={index}>
-                                                <Link activeClassName="active" to={link} onClick={that._setUser(user)} ><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{user.email}<span className="pull-right">({user.totalPoints})</span></Link>
+                                                <Link activeClassName="active" to={link} onClick={that._setUser(user)} ><i className="fa fa-user" aria-hidden="true"></i><span className="spacing"></span>{user.username}<span className="pull-right">({user.totalPoints})</span></Link>
                                             </li>
                                         )
                                     })}

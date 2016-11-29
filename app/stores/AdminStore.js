@@ -92,7 +92,7 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
                 user.requests.forEach(function(request) {
                     if(request.state === 'Pending') {
                         request.user = user._id;
-                        request.userName = user.email;
+                        request.userName = user.username;
                         _requests.push(request);
                     }
                 });

@@ -15,12 +15,11 @@ describe("Login", function() {
             res.body.should.be.a('array');
 
             res.body.forEach(function(user) {
-                if(user.email === 'tester@test.com') {
+                if(user.username === 'Admin') {
                     chai.request(server)
                     .post('/login')
-                    .send({email: user.email, password: user.password})
+                    .send({username: user.username, password: user.password})
                     .end(function(err, res) {
-                        console.log(res);
 
                         done();
                     });
