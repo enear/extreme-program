@@ -81,9 +81,6 @@ var Login = React.createClass({
                         <input type="submit" className="button submit" value="Submit" />
                     </div>
                 </form>
-
-                <p className="info-text">Not registered? <a href="/auth/slack"><img src="assets/slack-button.png" alt="Sign in with Slack" title="Sign in with Slack"/></a></p>
-                <p className="info-text"><span className="bold">Why Slack?</span> We use it to validate your information before choosing your password</p>
             </div>
         );
     }

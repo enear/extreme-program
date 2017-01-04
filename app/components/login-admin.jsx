@@ -62,7 +62,7 @@ var Login = React.createClass({
         
         return (
             <div>
-                <form className="form-horizontal col-xs-12" action="/login-admin" method="POST" onSubmit={this._handleSubmit} noValidate>
+                <form className="form-horizontal col-xs-12" action="/login" method="POST" onSubmit={this._handleSubmit} noValidate>
                     <div className="form-group">
                         <label htmlFor="username" className="form-label">User</label>
                         {this.state.usernameErrorMessage.length > 0

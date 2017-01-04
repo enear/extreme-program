@@ -6,9 +6,9 @@ module.exports = function(passport, User) {
         res.render('login-admin', { message: req.flash('error') });
     });
 
-    router.post('/', passport.authenticate('login', {
-        successRedirect: '/admin',
-        failureRedirect: '/login-admin',
+    router.post('/', passport.authenticate('directory-login', {
+        successRedirect: '/',
+        failureRedirect: '/login',
         failureFlash: true
     }));
 

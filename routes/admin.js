@@ -7,8 +7,6 @@ router.get("/", function(req, res) {
 
             req.flash('error', "You don't have permission to access this page");
 
-            console.log(req.flash);
-
             req.session.previousUrl = '';
 
             res.redirect('/');
@@ -18,7 +16,7 @@ router.get("/", function(req, res) {
     } else {
         req.session.previousUrl = '/admin';
 
-        res.redirect('/login-admin');
+        res.redirect('/login');
     }
 });
 

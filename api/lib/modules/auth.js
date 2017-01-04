@@ -1,6 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var SlackStrategy = require('passport-slack').Strategy;
-
+var WindowsStrategy = require('passport-windowsauth');
 
 module.exports = {
     passport: function(passport, User) {
@@ -131,6 +131,32 @@ module.exports = {
                         }
                     }
                 });
+                
+            }
+        }));
+
+        passport.use( new WindowsStrategy({
+            ldap: {
+                url: 'ldap://192.168.200.2',
+                base: 'ou=e.near,dc=headquarters,dc=egen,dc=ventures',
+                bindDN: 'egenventures\\ldap.enear',
+                bindCredentials: 'en.LDAP2016'
+            },
+            integrated: false
+        }, function(profile, done){
+            if(!profile) {
+                done(null, false, { message: "Invalid Username/Password" });
+            }
+            else {
+                User.findOne({'email': profile._json.mail}, function(err, user) {
+                   if(err) {
+                       done(err);
+                   }
+
+                   if(user) {
+                       done(null, user);
+                   }
+               });
             }
         }));
 
