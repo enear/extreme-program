@@ -113,28 +113,7 @@ var Profile = React.createClass({
                         <p>Redeem them  <Link className="link" to="/rewards">here</Link></p>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-xs-12">
-                        {this.state.errorMessage.length > 0
-                          ?   <label className="form-label error">{this.state.errorMessage}</label>
-                          :   null
-                        }
 
-                        <button id="change-password-button" onClick={this._togglePasswordChangeForm(true)} className={"button submit " + (this.state.changingPassword ? "hidden" : "")}>Change Your Password</button>
-                    </div>
-                    <form  className={"col-xs-12 change-password " + (this.state.changingPassword ? "show" : "")}  onSubmit={this._handleSubmit} >
-
-                        <label htmlFor="oldPassword" className="form-label">Old Password</label>
-                        <input className="form-field"  type="password" id="oldPassword" name="oldPassword" value={this.state.oldPassword} onChange={this._handleChange()} />
-                        <label htmlFor="newPassword" className="form-label">New Password</label>
-                        <input className="form-field"  type="password" id="newPassword" name="newPassword" value={this.state.newPassword} onChange={this._handleChange()} />
-                        <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                        <input className="form-field"  type="password" id="confirmPassword" name="confirmPassword" value={this.state.confirmPassword} onChange={this._handleChange()} />
-                        <button type="button" className="button" onClick={this._cancelForm}>Cancel</button>
-                        <span className="spacing hidden-xs"></span>
-                        <input type="submit" className="button submit" value="Submit" />
-                    </form>
-                </div>
                 <div className="row">
                     <div className="col-xs-12 col-sm-4">
                         <h3 className="profile-item-list-title"><i className="fa fa-exchange"></i><span className="spacing"></span>My Requests</h3>

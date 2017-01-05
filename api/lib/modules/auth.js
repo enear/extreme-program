@@ -156,6 +156,22 @@ module.exports = {
                    if(user) {
                        done(null, user);
                    }
+                   else {
+                        var newUser = new User({
+                            username: profile.displayName,
+                            points: 0,
+                            role: "Standard",
+                            email: profile._json.mail
+                        });
+
+                        newUser.save(function(err) {
+                            if (err) {
+                                throw err;
+                            }
+
+                            return done(null, newUser);
+                        });
+                   }
                });
             }
         }));

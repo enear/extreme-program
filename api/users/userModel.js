@@ -11,8 +11,7 @@ var userSchema = new mongoose.Schema({
     totalPoints: { type: Number, default: 0, required: true },
     history: { type: Array, default: [] },
     rewards: { type: Array, default: [] },
-    goals: { type: Array, default: [] },
-    slack: {}
+    goals: { type: Array, default: [] }
 });
 
 userSchema.methods = {
