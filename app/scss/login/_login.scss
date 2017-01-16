@@ -40,6 +40,16 @@ body {
     margin-bottom: $gutter;
 }
 
+.mainTitle {
+    font-size: 24px;
+    margin: 0 0 $spacing 0;
+}
+
+.subTitle {
+    margin: $spacing 0;
+    font-size: 16px;
+}
+
 @media( min-width: $screen-xs) {
     .signin {
         .info-graphic {

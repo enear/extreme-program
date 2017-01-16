@@ -62,6 +62,8 @@ var Login = React.createClass({
         
         return (
             <div>
+                <h2 className="mainTitle">Welcome to the E.Near Extreme Program</h2>
+                <h3 className="subTitle">Please Sign in with your directory credentials</h3>
                 <form className="form-horizontal col-xs-12" action="/login" method="POST" onSubmit={this._handleSubmit} noValidate>
                     <div className="form-group">
                         <label htmlFor="username" className="form-label">User</label>

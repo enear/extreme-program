@@ -69,7 +69,6 @@ app.use('/api/settings', permission.std, settings);
 app.use('/admin', admin);
 app.use('/auth', require('./routes/auth')(passport));
 app.use('/login', require('./routes/login')(passport));
-app.use('/login-admin', require('./routes/login-admin')(passport, UserModel));
 
 app.use(function(req, res, next) {
     res.status(404);

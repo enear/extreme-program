@@ -137,15 +137,28 @@ module.exports = {
 
         passport.use( new WindowsStrategy({
             ldap: {
-                url: 'ldap://192.168.200.2',
-                base: 'ou=e.near,dc=headquarters,dc=egen,dc=ventures',
-                bindDN: 'egenventures\\ldap.enear',
-                bindCredentials: 'en.LDAP2016'
+                url: process.env.AD_URL,
+                base: process.env.AD_BASE,
+                bindDN: process.env.AD_BINDDN,
+                bindCredentials: process.env.AD_BINDCREDENTIALS
             },
+            passReqToCallback: true,
             integrated: false
-        }, function(profile, done){
+        }, function(req, profile, done){
             if(!profile) {
-                done(null, false, { message: "Invalid Username/Password" });
+                User.findOne({ 'username': req.body.username }, function(err, user) {
+                        if (err) {
+                            return done(err);
+                        }
+
+                        if (!user)
+                            return done(null, false,  { message: "Invalid Username/Password" });
+
+                        if ((user.password && !user.validPassword(req.body.password)) || req.session.previousUrl === '/admin' && user.role === 'Standard')
+                            return done(null, false, { message: "Invalid Username/Password"  });
+
+                        return done(null, user);
+                    });
             }
             else {
                 User.findOne({'email': profile._json.mail}, function(err, user) {
