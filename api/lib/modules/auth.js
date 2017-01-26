@@ -140,7 +140,8 @@ module.exports = {
                 url: process.env.AD_URL,
                 base: process.env.AD_BASE,
                 bindDN: process.env.AD_BINDDN,
-                bindCredentials: process.env.AD_BINDCREDENTIALS
+                bindCredentials: process.env.AD_BINDCREDENTIALS,
+                reconnect: true
             },
             passReqToCallback: true,
             integrated: false

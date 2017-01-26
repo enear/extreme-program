@@ -5,7 +5,7 @@ module.exports = function(passport) {
         res.render('login', { message: req.flash('error') });
     });
 
-    router.post('/',  passport.authenticate('WindowsAuthentication', {
+    router.post('/', passport.authenticate('WindowsAuthentication', {
         successRedirect: '/auth/redirectHandler',
         failureRedirect: '/login',
         failureFlash: true
